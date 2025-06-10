@@ -27,7 +27,8 @@ export class TiendaService {
 
   // Añadir
   async crearArticulo(dto: ProductoAltaDto): Promise<ProductoDatosDto> {
-    return await this.productoRepo.save(dto);
+    const pedidoProducto = this.productoRepo.create(dto);
+    return await this.productoRepo.save(pedidoProducto);
   }
 
 
@@ -38,7 +39,7 @@ export class TiendaService {
       throw new NotFoundException("Artículo no encontrado");
     }
   }
-  
+
   //Crear un pedido y obtener su ID
     async crearPedido(email: string): Promise<number> {
     const pedido = this.pedidoRepo.create({
