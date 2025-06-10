@@ -33,12 +33,14 @@ export class Cita {
 
 
   constructor(cliente?: Cliente, empleado?: Empleado, fecha?: Date, hora?: string) {
-    this.cliente = cliente;
+    
     if(cliente){
+      this.cliente = cliente;
       this.email_cliente = cliente.email;
     }
-    this.empleado = empleado;
+    
     if(empleado){
+      this.empleado = empleado;
       this.dni_empleado = empleado.dni;
     }
     this.fecha = fecha;
