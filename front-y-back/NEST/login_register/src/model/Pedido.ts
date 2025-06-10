@@ -8,6 +8,9 @@ export class Pedido {
   id_pedido: number;
 
   @Column()
+  email_cliente: string;
+
+  @Column()
   fecha: Date;
 
   @ManyToOne(() => Cliente, cliente => cliente.pedidos)
@@ -20,5 +23,8 @@ export class Pedido {
   constructor(fecha?: Date, cliente?: Cliente) {
     this.fecha = fecha;
     this.cliente = cliente;
+    if(cliente){
+      this.email_cliente = cliente.email;
+    }
   }
 }

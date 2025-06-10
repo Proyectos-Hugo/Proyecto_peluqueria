@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsInt, Length } from "class-validator";
+import { IsDate, IsEmail, Length } from "class-validator";
 
 export class PedidoAltaDto {
   @IsDate()
@@ -7,7 +7,7 @@ export class PedidoAltaDto {
   @Length(10,40)
   clienteEmail: string;
 
-  constructor(fecha: Date, clienteEmail: string, id_pedido?: number) {
+  constructor(fecha: Date, clienteEmail: string) {
     this.fecha = fecha;
     this.clienteEmail = clienteEmail;
   }
