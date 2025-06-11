@@ -1,6 +1,6 @@
 import { IsInt, IsString, Length } from "class-validator";
 
-export class EmpleadoDTO {
+export class EmpleadoAltaDto {
   @IsString()
   @Length(9,9)
   dni: string;
