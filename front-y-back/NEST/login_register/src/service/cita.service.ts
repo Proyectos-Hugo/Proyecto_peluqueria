@@ -33,8 +33,10 @@ export class CitaService {
           cita,
           cliente?.nombre ?? '',
           cliente?.telefono ?? '',
-          mascota?.nombre ?? '',
           empleado?.nombre ?? '',
+          mascota?.nombre ?? '',
+          mascota?.raza ?? '',
+
         )
       );
     }
@@ -52,7 +54,14 @@ export class CitaService {
       return await Promise.all(result.map(async cita => {
         const mascota = await this.repositoryMascota.findOne({ where: { id_mascota: cita.id_mascota } });
         const empleado = await this.repositoryEmpleado.findOne({ where: { dni: cita.dni_empleado } });
-        return new CitaDatosDto(cita, cliente?.nombre ?? '', cliente?.telefono ?? '', mascota?.nombre ?? '', empleado?.nombre ?? '');
+        return new CitaDatosDto(
+          cita,
+          cliente?.nombre ?? '',
+          cliente?.telefono ?? '', 
+          empleado?.nombre ?? '',
+          mascota?.nombre ?? '', 
+          mascota?.raza ?? '', 
+          );
       }));
     }
   }

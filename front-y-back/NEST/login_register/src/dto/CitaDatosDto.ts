@@ -7,6 +7,7 @@ export class CitaDatosDto {
   telefono_cliente: string;
   nombre_empleado: string;
   nombre_mascota:string;
+  raza_mascota: string;
   fecha: Date;
   hora: string;
 
@@ -15,7 +16,8 @@ export class CitaDatosDto {
     nombre_cliente: string,
     telefono_cliente: string,
     nombre_empleado:string,
-    nombre_mascota:string
+    nombre_mascota:string,
+    raza_mascota: string,
   ) {
     this.id_cita = cita.id_cita;
     this.email_cliente = cita.email_cliente;
@@ -23,6 +25,7 @@ export class CitaDatosDto {
     this.telefono_cliente = telefono_cliente;
     this.nombre_empleado = nombre_empleado;
     this.nombre_mascota = nombre_mascota;
+    this.raza_mascota = raza_mascota;
     this.fecha = cita.fecha;
     this.hora = cita.hora;
   }

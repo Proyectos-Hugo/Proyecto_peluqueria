@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Cliente } from './Cliente';
 
 @Entity('mascotas')
@@ -19,6 +19,7 @@ export class Mascota {
   email_cliente: string;
 
   @ManyToOne(() => Cliente, cliente => cliente.mascotas)
+  @JoinColumn({ name: 'email_cliente' }) 
   cliente: Cliente;
 
 
@@ -29,7 +30,7 @@ export class Mascota {
     this.edad = edad;
     this.cliente = cliente;
     if(cliente){
-      this.email_cliente = cliente.email
+      this.email_cliente = cliente.email;
     }
   }
 }
