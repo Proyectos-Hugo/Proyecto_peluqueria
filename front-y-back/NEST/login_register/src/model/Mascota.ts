@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Cliente } from './Cliente';
+import { Cita } from './Cita';
 
 @Entity('mascotas')
 export class Mascota {
@@ -22,7 +23,8 @@ export class Mascota {
   @JoinColumn({ name: 'email_cliente' }) 
   cliente: Cliente;
 
-
+  @OneToMany(() => Cita, cita => cita.mascota)
+  citas: Cita[];
 
   constructor(nombre?: string, raza?: string, edad?: number, cliente?: Cliente) {
     this.nombre = nombre;

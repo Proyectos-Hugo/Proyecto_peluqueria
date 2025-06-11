@@ -45,25 +45,25 @@ export class CitaService {
   }
 
   // Devover las citas de un cliente
-  async findQuotesByClient(email: string):Promise<CitaDatosDto[]>{
-    const result = await this.repositoryCita.createQueryBuilder('cita')
-    .where('email_cliente = :email', { email })
-    .getMany();
-    if(result){
+  async findQuotesByClient(email: string): Promise<CitaDatosDto[]> {
+    const citas = await this.repositoryCita.find({
+      where: { email_cliente: email },
+      relations: ['empleado', 'mascota']
+    });
+    if (citas) {
       const cliente = await this.repositoryCliente.findOne({ where: { email: email } });
-      return await Promise.all(result.map(async cita => {
-        const mascota = await this.repositoryMascota.findOne({ where: { id_mascota: cita.id_mascota } });
-        const empleado = await this.repositoryEmpleado.findOne({ where: { dni: cita.dni_empleado } });
-        return new CitaDatosDto(
+      return citas.map(cita => 
+        new CitaDatosDto(
           cita,
           cliente?.nombre ?? '',
-          cliente?.telefono ?? '', 
-          empleado?.nombre ?? '',
-          mascota?.nombre ?? '', 
-          mascota?.raza ?? '', 
-          );
-      }));
+          cliente?.telefono ?? '',
+          cita.empleado?.nombre ?? '',
+          cita.mascota?.nombre ?? '',
+          cita.mascota?.raza ?? ''
+        )
+      );
     }
+    return [];
   }
 
   // Alta de una cita

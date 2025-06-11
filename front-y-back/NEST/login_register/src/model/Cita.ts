@@ -21,7 +21,9 @@ export class Cita {
 
   @Column()
   hora: string;
-  
+  @ManyToOne(() => Mascota, mascota => mascota.citas)
+  @JoinColumn({ name: 'id_mascota' })
+  mascota: Mascota;
 
   @ManyToOne(()=>Cliente, cliente => cliente.email)
   @JoinColumn({name: 'email_cliente', referencedColumnName: 'email' })
