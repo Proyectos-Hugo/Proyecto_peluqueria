@@ -2,6 +2,10 @@
 /dist
 /node_modules
 /build
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1e5ab45098378c70c39ffa731d46f73b59ca86cd
 # Logs
 logs
 *.log
