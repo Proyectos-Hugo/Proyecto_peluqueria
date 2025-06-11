@@ -5,10 +5,10 @@ export class PedidoAltaDto {
   fecha: Date;
   @IsEmail()
   @Length(10,40)
-  clienteEmail: string;
+  email_cliente: string;
 
-  constructor(fecha: Date, clienteEmail: string) {
+  constructor(fecha: Date, email_cliente: string) {
     this.fecha = fecha;
-    this.clienteEmail = clienteEmail;
+    this.email_cliente = email_cliente;
   }
 }

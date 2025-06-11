@@ -13,13 +13,13 @@ export class MascotaDTO {
   edad: number;
   @IsEmail()
   @Length(10,40)
-  clienteEmail: string;
+  email_cliente: string;
 
-  constructor(nombre: string, raza: string, edad: number, clienteEmail: string, id_mascota?: number) {
+  constructor(nombre: string, raza: string, edad: number, email_cliente: string, id_mascota?: number) {
     this.nombre = nombre;
     this.raza = raza;
     this.edad = edad;
-    this.clienteEmail = clienteEmail;
+    this.email_cliente = email_cliente;
     this.id_mascota = id_mascota;
   }
 }

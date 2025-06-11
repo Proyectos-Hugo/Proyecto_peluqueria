@@ -25,9 +25,9 @@ export class CitaController {
     }
 
     @Get('buscar-cita-por-cliente/:email')
-      BuscarCitaPorCliente(@Param('email') email:string){
-        return this.citaService.findQuotesByClient(email)
-      }
+    BuscarCitaPorCliente(@Param('email') email:string){
+      return this.citaService.findQuotesByClient(email)
+    }
 
     @Post('alta-cita')
     async altaCita(@Body() cita:CitaAltaDto, @Res() res:Response){

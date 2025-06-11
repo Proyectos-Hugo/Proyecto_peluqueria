@@ -4,6 +4,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CitaDatosDto } from 'src/dto/CitaDatosDto';
 import { Cliente } from 'src/model/Cliente';
+import { Empleado } from 'src/model/Empleado';
+import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
 
 
@@ -12,7 +14,9 @@ export class CitaService {
   
   constructor(
     @InjectRepository(Cita) private repositoryCita:Repository<Cita>,
-    @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>, 
+    @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>,
+    @InjectRepository(Mascota) private repositoryMascota: Repository<Mascota>,
+    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>
   ){}
 
   // Devolucion de todas las citas
@@ -22,11 +26,15 @@ export class CitaService {
 
     for (const cita of citas) {
       const cliente = await this.repositoryCliente.findOne({ where: { email: cita.email_cliente } });
+      const empleado = await this.repositoryEmpleado.findOne({ where: { dni: cita.dni_empleado}});
+      const mascota = await this.repositoryMascota.findOne({ where:  { id_mascota: cita.id_mascota}});
       citasDto.push(
         new CitaDatosDto(
           cita,
           cliente?.nombre ?? '',
-          cliente?.telefono ?? ''
+          cliente?.telefono ?? '',
+          mascota?.nombre ?? '',
+          empleado?.nombre ?? '',
         )
       );
     }
@@ -41,18 +49,23 @@ export class CitaService {
     .getMany();
     if(result){
       const cliente = await this.repositoryCliente.findOne({ where: { email: email } });
-       return result.map(cita => {    
-        return new CitaDatosDto(cita, cliente?.nombre ?? '', cliente?.telefono ?? '');
-       });
+      return await Promise.all(result.map(async cita => {
+        const mascota = await this.repositoryMascota.findOne({ where: { id_mascota: cita.id_mascota } });
+        const empleado = await this.repositoryEmpleado.findOne({ where: { dni: cita.dni_empleado } });
+        return new CitaDatosDto(cita, cliente?.nombre ?? '', cliente?.telefono ?? '', mascota?.nombre ?? '', empleado?.nombre ?? '');
+      }));
     }
   }
 
   // Alta de una cita
   async highQuote(cita:CitaAltaDto):Promise<boolean>{
+
     const fechaStr = cita.fecha instanceof Date
     ? cita.fecha.toISOString().slice(0, 10)
     : cita.fecha;
-        // Verifica si el cliente existe, si no, lo crea
+
+    // Verifica si el cliente existe, si no, lo crea
+
     let cliente :Cliente = await this.repositoryCliente.findOne({ where: { email: cita.email_cliente } });
     if (!cliente) {
       cliente = this.repositoryCliente.create({
@@ -62,6 +75,7 @@ export class CitaService {
       });
       await this.repositoryCliente.save(cliente);
     }
+
     const existe = await this.repositoryCita.createQueryBuilder("citas")
     .where("citas.fecha = :fecha AND citas.hora = :hora", { 
       fecha: fechaStr,

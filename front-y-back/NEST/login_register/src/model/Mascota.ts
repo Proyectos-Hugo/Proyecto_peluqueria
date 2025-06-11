@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
 import { Cliente } from './Cliente';
-import { Cita } from './Cita';
 
 @Entity('mascotas')
 export class Mascota {
