@@ -13,7 +13,7 @@ export class ClienteService {
   
   // ALTA CLIENTE
 
-  async highClient(nuevo:ClienteAltaDto):Promise<void>{
+  async highClient(nuevo:ClienteAltaDto):Promise<boolean>{
 
     // Verifica si el cliente existe, si no, lo crea
       let clienteRepetido :Cliente = await this.repositoryCliente.findOne({ where: { email: nuevo.email } });
@@ -22,6 +22,10 @@ export class ClienteService {
           nuevo
         );
         await this.repositoryCliente.save(cliente);
+        return true
+      }
+      else{
+        return false
       }
 
   }
@@ -29,12 +33,12 @@ export class ClienteService {
   //BAJA CLIENTE
 
   async deleteClient(email:string):Promise<boolean>{
-    const delet :Cliente = await this.repositoryCliente.createQueryBuilder("cliente")
+    const cliente :Cliente = await this.repositoryCliente.createQueryBuilder("cliente")
     .where("email=:email", { email:email})
     .getOne();
     
-    if(delet){
-      this.repositoryCliente.delete(delet);
+    if(cliente){
+      this.repositoryCliente.delete(cliente);
       return true;
     }else{
       return false;
@@ -43,16 +47,26 @@ export class ClienteService {
   
   //MODIFICAR CLIENTE
 
-  async modifyClient(email:string):Promise<boolean>{
-    let client:Cliente;
-    if(client.email===email){
+  async modifyClient(email:string, clienteModificado :ClienteAltaDto):Promise<boolean>{
       const result = await this.repositoryCliente.createQueryBuilder()
       .update(Cliente)
-      .set({ ...client })
-      .where("", { password:client.password, telefono:client.telefono })
+      .set({ ...clienteModificado })
+      .where("", { 
+        password: clienteModificado.password, 
+        telefono: clienteModificado.telefono 
+      })
       .execute();
 
       return result.affected && result.affected > 0;
     }
+
+
+    //BUSCAR CLIENTE POR EMAIL Y PASSWORD
+    async findOne(email: string, password: string): Promise<Cliente | Error> {
+      const usuario = await this.repositoryCliente.findOneBy({ email, password });
+      if (usuario) {
+        return usuario;
+      }
+    return new Error('Cuenta no encontrada');
   }
 }
