@@ -3,10 +3,12 @@ import { Cita } from './../model/Cita';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CitaDatosDto } from 'src/dto/CitaDatosDto';
+import { ClienteAltaDto } from 'src/dto/ClienteAltaDto';
 import { Cliente } from 'src/model/Cliente';
 import { Empleado } from 'src/model/Empleado';
 import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
+import { ClienteService } from './cliente.service';
 
 
 @Injectable()
@@ -16,7 +18,8 @@ export class CitaService {
     @InjectRepository(Cita) private repositoryCita:Repository<Cita>,
     @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>,
     @InjectRepository(Mascota) private repositoryMascota: Repository<Mascota>,
-    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>
+    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>,
+    private clienteService: ClienteService
   ){}
 
   // Devolucion de todas las citas
@@ -33,7 +36,7 @@ export class CitaService {
           cita,
           cliente?.nombre ?? '',
           cliente?.telefono ?? '',
-          empleado?.nombre ?? '',
+          empleado?.dni ?? '',
           mascota?.nombre ?? '',
           mascota?.raza ?? '',
 
@@ -57,7 +60,7 @@ export class CitaService {
           cita,
           cliente?.nombre ?? '',
           cliente?.telefono ?? '',
-          cita.empleado?.nombre ?? '',
+          cita.empleado?.dni ?? '',
           cita.mascota?.nombre ?? '',
           cita.mascota?.raza ?? ''
         )
@@ -74,28 +77,21 @@ export class CitaService {
     : cita.fecha;
 
     // Verifica si el cliente existe, si no, lo crea
-
-    let cliente :Cliente = await this.repositoryCliente.findOne({ where: { email: cita.email_cliente } });
-    if (!cliente) {
-      cliente = this.repositoryCliente.create({
-        email: cita.email_cliente,
-        nombre: cita.nombre_cliente,
-        telefono: cita.telefono_cliente
-      });
-      await this.repositoryCliente.save(cliente);
-    }
-
-    const existe = await this.repositoryCita.createQueryBuilder("citas")
+    let clienteNuevo = new ClienteAltaDto(cita.email_cliente, cita.telefono_cliente, cita.nombre_cliente);
+    //Se da de alta al cliente
+    this.clienteService.highClient(clienteNuevo)
+    //Se verifica si ya hay una cita registrada en la misma fecha y hora
+    const citaRepetida = await this.repositoryCita.createQueryBuilder("citas")
     .where("citas.fecha = :fecha AND citas.hora = :hora", { 
       fecha: fechaStr,
       hora: cita.hora 
     })
     .getOne()
    
-    if(existe){
-      console.log('repetido')
+    if(citaRepetida){
       return false;
     }else{
+      //Si no hay citas, se crea la nueva cita.
       const nuevaCita = this.repositoryCita.create(cita);
       await this.repositoryCita.save(nuevaCita);
       return true;

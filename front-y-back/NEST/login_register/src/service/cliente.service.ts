@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ClienteAltaDto } from 'src/dto/ClienteAltaDto';
 import { Cliente } from 'src/model/Cliente';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class ClineteService {
+export class ClienteService {
   
   constructor(
     @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>
@@ -12,34 +13,17 @@ export class ClineteService {
   
   // ALTA CLIENTE
 
-  async highClient(email:string):Promise<boolean>{
+  async highClient(nuevo:ClienteAltaDto):Promise<void>{
 
     // Verifica si el cliente existe, si no, lo crea
-    let client:Cliente;
-    if(client.email===email){
-      let cliente :Cliente = await this.repositoryCliente.findOne({ where: { email: client.email } });
-      if (!cliente) {
-        cliente = this.repositoryCliente.create({
-          email: client.email,
-          nombre: client.nombre,
-          apellido: client.apellido,
-          mascotas: client.mascotas,
-          telefono: client.telefono
-        });
+      let clienteRepetido :Cliente = await this.repositoryCliente.findOne({ where: { email: nuevo.email } });
+      if (!clienteRepetido) { //Verifica si existe un cliente
+        const cliente = this.repositoryCliente.create(
+          nuevo
+        );
         await this.repositoryCliente.save(cliente);
       }
-      const existe = await this.repositoryCliente.createQueryBuilder("cliente")
-        .where("cliente.email=:email", { email:client.email })
-        .getOne()
-        
-      if(existe){
-        return false;
-      }else{
-        const nuevoCliente = this.repositoryCliente.create(cliente);
-        await this.repositoryCliente.save(nuevoCliente);
-        return true;
-      }
-    }
+
   }
 
   //BAJA CLIENTE
