@@ -13,6 +13,9 @@ import { TiendaController } from './controller/tienda.controller';
 import { AuthService } from './service/auth.service';
 import { TiendaService } from './service/tienda.service';
 import { CitaService } from './service/cita.service';
+import { EmpleadoService } from './service/empleado.service';
+import { ClineteService } from './service/cliente.service';
+import { MascotaService } from './service/mascota.service';
 
 
 
@@ -22,12 +25,12 @@ import { CitaService } from './service/cita.service';
   host: 'localhost',
   port: 3306,
   username: 'nestuser',
-  password: 'passuser',
-  database: 'db_peluqueria_canina',
+  password: 'nestpass',
+  database: 'db_peluqueria',
   entities: [Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
   synchronize: false,
   }),TypeOrmModule.forFeature([Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],
   controllers: [AuthController,CitaController,TiendaController],
-  providers: [AuthService,TiendaService,CitaService],
+  providers: [AuthService,TiendaService,CitaService,EmpleadoService,ClineteService,MascotaService],
 })
 export class AppModule {}

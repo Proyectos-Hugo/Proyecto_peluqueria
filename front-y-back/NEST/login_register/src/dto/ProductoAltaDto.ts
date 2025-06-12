@@ -1,6 +1,8 @@
 import { IsInt, IsNumber, IsString, Length } from "class-validator";
 
 export class ProductoAltaDto {
+  @IsInt()
+  id_producto?: number;
   @IsString()
   @Length(2,15)
   nombre: string;
