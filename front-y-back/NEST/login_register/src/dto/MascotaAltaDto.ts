@@ -1,6 +1,6 @@
 import { IsEmail, IsInt, IsString, Length } from "class-validator";
 
-export class MascotaDTO {
+export class MascotaAltaDto {
   @IsInt()
   id_mascota?: number;
   @IsString()

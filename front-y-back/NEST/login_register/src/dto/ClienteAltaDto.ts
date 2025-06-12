@@ -1,6 +1,6 @@
 import { IsEmail, IsInt, IsString, IsStrongPassword, Length } from "class-validator";
 
-export class ClienteDTO {
+export class ClienteAltaDto {
   @IsEmail()
   @Length(20,50)
   email: string;
