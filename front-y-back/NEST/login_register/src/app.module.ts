@@ -22,7 +22,7 @@ import { CitaService } from './service/cita.service';
   host: 'localhost',
   port: 3306,
   username: 'nestuser',
-  password: 'passuser',
+  password: 'nestpass',
   database: 'db_peluqueria_canina',
   entities: [Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
   synchronize: false,
