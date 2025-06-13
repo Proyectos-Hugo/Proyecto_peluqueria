@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
 import { AuthComponent } from './views/auth/auth.component';

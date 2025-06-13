@@ -25,9 +25,10 @@ export class TiendaService {
     return await this.productoRepo.find();
   }
 
-  // Añadir Articulo
+  // Añadir
   async crearArticulo(dto: ProductoAltaDto): Promise<ProductoDatosDto> {
     const pedidoProducto = this.productoRepo.create(dto);
+    
     return await this.productoRepo.save(pedidoProducto);
   }
 
@@ -49,7 +50,6 @@ export class TiendaService {
     const pedidoGuardado = await this.pedidoRepo.save(pedido);
     return pedidoGuardado.id_pedido; // Aquí obtienes el ID del pedido creado
   }
-
   //Añadir un producto al pedido
   async añadirProductoAlPedido(dto: PedidoProductoAltaDto):Promise<boolean>{
     const pedidoProducto = this.pedidoProductoRepo.create(dto);
