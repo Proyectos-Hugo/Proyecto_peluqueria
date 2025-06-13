@@ -52,8 +52,7 @@ export class ClienteService {
       .update(Cliente)
       .set({ ...clienteModificado })
       .where("", { 
-        password: clienteModificado.password, 
-        telefono: clienteModificado.telefono 
+        email: email
       })
       .execute();
 

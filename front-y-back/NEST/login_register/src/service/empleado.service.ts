@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { EmpleadoAltaDto } from 'src/dto/EmpeladoAltaDto';
 import { Empleado } from 'src/model/Empleado';
 import { Repository } from 'typeorm';
 
@@ -12,33 +13,16 @@ export class EmpleadoService {
 
   // ALTA EMPLEADO
 
-  async highEmployees(dni:string):Promise<boolean>{
-
+  async highEmployees(empleadoNuevo: EmpleadoAltaDto):Promise<boolean>{
     // Verifica si el empleado existe, si no, lo crea
-    let emple:Empleado;
-    if(emple.dni===dni){
-      let empleado :Empleado = await this.repositoryEmpleado.findOne({ where: { dni: emple.dni } });
-      if (!empleado) {
-        empleado = this.repositoryEmpleado.create({
-          dni: emple.dni,
-          nombre: emple.nombre,
-          apellido: emple.apellido,
-          especialidad: emple.especialidad,
-          telefono: emple.telefono
-        });
-        await this.repositoryEmpleado.save(empleado);
+    let empleado :Empleado = await this.repositoryEmpleado.findOne({ where: { dni: empleadoNuevo.dni } });
+    if (!empleado) {
+      empleado = this.repositoryEmpleado.create(empleado);
+      await this.repositoryEmpleado.save(empleado);
+      return true;
       }
-      const existe = await this.repositoryEmpleado.createQueryBuilder("empleado")
-        .where("empleado.dni=:dni", { dni:emple.dni })
-        .getOne()
-        
-      if(existe){
-        return false;
-      }else{
-        const nuevoEmpleado = this.repositoryEmpleado.create(empleado);
-        await this.repositoryEmpleado.save(nuevoEmpleado);
-        return true;
-      }
+    else{
+      return false;
     }
   }
 
@@ -59,16 +43,13 @@ export class EmpleadoService {
   
   //MODIFICAR EMPLEADO
 
-  async modifyEmployees(dni:string):Promise<boolean>{
-    let empleado:Empleado;
-    if(empleado.dni===dni){
+  async modifyEmployees(dni:string, empleadoNuevo: EmpleadoAltaDto):Promise<boolean>{
       const result = await this.repositoryEmpleado.createQueryBuilder()
       .update(Empleado)
-      .set({ ...empleado })
-      .where("especialidad=:especialidad AND telefono=:telefono", { especialidad:empleado.especialidad, telefono:empleado.telefono })
+      .set({ ...empleadoNuevo })
+      .where("dni=:dni", { dni:dni })
       .execute();
 
       return result.affected && result.affected > 0;
-    }
   }
 }

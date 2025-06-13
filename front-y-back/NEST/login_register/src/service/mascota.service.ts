@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
+import { MascotaDatosDto } from 'src/dto/MascotaDatosDto';
 import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
 
@@ -12,14 +14,11 @@ export class MascotaService {
 
   //ALTA MASCOTA
 
-  async highAnimals(id:number):Promise<boolean>{
+  async highAnimals(mascota: MascotaAltaDto):Promise<boolean>{
 
     // Verifica si la mascota existe, si no, lo crea
-    
-    let masc :Mascota;
-    if(masc.id_mascota===id){
-      let mascota:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: masc.email_cliente, nombre: masc.nombre, raza: masc.raza}});
-      if (!mascota) {
+      let mascotaRepetida:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: mascota.email_cliente, nombre: mascota.nombre, raza: mascota.raza}});
+      if (!mascotaRepetida) {
         mascota = this.repositoryMascota.create({
           email_cliente: mascota.email_cliente,
           nombre: mascota.nombre,
@@ -27,31 +26,23 @@ export class MascotaService {
           edad: mascota.edad
         });
         await this.repositoryMascota.save(mascota);
-      }
-
-      const existe = await this.repositoryMascota.createQueryBuilder("mascota")
-      .where("mascota.id_mascota=:id_mascota", { id_mascota:id })
-      .getOne()
-      
-      if(existe){
-        return false;
-      }else{
-        const nuevoMascota = this.repositoryMascota.create(mascota);
-        await this.repositoryMascota.save(nuevoMascota);
         return true;
       }
-    } 
-  }
+      else{
+        return false;
+      }
+
+  } 
 
   //BAJA MASCOTA
 
   async deleteAnimal(id:number):Promise<boolean>{
-    const delet :Mascota = await this.repositoryMascota.createQueryBuilder("mascota")
-    .where("id_mascota=:id_mascota", { id_mascota:id})
+    const mascota :Mascota = await this.repositoryMascota.createQueryBuilder("mascota")
+    .where("id_mascota=:id", { id_mascota:id})
     .getOne();
     
-    if(delet){
-      this.repositoryMascota.delete(delet);
+    if(mascota){
+      this.repositoryMascota.delete(mascota);
       return true;
     }else{
       return false;
@@ -60,16 +51,19 @@ export class MascotaService {
 
   //MODIFICAR MASCOTA
 
-  async modifyAnimals(id:number):Promise<boolean>{
-    let mascota:Mascota;
+  async modifyAnimals(id:number, mascota: MascotaAltaDto):Promise<boolean>{
+
     if(mascota.id_mascota===id){
       const result = await this.repositoryMascota.createQueryBuilder()
         .update(Mascota)
         .set({ ...mascota })
-        .where("nombre = :nombre AND raza = :raza AND edad=: edad", { nombre:mascota.nombre, raza:mascota.raza, edad:mascota.edad })
+        .where("id_mascota = :id", { id_mascota:id })
         .execute();
 
       return result.affected && result.affected > 0;
+    }
+    else{
+      return false;
     }
     
   }
