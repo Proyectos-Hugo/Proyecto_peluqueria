@@ -55,14 +55,13 @@ export class ProductosService {
   
   //MODIFICAR PRODUCTO
 
-  async modifyProduct(id:number):Promise<boolean>{
-    let producto:ProductoAltaDto;
+  async modifyProduct(id:number, producto: ProductoAltaDto):Promise<boolean>{
     if(producto.id_producto===id){
       const result = await this.repositoryProducto.createQueryBuilder()
       .update(Producto)
       .set({ ...producto })
-      .where("descripcuion=:descripcion AND precio=:precio AND id_categoria=:id_categoria AND stock=:stock", 
-        { descipcion:producto.descripcion, precio:producto.precio, id_categoria:producto.id_categoria, stock:producto.stock })
+      .where("id_producto=:id ", 
+        { id_producto:id })
       .execute();
 
       return result.affected && result.affected > 0;
@@ -73,10 +72,10 @@ export class ProductosService {
 
   async findAllProduct(): Promise<ProductoDatosDto[]> {
     const productos = await this.repositoryProducto.find();
-    const productoDto: ProductoDatosDto[] = [];
+    const productosDto: ProductoDatosDto[] = [];
 
     for (const prods of productos) {
-      productoDto.push(
+      productosDto.push(
         new ProductoDatosDto(
           prods.id_producto,
           prods.nombre,
@@ -86,6 +85,6 @@ export class ProductosService {
         )
       );
     }
-    return productoDto;
+    return productosDto;
   }
 }
