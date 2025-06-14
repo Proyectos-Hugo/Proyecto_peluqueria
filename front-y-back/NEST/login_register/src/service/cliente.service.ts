@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClienteAltaDto } from 'src/dto/ClienteAltaDto';
+import { ClienteDatosDto } from 'src/dto/ClienteDatosDto';
 import { Cliente } from 'src/model/Cliente';
 import { Repository } from 'typeorm';
 
@@ -48,24 +49,28 @@ export class ClienteService {
   //MODIFICAR CLIENTE
 
   async modifyClient(email:string, clienteModificado :ClienteAltaDto):Promise<boolean>{
-      const result = await this.repositoryCliente.createQueryBuilder()
-      .update(Cliente)
-      .set({ ...clienteModificado })
-      .where("", { 
-        email: email
-      })
-      .execute();
+    const result = await this.repositoryCliente.createQueryBuilder()
+    .update(Cliente)
+    .set({ ...clienteModificado })
+    .where("", { 
+      email: email
+    })
+    .execute();
 
-      return result.affected && result.affected > 0;
-    }
+    return result.affected && result.affected > 0;
+  }
 
 
     //BUSCAR CLIENTE POR EMAIL Y PASSWORD
-    async findOne(email: string, password: string): Promise<Cliente | Error> {
-      const usuario = await this.repositoryCliente.findOneBy({ email, password });
-      if (usuario) {
-        return usuario;
-      }
+  async findOne(email: string, password: string): Promise<Cliente | Error> {
+    const usuario = await this.repositoryCliente.findOneBy({ email, password });
+    if (usuario) {
+      return usuario;
+    }
     return new Error('Cuenta no encontrada');
+  }
+
+  allCliente():Promise<ClienteDatosDto[]>{
+    return this.repositoryCliente.find();
   }
 }
