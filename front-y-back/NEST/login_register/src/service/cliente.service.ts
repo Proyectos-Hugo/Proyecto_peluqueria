@@ -69,4 +69,7 @@ export class ClienteService {
       }
     return new Error('Cuenta no encontrada');
   }
+  async allClientes(): Promise<Cliente[]> {
+    return this.repositoryCliente.find();
+  }
 }

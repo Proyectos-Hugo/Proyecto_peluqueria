@@ -33,7 +33,7 @@ export class ClienteController {
 
   @Get('clientes')
   allCLientes(){
-    return this.clienteService.allCliente();
+    return this.clienteService.allClientes();
   }
 
   @Get('cliente/:email/:password')
