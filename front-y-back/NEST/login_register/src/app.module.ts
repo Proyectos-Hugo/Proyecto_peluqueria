@@ -30,6 +30,6 @@ import { LoginController } from './controller/login.controller';
   synchronize: false,
   }),TypeOrmModule.forFeature([Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],
   controllers: [LoginController,CitaController,TiendaController],
-  providers: [ClienteService,TiendaService,CitaService,EmpleadoService,ClienteService,MascotaService],
+  providers: [TiendaService,CitaService,EmpleadoService,ClienteService,MascotaService],
 })
 export class AppModule {}
