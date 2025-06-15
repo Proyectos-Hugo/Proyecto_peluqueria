@@ -17,18 +17,29 @@ export class ProductosService {
   async highProduct(producto:ProductoAltaDto):Promise<boolean>{
 
     // Verifica si el empleado existe, si no, lo crea
-
+<<<<<<< HEAD
+    let articulo :Producto = await this.repositoryProducto.findOne({ where: { nombre:producto.nombre} });
+=======
     let articulo :Producto = await this.repositoryProducto.findOne({ where: { nombre: producto.nombre, descripcion: producto.descripcion} });
+>>>>>>> aa6d280be4d279b4df8c81d4f1079d97fc51b20f
     if (!articulo) {
-      articulo = this.repositoryProducto.create({
-        
-      });
+      articulo = this.repositoryProducto.create({});
       await this.repositoryProducto.save(articulo);
-
-      return true;
+<<<<<<< HEAD
     }
-    else{
+
+    const existe = await this.repositoryProducto.createQueryBuilder("producto")
+    .where("id_producto=:id_producto", { id_producto:producto.id_producto })
+    .getOne()
+    
+    if(existe){
       return false;
+    }else{
+      const nuevoProducto = this.repositoryProducto.create(articulo);
+      await this.repositoryProducto.save(nuevoProducto);
+=======
+>>>>>>> aa6d280be4d279b4df8c81d4f1079d97fc51b20f
+      return true;
     }
   }
 
