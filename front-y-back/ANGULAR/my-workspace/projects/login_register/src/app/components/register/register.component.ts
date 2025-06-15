@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RegisterService } from '../../service/register.service';
-import { Cliente } from '../../model/Cliente';
+import { ClienteDatosDto } from '../../model/ClienteDatosDto';
 import { RouterModule, Router } from '@angular/router';
 @Component({
   selector: 'app-register',
@@ -28,7 +28,7 @@ export class RegisterComponent {
       this.password,
       this.telefono
     ).subscribe({
-      next: (response: Cliente) => {
+      next: (response: ClienteDatosDto) => {
         // Maneja el éxito (puedes mostrar un mensaje o redirigir)
         console.log('Cliente registrado:', response);
       },

@@ -1,7 +1,28 @@
-<nav>
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active">Inicio</a></li>
-    <li><a routerLink="/auth" routerLinkActive="active">Auth</a></li>
-  </ul>
+<nav style="height:5vh;">
+  <!-- Menú Perfil -->
+  <div>
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="perfilMenu">Perfil</button>
+      <mat-menu #perfilMenu="matMenu" yPosition="below">
+        <button *ngIf="!isLoggedIn()" (click)="goToLogin()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Inicia Sesión</button>
+        <button *ngIf="!isLoggedIn()" (click)="goToRegister()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Regístrate</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:red;" class="mat-menu-item" mat-menu-item>Cierra sesión</button>
+      </mat-menu>
+  </div>
+
+  <!-- Menú Tareas -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="reservasMenu">Tareas</button>
+    <mat-menu #reservasMenu="matMenu" yPosition="below">
+      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Tarea</button>
+      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Tarea</button>
+    </mat-menu>
+  </div>
+  <div>
+    <button (click)="goToHome()" style="color:rgb(14, 110, 235);" mat-button>Home</button>
+
+  </div>
+
 </nav>
-<router-outlet></router-outlet>
+<div style="height:80vh;">
+  <router-outlet></router-outlet>
+</div>

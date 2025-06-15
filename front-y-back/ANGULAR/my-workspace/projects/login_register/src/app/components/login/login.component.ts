@@ -1,8 +1,11 @@
+
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../service/login.service';
 import { RouterModule, Router } from '@angular/router';
+import { ClienteDatosDto } from '../../model/ClienteDatosDto';
+
 
 @Component({
   selector: 'app-login',
@@ -13,15 +16,15 @@ import { RouterModule, Router } from '@angular/router';
 export class LoginComponent {
 
   email:string;
-  contra:string;
+  password:string;
 
   constructor(private log :LoginService, private router: Router){}
 
   login(){
-    return this.log.findUsu(this.email,this.contra)
-    .subscribe(data=>{
-      console.log(data);
-    });
+    this.log.findUsu(this.email,this.password).subscribe(data => {
+      console.log(data)
+    })
+
   }
     goToRegister() {
     this.router.navigate(['/auth/register']);
