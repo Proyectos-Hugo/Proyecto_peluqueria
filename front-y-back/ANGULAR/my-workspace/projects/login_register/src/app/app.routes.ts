@@ -4,6 +4,8 @@ import { HomeComponent } from './views/home/home.component';
 import { AuthComponent } from './views/auth/auth.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NuevaMascotaComponent } from './views/usuario/mascotas/nueva-mascota/nueva-mascota.component';
+import { MisMascotasComponent } from './views/usuario/mascotas/mis-mascotas/mis-mascotas.component';
 
 export const routes: Routes = [
 
@@ -20,7 +22,15 @@ export const routes: Routes = [
       { path: 'register', component: RegisterComponent }
     ]
   },
+  {
+    path: 'nueva-mascota',
+    component: NuevaMascotaComponent
+  },
     {
+    path: 'mis-mascotas',
+    component: MisMascotasComponent
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

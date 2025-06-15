@@ -37,6 +37,12 @@ export class AppComponent {
   goToRegister() {
       this.router.navigate(['/auth/register']);
   }
+  goToMisMascotas() {
+      this.router.navigate(['/mis-mascotas']);
+  }
+  goToNuevaMascota() {
+      this.router.navigate(['/nueva-mascota']);
+  }
 
 
 }

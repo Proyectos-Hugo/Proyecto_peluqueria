@@ -5,16 +5,33 @@
       <mat-menu #perfilMenu="matMenu" yPosition="below">
         <button *ngIf="!isLoggedIn()" (click)="goToLogin()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Inicia Sesión</button>
         <button *ngIf="!isLoggedIn()" (click)="goToRegister()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Regístrate</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Pedidos</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo Pedido</button>
         <button *ngIf="isLoggedIn()" (click)="logout()" style="color:red;" class="mat-menu-item" mat-menu-item>Cierra sesión</button>
       </mat-menu>
   </div>
 
-  <!-- Menú Tareas -->
+  <!-- Menú Citas -->
   <div *ngIf="isLoggedIn()">
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="reservasMenu">Tareas</button>
-    <mat-menu #reservasMenu="matMenu" yPosition="below">
-      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Tarea</button>
-      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Tarea</button>
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="citasMenu">Citas</button>
+    <mat-menu #citasMenu="matMenu" yPosition="below">
+      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
+      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita</button>
+    </mat-menu>
+  </div>
+   <!-- Menú Mascotas -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="mascotasMenu">Mascotas</button>
+    <mat-menu #mascotasMenu="matMenu" yPosition="below">
+      <button (click)="goToMisMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Mascotas</button>
+      <button (click)="goToNuevaMascota()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Mascota</button>
+    </mat-menu>
+  </div>
+   <!-- Menú Tienda -->
+  <div>
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="productosMenu">Tienda</button>
+    <mat-menu #productosMenu="matMenu" yPosition="below">
+      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Productos</button>
     </mat-menu>
   </div>
   <div>
