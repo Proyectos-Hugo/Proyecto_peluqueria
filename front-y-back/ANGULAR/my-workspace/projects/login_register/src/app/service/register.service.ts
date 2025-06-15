@@ -9,7 +9,7 @@ import { ClienteDatosDto } from '../model/ClienteDatosDto';
 })
 export class RegisterService {
 
-  url:string = 'http://localhost:3000/auth';
+  url:string = 'http://localhost:3000/login';
   constructor(private http:HttpClient) { }
 
 
