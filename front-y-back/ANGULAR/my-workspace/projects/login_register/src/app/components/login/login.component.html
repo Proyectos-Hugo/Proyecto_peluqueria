@@ -1,15 +1,15 @@
-<h1>LOGIN</h1>
-<br>
-<div>
-  Introduce el email:
-  <input title="email" type="text" name="email" [(ngModel)]="email" />
-  <br>
-  Introduce la contraseña
-  <input title="contrasena" type="password" name="password" [(ngModel)]="password" />
-  <br>
-  <button (click)="login()">Login</button>
-  <div>
-    <p>Aún no te has registrado? </p>
-    <button (click)="goToRegister()">Registrate</button>
+<div class="form-container">
+  <h1>LOGIN</h1>
+  <label for="email">Email:</label>
+  <input type="email" id="email" [(ngModel)]="email" placeholder="Email">
+
+  <label for="password">Contraseña:</label>
+  <input type="password" id="password" [(ngModel)]="password" placeholder="Contraseña">
+
+  <button class="btn-submit" (click)="login()">Login</button>
+
+  <p>¿Aún no te has registrado?</p>
+  <div class="center-button">
+    <button (click)="goToRegister()">Regístrate</button>
   </div>
 </div>
