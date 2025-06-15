@@ -33,9 +33,9 @@ export class MascotaController {
     }
   }
 
-  @Get('mascotas')
-  allMascota():Promise<MascotaDatosDto>{
-    return this.mascotaService.findMascotas();
+  @Get('mascotas/:email')
+  allMascota(@Param('email') email:string):Promise<MascotaDatosDto[]>{
+    return this.mascotaService.findMascotas(email);
   }
 
   @Delete('eliminarMascota/:id')

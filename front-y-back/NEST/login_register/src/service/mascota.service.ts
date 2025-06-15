@@ -67,4 +67,8 @@ export class MascotaService {
     }
     
   }
+
+  async findMascotas(email_cliente: string): Promise<Mascota[]> {
+    return this.repositoryMascota.find({ where: { email_cliente } });
+  }
 }

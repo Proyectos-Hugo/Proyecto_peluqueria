@@ -64,6 +64,7 @@ export class ClienteService {
     async findOne(email: string, password: string): Promise<Cliente | Error> {
       const usuario = await this.repositoryCliente.findOneBy({ email, password });
       if (usuario) {
+        localStorage.setItem('usuario', JSON.stringify(usuario));
         return usuario;
       }
     return new Error('Cuenta no encontrada');

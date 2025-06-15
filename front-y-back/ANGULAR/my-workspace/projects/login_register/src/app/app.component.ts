@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './app.component.html',
   styles:[`
     nav {
@@ -38,5 +39,8 @@ import { RouterModule } from '@angular/router';
   `]
 })
 export class AppComponent {
+    isLoggedIn(): boolean {
+    return !!localStorage.getItem('usuario');
+  }
 
 }
