@@ -25,7 +25,7 @@ import { LoginController } from './controller/login.controller';
   port: 3306,
   username: 'nestuser',
   password: 'nestpass',
-  database: 'db_peluqueria_canina',
+  database: 'db_peluqueria',
   entities: [Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
   synchronize: false,
   }),TypeOrmModule.forFeature([Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],

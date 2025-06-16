@@ -1,0 +1,81 @@
+<div class="empleado-container">
+
+  <!-- Parte 1: Buscar Empleado por DNI -->
+  <div class="section">
+    <h2>Mostrar Todos los Empleados</h2>
+    <button (click)="mostrarTodosEmpleados()">Mostrar Empleados</button>
+    <div *ngIf="empleados && empleados.length > 0" class="empleados-lista">
+      <ul>
+        <li *ngFor="let empleado of empleados">
+          <strong>{{empleado.dni}}</strong> - {{empleado.nombre}} {{empleado.apellido}} | {{empleado.especialidad}} | {{empleado.telefono}}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="empleados && empleados.length === 0">
+      <em>No hay empleados registrados.</em>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Parte 2: Alta de Empleado -->
+  <div class="section">
+    <h2>Alta de Empleado</h2>
+    <form (ngSubmit)="altaEmpleado()">
+      <div class="form-group">
+        <label for="dniEmpleado">DNI:</label>
+        <input type="text" [(ngModel)]="nuevoEmpleado.dni" name="dniEmpleado" required>
+      </div>
+      <div class="form-group">
+        <label for="nombreEmpleado">Nombre:</label>
+        <input type="text" [(ngModel)]="nuevoEmpleado.nombre" name="nombreEmpleado" required>
+      </div>
+      <div class="form-group">
+        <label for="apellidoEmpleado">Apellido:</label>
+        <input type="text" [(ngModel)]="nuevoEmpleado.apellido" name="apellidoEmpleado" required>
+      </div>
+      <div class="form-group">
+        <label for="especialidadEmpleado">Especialidad:</label>
+        <input type="text" [(ngModel)]="nuevoEmpleado.especialidad" name="especialidadEmpleado" required>
+      </div>
+      <div class="form-group">
+        <label for="telefonoEmpleado">Teléfono:</label>
+        <input type="tel" [(ngModel)]="nuevoEmpleado.telefono" name="telefonoEmpleado" required>
+      </div>
+      <button type="submit">Dar de Alta</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Parte 3: Modificar Empleado -->
+  <div class="section">
+    <h2>Modificar Empleado</h2>
+    <form (ngSubmit)="modificarEmpleado()">
+      <div class="form-group">
+        <label for="modificarEspecialidad">Nueva Especialidad:</label>
+        <input type="text" [(ngModel)]="modificarEmpleadoData.especialidad" name="modificarEspecialidad">
+      </div>
+      <div class="form-group">
+        <label for="modificarTelefono">Nuevo Teléfono:</label>
+        <input type="tel" [(ngModel)]="modificarEmpleadoData.telefono" name="modificarTelefono">
+      </div>
+      <button type="submit">Modificar</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Parte 4: Eliminar Empleado -->
+  <div class="section">
+    <h2>Eliminar Empleado</h2>
+    <form (ngSubmit)="eliminarEmpleado()">
+      <div class="form-group">
+        <label for="eliminarDni">Introduce el DNI del empleado:</label>
+        <input type="text" [(ngModel)]="eliminarDni" name="eliminarDni" required>
+      </div>
+      <button type="submit">Eliminar</button>
+    </form>
+  </div>
+
+</div>
