@@ -1,4 +1,3 @@
-import { CitaAltaDto } from './../dto/CitaAltaDto';
 import { Cita } from './../model/Cita';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,6 +8,9 @@ import { Empleado } from 'src/model/Empleado';
 import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
 import { ClienteService } from './cliente.service';
+import { CitaAltaClienteDto } from 'src/dto/CitaAltaClienteDto';
+import { CitaAltaEmpleadoDto } from 'src/dto/CitaAltaEmpleadoDto';
+import { CitaAltaDto } from 'src/dto/CitaCAltaDto';
 
 
 @Injectable()
@@ -70,14 +72,35 @@ export class CitaService {
   }
 
   // Alta de una cita
-  async highQuote(cita:CitaAltaDto):Promise<boolean>{
+    async highQuoteByClient(cita:CitaAltaClienteDto):Promise<boolean>{
 
+      const fechaStr = cita.fecha instanceof Date
+      ? cita.fecha.toISOString().slice(0, 10)
+      : cita.fecha;
+
+      //Se verifica si ya hay una cita registrada en la misma fecha y hora
+      const citaRepetida = await this.repositoryCita.createQueryBuilder("citas")
+      .where("citas.fecha = :fecha AND citas.hora = :hora", { 
+        fecha: fechaStr,
+        hora: cita.hora 
+      })
+      .getOne()
+    
+      if(citaRepetida){
+        return false;
+      }else{
+        //Si no hay citas, se crea la nueva cita.
+        const nuevaCita = this.repositoryCita.create(cita);
+        await this.repositoryCita.save(nuevaCita);
+        return true;
+      }
+    }
+  async highQuoteByEmployee(cita:CitaAltaEmpleadoDto):Promise<boolean>{
     const fechaStr = cita.fecha instanceof Date
     ? cita.fecha.toISOString().slice(0, 10)
     : cita.fecha;
 
     // Verifica si el cliente existe, si no, lo crea
- 
     let clienteNuevo = new ClienteAltaDto(cita.email_cliente, cita.telefono_cliente, cita.nombre_cliente);
     //Se da de alta al cliente
     if(!this.clienteService.highClient(clienteNuevo)){
