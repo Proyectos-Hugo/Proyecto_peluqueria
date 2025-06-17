@@ -1,4 +1,3 @@
-import { IsInt, IsString, Length } from "class-validator";
 
 export class EmpleadoDatosDto {
   dni: string;

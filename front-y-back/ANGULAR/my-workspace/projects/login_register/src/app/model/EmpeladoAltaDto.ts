@@ -1,6 +1,6 @@
-import { IsInt, IsString, Length } from "class-validator";
 
-export class EmpleadoDatosDto {
+
+export class EmpleadoAltaDto {
   dni: string;
   nombre: string;
   apellido: string;
