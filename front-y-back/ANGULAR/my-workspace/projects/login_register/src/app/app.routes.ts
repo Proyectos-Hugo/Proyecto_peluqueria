@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NuevaMascotaComponent } from './views/usuario/mascotas/nueva-mascota/nueva-mascota.component';
 import { MisMascotasComponent } from './views/usuario/mascotas/mis-mascotas/mis-mascotas.component';
+import { MascotaComponent } from './components/mascota/mascota.component';
 
 export const routes: Routes = [
 
@@ -28,7 +29,7 @@ export const routes: Routes = [
   },
     {
     path: 'mis-mascotas',
-    component: MisMascotasComponent
+    component: MascotaComponent
   },
   {
     path: '',

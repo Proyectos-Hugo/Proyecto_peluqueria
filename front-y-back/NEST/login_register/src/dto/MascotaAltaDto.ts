@@ -15,7 +15,7 @@ export class MascotaAltaDto {
   @Length(10,40)
   email_cliente: string;
 
-  constructor(nombre: string, raza: string, edad: number, email_cliente: string, id_mascota?: number) {
+  constructor(nombre?: string, raza?: string, edad?: number, email_cliente?: string, id_mascota?: number) {
     this.nombre = nombre;
     this.raza = raza;
     this.edad = edad;

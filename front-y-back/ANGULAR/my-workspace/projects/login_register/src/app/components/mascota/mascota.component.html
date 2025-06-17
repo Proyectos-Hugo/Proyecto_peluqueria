@@ -6,10 +6,20 @@
     <form (ngSubmit)="buscarMascotaPorId()">
       <div class="form-group">
         <label for="buscarId">Introduce el ID de la mascota:</label>
-        <input type="text" [(ngModel)]="email" name="buscarId" required>
+        <input type="number" [(ngModel)]="id_mascota" name="buscarId" required>
       </div>
       <button type="submit">Buscar</button>
     </form>
+    <div *ngIf="mascotaEncontrada">
+      <h3>Información de la Mascota</h3>
+      <ul>
+        <li><strong>ID:</strong> {{ mascotaEncontrada.id_mascota }}</li>
+        <li><strong>Nombre:</strong> {{ mascotaEncontrada.nombre }}</li>
+        <li><strong>Raza:</strong> {{ mascotaEncontrada.raza }}</li>
+        <li><strong>Edad:</strong> {{ mascotaEncontrada.edad }}</li>
+        <li><strong>Email Cliente:</strong> {{ mascotaEncontrada.email_cliente }}</li>
+      </ul>
+    </div>
   </div>
 
   <hr>
@@ -19,20 +29,20 @@
     <h2>Alta de Mascota</h2>
     <form (ngSubmit)="altaMascota()">
       <div class="form-group">
-        <label for="emailCliente">Email del Cliente:</label>
-        <input type="email" id="emailCliente" [(ngModel)]="nuevaMascota.email_cliente" name="emailCliente" required>
+        <label for="email_Cliente">Email del Cliente:</label>
+        <input type="email" [(ngModel)]="email_cliente" name="emailCliente" required>
       </div>
       <div class="form-group">
         <label for="nombreMascota">Nombre:</label>
-        <input type="text" id="nombreMascota" [(ngModel)]="nuevaMascota.nombre" name="nombreMascota" required>
+        <input type="text" [(ngModel)]="nombreMascota" name="nombreMascota" required>
       </div>
       <div class="form-group">
         <label for="razaMascota">Raza:</label>
-        <input type="text" id="razaMascota" [(ngModel)]="nuevaMascota.raza" name="razaMascota" required>
+        <input type="text" [(ngModel)]="razaMascota" name="razaMascota" required>
       </div>
       <div class="form-group">
         <label for="edadMascota">Edad:</label>
-        <input type="number" id="edadMascota" [(ngModel)]="nuevaMascota.edad" name="edadMascota" min="0" required>
+        <input type="number" [(ngModel)]="edadMascota" name="edadMascota" min="0" required>
       </div>
       <button type="submit">Dar de Alta</button>
     </form>
@@ -64,19 +74,19 @@
       </div>
       <div class="form-group">
         <label for="modificarEmail">Nuevo Email del Cliente:</label>
-        <input type="email" [(ngModel)]="modificarMascotaData.email_cliente" name="modificarEmail">
+        <input type="email" [(ngModel)]="email_clienteMascota" name="modificarEmail">
       </div>
       <div class="form-group">
         <label for="modificarNombre">Nuevo Nombre:</label>
-        <input type="text" [(ngModel)]="modificarMascotaData.nombre" name="modificarNombre">
+        <input type="text" [(ngModel)]="nombre" name="modificarNombre">
       </div>
       <div class="form-group">
         <label for="modificarRaza">Nueva Raza:</label>
-        <input type="text" [(ngModel)]="modificarMascotaData.raza" name="modificarRaza">
+        <input type="text" [(ngModel)]="raza" name="modificarRaza">
       </div>
       <div class="form-group">
         <label for="modificarEdad">Nueva Edad:</label>
-        <input type="number"  [(ngModel)]="modificarMascotaData.edad" name="modificarEdad" min="0">
+        <input type="number" [(ngModel)]="edad" name="modificarEdad" min="0">
       </div>
       <button type="submit">Modificar</button>
     </form>

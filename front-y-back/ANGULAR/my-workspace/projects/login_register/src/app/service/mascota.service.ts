@@ -12,8 +12,8 @@ export class MascotaService {
 
   url:string = 'http://localhost:3000/mascotas';
 
-  findMascota(email:string):Observable<MascotaDatosDto>{
-    return this.http.get<MascotaDatosDto>(`${this.url}/mascotas/${email}`);
+  findMascota(id:number):Observable<MascotaDatosDto>{
+    return this.http.get<MascotaDatosDto>(`${this.url}/buscarMascota/${id}`);
   }
 
   altaMascota(email:string,nombre:string,raza:string,edad:number):Observable<MascotaDatosDto>{
@@ -30,7 +30,7 @@ export class MascotaService {
     return this.http.delete<MascotaDatosDto>(`${this.url}/eliminarMascota/${id}`);
   }
 
-  modifyMAscota(id: number, mascota: Partial<MascotaDatosDto>): Observable<MascotaDatosDto> {
+  modifyMascota(id: number, mascota: Partial<MascotaDatosDto>): Observable<MascotaDatosDto> {
     return this.http.patch<MascotaDatosDto>(`${this.url}/modificarMascota/${id}`, mascota);
   }
 }

@@ -12,24 +12,34 @@ import { MascotaDatosDto } from '../../model/mascotaDatosDto';
 })
 export class MascotaComponent {
 
-  email:string;
+  id_mascota:number;
   bajaId:number;
   idModificar:number;
-  nuevaMascota:MascotaDatosDto;
-  modificarMascotaData:MascotaDatosDto;
+  email_cliente:string;
+  nombreMascota: string;
+  razaMascota: string;
+  edadMascota: number;
+  email_clienteMascota: string;
+  nombre: string;
+  raza: string;
+  edad: number;
+  mascotaEncontrada:MascotaDatosDto;
+
 
   constructor(private mascotaService:MascotaService){}
 
-  buscarMascotaPorId(){
-    return this.mascotaService.findMascota(this.email);
+  buscarMascotaPorId() {
+    this.mascotaService.findMascota(this.id_mascota)
+    .subscribe(mascota => {this.mascotaEncontrada = mascota});
+    return this.mascotaEncontrada;
   }
 
   altaMascota(){
     return this.mascotaService.altaMascota(
-      this.nuevaMascota.email_cliente,
-      this.nuevaMascota.nombre,
-      this.nuevaMascota.raza,
-      this.nuevaMascota.edad
+      this.email_cliente,
+      this.nombreMascota,
+      this.razaMascota,
+      this.edadMascota
     );
   }
 
@@ -38,9 +48,14 @@ export class MascotaComponent {
   }
 
   modificarMascota(){
-    return this.mascotaService.modifyMAscota(
+    return this.mascotaService.modifyMascota(
       this.idModificar,
-      this.modificarMascotaData
+      {
+        email_cliente: this.email_clienteMascota,
+        nombre: this.nombre,
+        raza: this.raza,
+        edad: this.edad
+      }
     );
   }
 }

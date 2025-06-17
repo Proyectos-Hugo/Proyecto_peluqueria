@@ -12,6 +12,12 @@ export class MascotaService {
     @InjectRepository(Mascota) private repositoryMascota: Repository<Mascota>,
   ){}
 
+  // BUSCAR MASCOTA
+
+  async findMascotas(id: number): Promise<Mascota[]> {
+    return this.repositoryMascota.find({ where: { id_mascota:id } });
+  }
+
   //ALTA MASCOTA
 
   async highAnimals(mascota: MascotaAltaDto):Promise<boolean>{
@@ -68,7 +74,4 @@ export class MascotaService {
     
   }
 
-  async findMascotas(email_cliente: string): Promise<Mascota[]> {
-    return this.repositoryMascota.find({ where: { email_cliente } });
-  }
 }

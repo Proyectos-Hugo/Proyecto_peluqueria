@@ -33,9 +33,9 @@ export class MascotaController {
     }
   }
 
-  @Get('mascotas/:email')
-  allMascota(@Param('email') email:string):Promise<MascotaDatosDto[]>{
-    return this.mascotaService.findMascotas(email);
+  @Get('buscarMascota/:id')
+  allMascota(@Param('id') id_mascota:number):Promise<MascotaDatosDto[]>{
+    return this.mascotaService.findMascotas(id_mascota);
   }
 
   @Delete('eliminarMascota/:id')
@@ -44,11 +44,11 @@ export class MascotaController {
 
     if(delet){
       return res.status(201).json({
-        massage: "Se borro la mascota"
+        message: "Se borro la mascota"
       });
     }else{
       return res.status(499).json({
-        massage: "No se pudo borrar la mascota"
+        message: "No se pudo borrar la mascota"
       });
     }
   }
