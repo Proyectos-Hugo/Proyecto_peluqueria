@@ -2,6 +2,7 @@ import { MascotaDatosDto } from '../model/mascotaDatosDto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MascotaAltaDto } from '../model/MascotaAltaDto';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class MascotaService {
     return this.http.get<MascotaDatosDto>(`${this.url}/buscarMascota/${id}`);
   }
 
+  /*
   altaMascota(email:string,nombre:string,raza:string,edad:number):Observable<MascotaDatosDto>{
     const nuevaMascota = {
       email,
@@ -25,6 +27,12 @@ export class MascotaService {
     }
     return this.http.post<MascotaDatosDto>(`${this.url}/altaMascota/`,nuevaMascota);
   }
+  */
+
+  altaMascota(mascota: MascotaAltaDto):Observable<MascotaDatosDto>{
+    return this.http.post<MascotaDatosDto>(`${this.url}/altaMascota/`,mascota);
+  }
+
 
   deleteMascota(id:number):Observable<MascotaDatosDto> {
     return this.http.delete<MascotaDatosDto>(`${this.url}/eliminarMascota/${id}`);

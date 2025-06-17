@@ -1,8 +1,9 @@
 import { IsEmail, IsInt, IsString, Length } from "class-validator";
 
 export class MascotaAltaDto {
-  @IsInt()
-  id_mascota?: number;
+  @IsEmail()
+  @Length(10,40)
+  email_cliente: string;
   @IsString()
   @Length(2,15)
   nombre: string;
@@ -11,15 +12,13 @@ export class MascotaAltaDto {
   raza: string;
   @IsInt()
   edad: number;
-  @IsEmail()
-  @Length(10,40)
-  email_cliente: string;
 
-  constructor(nombre?: string, raza?: string, edad?: number, email_cliente?: string, id_mascota?: number) {
+
+  constructor(email_cliente: string, nombre: string, raza: string, edad?: number) {
+    this.email_cliente = email_cliente;
     this.nombre = nombre;
     this.raza = raza;
     this.edad = edad;
-    this.email_cliente = email_cliente;
-    this.id_mascota = id_mascota;
+    
   }
 }

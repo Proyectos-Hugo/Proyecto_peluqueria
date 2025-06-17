@@ -5,11 +5,11 @@ export class MascotaDatosDto {
   raza:string;
   edad:number;
 
-  constructor(idMas?:number,emailClie?:string,nom?:string,raz?:string,age?:number){
-    this.id_mascota=idMas;
-    this.email_cliente=emailClie;
-    this.nombre=nom;
-    this.raza=raz;
-    this.edad=age;
+  constructor(id_mascota:number,email_cliente?:string,nombre?:string,raza?:string,edad?:number){
+    this.id_mascota=id_mascota;
+    this.email_cliente=email_cliente;
+    this.nombre=nombre;
+    this.raza=raza;
+    this.edad=edad;
   }
 }

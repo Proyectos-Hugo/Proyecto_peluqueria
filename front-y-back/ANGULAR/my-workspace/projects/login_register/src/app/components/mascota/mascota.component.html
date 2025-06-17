@@ -12,12 +12,13 @@
     </form>
     <div *ngIf="mascotaEncontrada">
       <h3>Información de la Mascota</h3>
-      <ul>
-        <li><strong>ID:</strong> {{ mascotaEncontrada.id_mascota }}</li>
-        <li><strong>Nombre:</strong> {{ mascotaEncontrada.nombre }}</li>
-        <li><strong>Raza:</strong> {{ mascotaEncontrada.raza }}</li>
-        <li><strong>Edad:</strong> {{ mascotaEncontrada.edad }}</li>
-        <li><strong>Email Cliente:</strong> {{ mascotaEncontrada.email_cliente }}</li>
+      <ul *ngFor="let mascota of mascotaEncontrada">
+        <li><strong>ID:</strong> {{ mascota.id_mascota }}</li>
+        <li><strong>Nombre:</strong> {{ mascota.nombre }}</li>
+        <li><strong>Raza:</strong> {{ mascota.raza }}</li>
+        <li><strong>Edad:</strong> {{ mascota.edad }}</li>
+        <li><strong>Email Cliente:</strong> {{ mascota.email_cliente }}</li>
+        <hr>
       </ul>
     </div>
   </div>

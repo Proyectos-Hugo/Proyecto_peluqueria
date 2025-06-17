@@ -8,6 +8,9 @@ export class Mascota {
   id_mascota: number;
 
   @Column()
+  email_cliente: string;
+
+  @Column()
   nombre: string;
 
   @Column()
@@ -16,9 +19,6 @@ export class Mascota {
   @Column()
   edad: number;
 
-  @Column()
-  email_cliente: string;
-
   @ManyToOne(() => Cliente, cliente => cliente.mascotas)
   @JoinColumn({ name: 'email_cliente' }) 
   cliente: Cliente;
@@ -26,13 +26,11 @@ export class Mascota {
   @OneToMany(() => Cita, cita => cita.mascota)
   citas: Cita[];
 
-  constructor(nombre?: string, raza?: string, edad?: number, cliente?: Cliente) {
+  constructor(email_cliente: string, nombre: string, raza: string, edad: number) {
+    this.email_cliente = email_cliente;
     this.nombre = nombre;
     this.raza = raza;
     this.edad = edad;
-    this.cliente = cliente;
-    if(cliente){
-      this.email_cliente = cliente.email;
-    }
+    
   }
 }

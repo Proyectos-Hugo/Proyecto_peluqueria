@@ -25,13 +25,8 @@ export class MascotaService {
     // Verifica si la mascota existe, si no, lo crea
       let mascotaRepetida:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: mascota.email_cliente, nombre: mascota.nombre, raza: mascota.raza}});
       if (!mascotaRepetida) {
-        mascota = this.repositoryMascota.create({
-          email_cliente: mascota.email_cliente,
-          nombre: mascota.nombre,
-          raza: mascota.raza,
-          edad: mascota.edad
-        });
-        await this.repositoryMascota.save(mascota);
+        this.repositoryMascota.create(mascota);
+        await this.repositoryMascota.save(mascota)
         return true;
       }
       else{
@@ -59,18 +54,12 @@ export class MascotaService {
 
   async modifyAnimals(id:number, mascota: MascotaAltaDto):Promise<boolean>{
 
-    if(mascota.id_mascota===id){
       const result = await this.repositoryMascota.createQueryBuilder()
         .update(Mascota)
         .set({ ...mascota })
         .where("id_mascota = :id", { id_mascota:id })
-        .execute();
-
+        .execute()
       return result.affected && result.affected > 0;
-    }
-    else{
-      return false;
-    }
     
   }
 

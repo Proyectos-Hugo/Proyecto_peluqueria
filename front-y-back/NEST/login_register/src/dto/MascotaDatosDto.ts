@@ -7,11 +7,11 @@ export class MascotaDatosDto {
   edad: number;
   email_cliente: string;
 
-  constructor(nombre?: string, raza?: string, edad?: number, email_cliente?: string, id_mascota?: number) {
+  constructor(id_mascota?: number, email_cliente?: string, nombre?: string, raza?: string, edad?: number) {
+    this.id_mascota = id_mascota;
+    this.email_cliente = email_cliente;
     this.nombre = nombre;
     this.raza = raza;
     this.edad = edad;
-    this.email_cliente = email_cliente;
-    this.id_mascota = id_mascota;
   }
 }
