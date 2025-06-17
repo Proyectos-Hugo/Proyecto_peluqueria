@@ -106,6 +106,8 @@ export class CitaService {
     if(!this.clienteService.highClient(clienteNuevo)){
       return false;
     }
+    //VERIFICACION MASCOTA
+    
     //Se verifica si ya hay una cita registrada en la misma fecha y hora
     const citaRepetida = await this.repositoryCita.createQueryBuilder("citas")
     .where("citas.fecha = :fecha AND citas.hora = :hora", { 
