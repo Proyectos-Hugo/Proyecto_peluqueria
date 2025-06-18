@@ -13,7 +13,7 @@ import {Response} from 'express';
 import { CitaDatosDto } from 'src/dto/CitaDatosDto';
 import { CitaAltaEmpleadoDto } from 'src/dto/CitaAltaEmpleadoDto';
 import { CitaAltaClienteDto } from 'src/dto/CitaAltaClienteDto';
-import { CitaAltaDto } from 'src/dto/CitaCAltaDto';
+import { CitaAltaDto } from 'src/dto/CitaAltaDto';
 
 
 @Controller('citas')

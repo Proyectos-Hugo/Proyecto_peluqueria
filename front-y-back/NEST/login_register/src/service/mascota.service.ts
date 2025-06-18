@@ -16,20 +16,29 @@ export class MascotaService {
 
   // BUSCAR MASCOTA
 
-  async findMascotas(id: number): Promise<Mascota[]> {
-    return this.repositoryMascota.find({ where: { id_mascota:id } });
+  async findMascotas(id: number): Promise<Mascota> {
+    return this.repositoryMascota.findOne({ where: { id_mascota:id } });
+  }
+  
+  //BUSCAR MASCOTAS POR EMAIL DE CLIENTE
+  async findMascotasByEmail(email: string): Promise<Mascota[]> {
+    return this.repositoryMascota.find({ where: { email_cliente:email } });
+  }
+  //BUSCAR MASCOTA POR EMAIL DE CLIENTE Y NOMBRE
+  async findMascotaByEmailAndName(email: string, nombre: string): Promise<Mascota> {
+    return this.repositoryMascota.findOne({ where: { email_cliente:email, nombre:nombre } });
   }
 
   //ALTA MASCOTA
 
-  async highAnimals(mascota: MascotaAltaDto):Promise<boolean>{
+  async highAnimals(mascota: MascotaAltaDto):Promise<Mascota | boolean>{
 
     // Verifica si la mascota existe, si no, lo crea
       let mascotaRepetida:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: mascota.email_cliente, nombre: mascota.nombre, raza: mascota.raza}});
       if (!mascotaRepetida) {
         this.repositoryMascota.create(mascota);
-        await this.repositoryMascota.save(mascota)
-        return true;
+        let mascotacreada = await this.repositoryMascota.save(mascota)
+        return mascotacreada;
       }
       else{
         return false;

@@ -62,4 +62,8 @@ export class EmpleadoService {
 
       return result.affected && result.affected > 0;
   }
+  async findEmpleadoByDni(dni: string): Promise<Empleado> {
+    return this.repositoryEmpleado.findOneBy({ dni });
+  }
 }
+

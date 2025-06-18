@@ -3,14 +3,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CitaDatosDto } from 'src/dto/CitaDatosDto';
 import { ClienteAltaDto } from 'src/dto/ClienteAltaDto';
-import { Cliente } from 'src/model/Cliente';
-import { Empleado } from 'src/model/Empleado';
-import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
 import { ClienteService } from './cliente.service';
 import { CitaAltaClienteDto } from 'src/dto/CitaAltaClienteDto';
 import { CitaAltaEmpleadoDto } from 'src/dto/CitaAltaEmpleadoDto';
-import { CitaAltaDto } from 'src/dto/CitaCAltaDto';
+import { CitaAltaDto } from 'src/dto/CitaAltaDto';
+import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
+import { MascotaService } from './mascota.service';
+import { EmpleadoService } from './empleado.service';
+import { Mascota } from 'src/model/Mascota';
+import { Cliente } from 'src/model/Cliente';
+import { ClienteDatosDto } from 'src/dto/ClienteDatosDto';
 
 
 @Injectable()
@@ -18,10 +21,9 @@ export class CitaService {
   
   constructor(
     @InjectRepository(Cita) private repositoryCita:Repository<Cita>,
-    @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>,
-    @InjectRepository(Mascota) private repositoryMascota: Repository<Mascota>,
-    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private mascotasService: MascotaService,
+    private empleadosService: EmpleadoService
   ){}
 
   // Devolucion de todas las citas
@@ -30,9 +32,9 @@ export class CitaService {
     const citasDto: CitaDatosDto[] = [];
 
     for (const cita of citas) {
-      const cliente = await this.repositoryCliente.findOne({ where: { email: cita.email_cliente } });
-      const empleado = await this.repositoryEmpleado.findOne({ where: { dni: cita.dni_empleado}});
-      const mascota = await this.repositoryMascota.findOne({ where:  { id_mascota: cita.id_mascota}});
+      const cliente = await this.clienteService.findClienteByEmail(cita.email_cliente);
+      const empleado = await this.empleadosService.findEmpleadoByDni(cita.dni_empleado);
+      const mascota = await this.mascotasService.findMascotas(cita.id_mascota);
       citasDto.push(
         new CitaDatosDto(
           cita,
@@ -56,7 +58,7 @@ export class CitaService {
       relations: ['empleado', 'mascota']
     });
     if (citas) {
-      const cliente = await this.repositoryCliente.findOne({ where: { email: email } });
+      const cliente = await this.clienteService.findClienteByEmail(email);
       return citas.map(cita => 
         new CitaDatosDto(
           cita,
@@ -90,40 +92,44 @@ export class CitaService {
         return false;
       }else{
         //Si no hay citas, se crea la nueva cita.
-        const nuevaCita = this.repositoryCita.create(cita);
+        let nuevacita = new CitaAltaDto(cita.email_cliente, cita.dni_empleado, cita.id_mascota, cita.fecha, cita.hora);
+        const nuevaCita = this.repositoryCita.create(nuevacita);
         await this.repositoryCita.save(nuevaCita);
         return true;
       }
     }
   async highQuoteByEmployee(cita:CitaAltaEmpleadoDto):Promise<boolean>{
+
     const fechaStr = cita.fecha instanceof Date
     ? cita.fecha.toISOString().slice(0, 10)
     : cita.fecha;
-
-    // Verifica si el cliente existe, si no, lo crea
-    let clienteNuevo = new ClienteAltaDto(cita.email_cliente, cita.telefono_cliente, cita.nombre_cliente);
-    //Se da de alta al cliente
-    if(!this.clienteService.highClient(clienteNuevo)){
-      return false;
-    }
-    //VERIFICACION MASCOTA
-    
-    //Se verifica si ya hay una cita registrada en la misma fecha y hora
     const citaRepetida = await this.repositoryCita.createQueryBuilder("citas")
     .where("citas.fecha = :fecha AND citas.hora = :hora", { 
       fecha: fechaStr,
       hora: cita.hora 
     })
-    .getOne()
-   
+    .getOne()    
     if(citaRepetida){
       return false;
-    }else{
-      //Si no hay citas, se crea la nueva cita.
-      const nuevaCita = this.repositoryCita.create(cita);
-      await this.repositoryCita.save(nuevaCita);
-      return true;
     }
+    // Verifica si el cliente existe, si no, lo crea
+    let clienteRepetido:any = await this.clienteService.findClienteByEmail(cita.email_cliente);
+    if (clienteRepetido instanceof ClienteDatosDto) {
+      let clienteNuevo = new ClienteAltaDto(cita.email_cliente, cita.telefono_cliente, cita.nombre_cliente);   
+      await this.clienteService.highClient(clienteNuevo)
+    }
+    //VERIFICACION MASCOTA
+    let mascota = await this.mascotasService.findMascotaByEmailAndName(cita.email_cliente, cita.nombre_mascota);
+    if(!mascota){
+      let mascotanueva = new MascotaAltaDto(cita.email_cliente, cita.nombre_mascota, cita.raza, cita.edad);
+      let mascotaNueva = await this.mascotasService.highAnimals(mascotanueva);
+      if(mascotaNueva instanceof Mascota){
+        let nuevacita = new CitaAltaDto(cita.email_cliente, cita.dni_empleado, mascotaNueva.id_mascota, cita.fecha, cita.hora);
+        const nuevaCita = this.repositoryCita.create(nuevacita)
+        await this.repositoryCita.save(nuevaCita);
+        return true;  
+      }
+    }  
   }
 
   // Modificar Cita
