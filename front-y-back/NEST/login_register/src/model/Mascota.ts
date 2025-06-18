@@ -19,11 +19,11 @@ export class Mascota {
   @Column()
   edad: number;
 
-  @ManyToOne(() => Cliente, cliente => cliente.mascotas)
+  @ManyToOne(() => Cliente, cliente => cliente.mascotas, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'email_cliente' }) 
   cliente: Cliente;
 
-  @OneToMany(() => Cita, cita => cita.mascota,  { cascade: true, onDelete: 'CASCADE' })
+  @OneToMany(() => Cita, cita => cita.mascota)
   citas: Cita[];
 
   constructor(email_cliente: string, nombre: string, raza: string, edad: number) {

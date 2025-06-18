@@ -25,11 +25,11 @@ export class Cita {
   @JoinColumn({ name: 'id_mascota' })
   mascota: Mascota;
 
-  @ManyToOne(()=>Cliente, cliente => cliente.email)
+  @ManyToOne(()=>Cliente, cliente => cliente.email, {onDelete: 'CASCADE'})
   @JoinColumn({name: 'email_cliente', referencedColumnName: 'email' })
   cliente: Cliente;
 
-  @ManyToOne(() => Empleado, empleado => empleado.citas)
+  @ManyToOne(() => Empleado, empleado => empleado.citas, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'dni_empleado', referencedColumnName: 'dni' })
   empleado: Empleado;
 
