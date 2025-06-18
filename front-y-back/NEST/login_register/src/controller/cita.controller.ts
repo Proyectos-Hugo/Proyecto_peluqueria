@@ -8,10 +8,12 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
-import { CitaAltaDto } from 'src/dto/CitaAltaDto';
 import { CitaService } from 'src/service/cita.service';
 import {Response} from 'express';
 import { CitaDatosDto } from 'src/dto/CitaDatosDto';
+import { CitaAltaEmpleadoDto } from 'src/dto/CitaAltaEmpleadoDto';
+import { CitaAltaClienteDto } from 'src/dto/CitaAltaClienteDto';
+import { CitaAltaDto } from 'src/dto/CitaCAltaDto';
 
 
 @Controller('citas')
@@ -28,10 +30,26 @@ export class CitaController {
     BuscarCitaPorCliente(@Param('email') email:string){
       return this.citaService.findQuotesByClient(email)
     }
-
-    @Post('alta-cita')
-    async altaCita(@Body() cita:CitaAltaDto, @Res() res:Response){
-      const creada = await this.citaService.highQuote(cita);
+    //CITA RESERVADA POR UN CLIENTE EN LA WEB
+    @Post('alta-cita-cliente')
+    async altaCitaCliente(@Body() cita:CitaAltaClienteDto, @Res() res:Response){
+      const creada = await this.citaService.highQuoteByClient(cita);
+      if(creada){
+        return res.status(201).json(
+        {
+          message: 'Cita creada',
+        });
+      }else{
+        return res.status(499).json({
+            message: 'Ya existe una cita en la hora seleccionada'
+        });
+      }
+      
+    }
+    //CITA RESERVADA POR UN EMPLEADO A UN CLIENTE NUEVO
+    @Post('alta-cita-empleado')
+    async altaCitaEmpleado(@Body() cita:CitaAltaEmpleadoDto, @Res() res:Response){
+      const creada = await this.citaService.highQuoteByEmployee(cita);
       if(creada){
         return res.status(201).json(
         {
