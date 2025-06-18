@@ -48,7 +48,6 @@ export class MascotaComponent {
     this.mascotaService.altaMascota(nuevaMascota)
    .subscribe({
       next: mascota => {
-        console.log(mascota)
       this.mensajeAlta = 'Mascota creada correctamente.';
       this.email_clienteMascota = '';
       this.nombreMascota = '';
@@ -61,12 +60,19 @@ export class MascotaComponent {
   });
 }
 
-  bajaMascota(){
-    return this.mascotaService.deleteMascota(this.bajaId);
+  bajaMascota() {
+    this.mascotaService.deleteMascota(this.bajaId).subscribe({
+      next: (resultado) => {
+        this.mensajeAlta = resultado ? 'Mascota eliminada correctamente.' : 'No se pudo eliminar la mascota.';
+      },
+      error: () => {
+        this.mensajeAlta = 'Error al eliminar la mascota.';
+      }
+    });
   }
 
-  modificarMascota(){
-    return this.mascotaService.modifyMascota(
+  modificarMascota() {
+    this.mascotaService.modifyMascota(
       this.idModificar,
       {
         email_cliente: this.email_clienteMascota,
@@ -74,6 +80,13 @@ export class MascotaComponent {
         raza: this.raza,
         edad: this.edad
       }
-    );
+    ).subscribe({
+      next: (resultado) => {
+        this.mensajeAlta = resultado ? 'Mascota modificada correctamente.' : 'No se pudo modificar la mascota.';
+      },
+      error: () => {
+        this.mensajeAlta = 'Error al modificar la mascota.';
+      }
+    });
   }
 }

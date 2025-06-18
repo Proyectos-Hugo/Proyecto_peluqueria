@@ -21,7 +21,7 @@ export class Cita {
 
   @Column()
   hora: string;
-  @ManyToOne(() => Mascota, mascota => mascota.citas)
+  @ManyToOne(() => Mascota, mascota => mascota.citas, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'id_mascota' })
   mascota: Mascota;
 

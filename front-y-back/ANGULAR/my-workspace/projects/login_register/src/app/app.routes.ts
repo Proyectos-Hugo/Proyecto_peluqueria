@@ -27,7 +27,7 @@ export const routes: Routes = [
     path: 'nueva-mascota',
     component: NuevaMascotaComponent
   },
-    {
+  {
     path: 'mis-mascotas',
     component: MascotaComponent
   },

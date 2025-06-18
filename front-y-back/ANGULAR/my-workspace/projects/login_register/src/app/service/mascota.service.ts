@@ -17,18 +17,6 @@ export class MascotaService {
     return this.http.get<MascotaDatosDto>(`${this.url}/buscarMascota/${id}`);
   }
 
-  /*
-  altaMascota(email:string,nombre:string,raza:string,edad:number):Observable<MascotaDatosDto>{
-    const nuevaMascota = {
-      email,
-      nombre,
-      raza,
-      edad
-    }
-    return this.http.post<MascotaDatosDto>(`${this.url}/altaMascota/`,nuevaMascota);
-  }
-  */
-
   altaMascota(mascota: MascotaAltaDto):Observable<MascotaDatosDto>{
     return this.http.post<MascotaDatosDto>(`${this.url}/altaMascota/`,mascota);
   }

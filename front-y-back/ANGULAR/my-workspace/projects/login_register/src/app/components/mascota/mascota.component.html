@@ -46,6 +46,9 @@
         <input type="number" [(ngModel)]="edadMascota" name="edadMascota" min="0" required>
       </div>
       <button type="submit">Dar de Alta</button>
+      <div *ngIf="mensajeAlta">
+        {{mensajeAlta}}
+      </div>
     </form>
   </div>
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
 import { MascotaDatosDto } from 'src/dto/MascotaDatosDto';
+import { Cita } from 'src/model/Cita';
 import { Mascota } from 'src/model/Mascota';
 import { Repository } from 'typeorm';
 
@@ -10,6 +11,7 @@ export class MascotaService {
 
   constructor(
     @InjectRepository(Mascota) private repositoryMascota: Repository<Mascota>,
+    @InjectRepository(Cita) private repsositoryCita: Repository<Cita>
   ){}
 
   // BUSCAR MASCOTA
@@ -37,30 +39,31 @@ export class MascotaService {
 
   //BAJA MASCOTA
 
-  async deleteAnimal(id:number):Promise<boolean>{
-    const mascota :Mascota = await this.repositoryMascota.createQueryBuilder("mascota")
-    .where("id_mascota=:id", { id_mascota:id})
-    .getOne();
-    
-    if(mascota){
-      this.repositoryMascota.delete(mascota);
+  async deleteAnimal(id: number): Promise<boolean> {
+    const mascota = await this.repositoryMascota
+      .createQueryBuilder('mascota')
+      .leftJoinAndSelect('mascota.citas', 'cita')
+      .where('mascota.id_mascota = :id', { id })
+      .getOne();
+
+    if (mascota) {
+      await this.repositoryMascota.delete(mascota.id_mascota);
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
+
   //MODIFICAR MASCOTA
 
   async modifyAnimals(id:number, mascota: MascotaAltaDto):Promise<boolean>{
-
-      const result = await this.repositoryMascota.createQueryBuilder()
-        .update(Mascota)
-        .set({ ...mascota })
-        .where("id_mascota = :id", { id_mascota:id })
-        .execute()
-      return result.affected && result.affected > 0;
-    
+    const result = await this.repositoryMascota.createQueryBuilder()
+      .update(Mascota)
+      .set({ ...mascota })
+      .where("id_mascota = :id", { id:id })
+      .execute()
+    return result.affected && result.affected > 0;
   }
 
 }
