@@ -18,7 +18,7 @@ export class Empleado {
   @Column()
   telefono: string;
 
-  @OneToMany(() => Cita, cita => cita.empleado)
+  @OneToMany(() => Cita, cita => cita.empleado,  { cascade: true, onDelete: 'CASCADE' })
   citas: Cita[];
 
   constructor(dni?: string, nombre?: string, apellido?: string, especialidad?: string, telefono?: string) {

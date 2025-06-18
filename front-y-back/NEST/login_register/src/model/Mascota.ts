@@ -23,7 +23,7 @@ export class Mascota {
   @JoinColumn({ name: 'email_cliente' }) 
   cliente: Cliente;
 
-  @OneToMany(() => Cita, cita => cita.mascota)
+  @OneToMany(() => Cita, cita => cita.mascota,  { cascade: true, onDelete: 'CASCADE' })
   citas: Cita[];
 
   constructor(email_cliente: string, nombre: string, raza: string, edad: number) {

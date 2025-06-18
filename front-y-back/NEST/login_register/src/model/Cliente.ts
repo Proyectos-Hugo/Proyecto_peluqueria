@@ -20,10 +20,10 @@ export class Cliente {
   @Column()
   telefono: string;
 
-  @OneToMany(() => Mascota, mascota => mascota.cliente)
+  @OneToMany(() => Mascota, mascota => mascota.cliente , { cascade: true, onDelete: 'CASCADE' })
   mascotas: Mascota[];
 
-  @OneToMany(() => Pedido, pedido => pedido.cliente)
+  @OneToMany(() => Pedido, pedido => pedido.cliente,  { cascade: true, onDelete: 'CASCADE' })
   pedidos: Pedido[];
 
   constructor(email: string, nombre: string, apellido: string, password?: string, telefono?: string) {
