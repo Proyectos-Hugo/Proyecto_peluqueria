@@ -13,12 +13,12 @@ export class Cliente {
 
   @Column()
   apellido: string;
-  
-  @Column()
-  password: string;
 
   @Column()
   telefono: string;
+
+  @Column()
+  password: string;
 
   @OneToMany(() => Mascota, mascota => mascota.cliente)
   mascotas: Mascota[];
@@ -26,11 +26,12 @@ export class Cliente {
   @OneToMany(() => Pedido, pedido => pedido.cliente)
   pedidos: Pedido[];
 
-  constructor(email: string, nombre: string, apellido?: string, password?: string, telefono?: string) {
+  constructor(email: string, nombre: string, apellido: string, telefono: string, password?: string) {
     this.email = email;
     this.nombre = nombre;
     this.apellido = apellido;
-    this.password = password;
     this.telefono = telefono;
+    this.password = password;
+    
   }
 }

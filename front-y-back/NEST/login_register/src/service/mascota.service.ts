@@ -16,7 +16,7 @@ export class MascotaService {
 
   // BUSCAR MASCOTA
 
-  async findMascotas(id: number): Promise<Mascota> {
+  async findMascota(id: number): Promise<Mascota> {
     return this.repositoryMascota.findOne({ where: { id_mascota:id } });
   }
   
@@ -25,8 +25,20 @@ export class MascotaService {
     return this.repositoryMascota.find({ where: { email_cliente:email } });
   }
   //BUSCAR MASCOTA POR EMAIL DE CLIENTE Y NOMBRE
-  async findMascotaByEmailAndName(email: string, nombre: string): Promise<Mascota> {
-    return this.repositoryMascota.findOne({ where: { email_cliente:email, nombre:nombre } });
+  async findMascotaByEmailAndName(email: string, nombre: string): Promise<MascotaDatosDto | boolean> {
+    const mascota = await this.repositoryMascota.findOne({ where: { email_cliente:email, nombre:nombre } });
+    if(mascota){
+      return new MascotaDatosDto(
+        mascota.id_mascota,
+        mascota.email_cliente,
+        mascota.nombre,
+        mascota.raza,
+        mascota.edad
+      )
+    }else{
+      return false;
+    }
+    
   }
 
   //ALTA MASCOTA

@@ -22,8 +22,8 @@ export class ClienteService {
         let cliente = this.repositoryCliente.create(
           nuevo
         );
-        cliente =await this.repositoryCliente.save(cliente);
-        return new ClienteDatosDto(cliente.email, cliente.nombre, cliente.apellido, cliente.apellido, cliente.telefono);
+        cliente = await this.repositoryCliente.save(cliente);
+        return new ClienteDatosDto(cliente.email, cliente.nombre, cliente.apellido, cliente.telefono);
       }
       else{
         return false
@@ -62,20 +62,23 @@ export class ClienteService {
 
 
     //BUSCAR CLIENTE POR EMAIL Y PASSWORD
-    async findOne(email: string, password: string): Promise<ClienteDatosDto | Error> {
+    async findOne(email: string, password: string): Promise<ClienteDatosDto | boolean> {
       const usuario = await this.repositoryCliente.findOneBy({ email, password });
       if (usuario) {
         return new ClienteDatosDto(usuario.email, usuario.nombre, usuario.apellido, usuario.password, usuario.telefono);
       }
-      return new Error('Cuenta no encontrada');
+      return false;
     }
 
     async allClientes(): Promise<Cliente[]> {
       return this.repositoryCliente.find();
     }
 
-    async findClienteByEmail(email: string): Promise<Cliente> {
-      return this.repositoryCliente.findOneBy({ email });
+    async findClienteByEmail(email: string): Promise<ClienteDatosDto | boolean> {
+      const usuario = await this.repositoryCliente.findOneBy({ email });
+      if (usuario)
+        return new ClienteDatosDto(usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, usuario.password);
+      return false;
     }
 
 }

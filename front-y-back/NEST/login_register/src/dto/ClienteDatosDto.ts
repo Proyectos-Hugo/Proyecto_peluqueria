@@ -4,10 +4,10 @@ export class ClienteDatosDto {
   email: string;
   nombre: string;
   apellido: string;
-  password: string;
   telefono: string;
+  password: string;
 
-  constructor(email: string, nombre: string, apellido: string, password: string, telefono: string) {
+  constructor(email: string, nombre: string, apellido: string, telefono: string, password?:string) {
     this.email = email;
     this.nombre = nombre;
     this.apellido = apellido;

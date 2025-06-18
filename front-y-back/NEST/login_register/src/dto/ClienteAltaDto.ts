@@ -10,14 +10,14 @@ export class ClienteAltaDto {
   @IsString()
   @Length(10,40)
   apellido: string;
-  @IsStrongPassword()
-  @Length(8,16)
-  password: string;
   @IsInt()
   @Length(9,9)
   telefono: string;
+  @IsStrongPassword()
+  @Length(8,16)
+  password: string;
 
-  constructor(email: string, telefono: string, nombre: string, apellido?: string, password?: string) {
+  constructor(email: string, nombre: string, apellido: string, telefono: string, password?: string) {
     this.email = email;
     this.nombre = nombre;
     this.apellido = apellido;

@@ -39,22 +39,22 @@ export class LoginController {
   @Get(':email,:password')
   async findOne(@Param('email') email: string, @Param('password') password: string, @Res() res: Response):Promise<Response> {
 
-    var cliente: Cliente|Error = await this.clienteService.findOne(email, password);
+    var cliente: ClienteDatosDto|boolean = await this.clienteService.findOne(email, password);
 
     //comprobar que el cliente es Cliente
     if (cliente instanceof Cliente) {
     // Asegúrate que ClienteDatosDto tiene constructor o crea un objeto simple
-    const clientedto = new ClienteDatosDto(
-      cliente.email,
-      cliente.nombre,
-      cliente.apellido,
-      cliente.password,
-      cliente.telefono,
-    );
-    return res.status(200).json(clientedto);
-  } else {
+      const clientedto = new ClienteDatosDto(
+        cliente.email,
+        cliente.nombre,
+        cliente.apellido,
+        cliente.password,
+        cliente.telefono,
+      );
+      return res.status(200).json(clientedto);
+    }
     return res.status(404).json({ message: 'Cuenta no encontrada' });
-  }
+
   }
   
 }

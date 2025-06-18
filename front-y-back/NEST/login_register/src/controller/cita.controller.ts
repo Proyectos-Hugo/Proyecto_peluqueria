@@ -35,14 +35,9 @@ export class CitaController {
     async altaCitaCliente(@Body() cita:CitaAltaClienteDto, @Res() res:Response){
       const creada = await this.citaService.highQuoteByClient(cita);
       if(creada){
-        return res.status(201).json(
-        {
-          message: 'Cita creada',
-        });
+        return res.status(201).json(creada);
       }else{
-        return res.status(499).json({
-            message: 'Ya existe una cita en la hora seleccionada'
-        });
+        return res.status(499).json(creada);
       }
       
     }
@@ -54,6 +49,7 @@ export class CitaController {
         return res.status(201).json(
         {
           message: 'Cita creada',
+          cita: creada
         });
       }else{
         return res.status(499).json({

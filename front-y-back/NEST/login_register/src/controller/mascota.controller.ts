@@ -34,8 +34,15 @@ export class MascotaController {
   }
 
   @Get('buscarMascota/:id')
-  allMascota(@Param('id') id_mascota:number):Promise<MascotaDatosDto[]>{
-    return this.mascotaService.findMascotas(id_mascota);
+  async mascotaPorId(@Param('id') id_mascota:number, @Res() res:Response){
+    const mascota = await this.mascotaService.findMascota(id_mascota);
+    if(mascota){
+      return res.status(200).json(mascota);
+    }else{
+      return res.status(499).json({
+        message: "No se encontro la mascota"
+      });
+    }
   }
 
   @Delete('eliminarMascota/:id')

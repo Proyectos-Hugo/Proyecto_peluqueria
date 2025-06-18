@@ -62,8 +62,12 @@ export class EmpleadoService {
 
       return result.affected && result.affected > 0;
   }
-  async findEmpleadoByDni(dni: string): Promise<Empleado> {
-    return this.repositoryEmpleado.findOneBy({ dni });
+  async findEmpleadoByDni(dni: string): Promise<EmpleadoDatosDto | boolean> {
+    const empleado =  await this.repositoryEmpleado.findOneBy({ dni });
+    if (empleado) {
+      return new EmpleadoDatosDto(empleado.dni, empleado.nombre, empleado.apellido, empleado.especialidad, empleado.telefono);
+    }
+    return false;
   }
 }
 
