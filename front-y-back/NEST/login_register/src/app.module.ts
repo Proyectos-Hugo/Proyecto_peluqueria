@@ -16,6 +16,7 @@ import { ClienteService } from './service/cliente.service';
 import { MascotaService } from './service/mascota.service';
 import { LoginController } from './controller/login.controller';
 import { MascotaController } from './controller/mascota.controller';
+import { EmpleadoController } from './controller/empleado.controller';
 
 
 
@@ -30,7 +31,7 @@ import { MascotaController } from './controller/mascota.controller';
   entities: [Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
   synchronize: false,
   }),TypeOrmModule.forFeature([Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],
-  controllers: [LoginController,CitaController,TiendaController,MascotaController],
+  controllers: [LoginController,CitaController,TiendaController,MascotaController,EmpleadoController],
   providers: [TiendaService,CitaService,EmpleadoService,ClienteService,MascotaService],
 })
 export class AppModule {}

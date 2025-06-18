@@ -11,6 +11,15 @@
       </mat-menu>
   </div>
 
+  <!-- Menú Empleado -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="empleadoMenu">Empleado</button>
+    <mat-menu #empleadoMenu="matMenu" yPosition="below">
+      <button (click)="goToMisEmpleados()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis empleados</button>
+      <button (click)="goToNuevoEmplado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo empleado</button>
+    </mat-menu>
+  </div>
+
   <!-- Menú Citas -->
   <div *ngIf="isLoggedIn()">
     <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="citasMenu">Citas</button>

@@ -4,9 +4,9 @@ export class EmpleadoDatosDto {
   nombre: string;
   apellido: string;
   especialidad: string;
-  telefono: string;
+  telefono: number;
 
-  constructor(dni: string, nombre: string, apellido: string, especialidad: string, telefono: string) {
+  constructor(dni: string, nombre: string, apellido: string, especialidad: string, telefono: number) {
     this.dni = dni;
     this.nombre = nombre;
     this.apellido = apellido;

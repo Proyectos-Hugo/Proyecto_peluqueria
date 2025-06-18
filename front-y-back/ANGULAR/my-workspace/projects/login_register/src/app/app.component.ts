@@ -43,6 +43,12 @@ export class AppComponent {
   goToNuevaMascota() {
       this.router.navigate(['/nueva-mascota']);
   }
+  goToMisEmpleados(){
+      this.router.navigate(['/mis-empleados']);
+  }
+  goToNuevoEmplado(){
+      this.router.navigate(['/nuevo-empleado']);
+  }
 
 
 }

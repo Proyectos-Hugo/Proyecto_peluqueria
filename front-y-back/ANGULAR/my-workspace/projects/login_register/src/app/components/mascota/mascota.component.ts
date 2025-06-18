@@ -43,8 +43,7 @@ export class MascotaComponent {
 }
 
   altaMascota() {
-    let nuevaMascota = new MascotaAltaDto(this.email_cliente, this.nombreMascota, this.razaMascota, this.edadMascota)
-    this.mascotaService.altaMascota(nuevaMascota)
+    let nuevaMascota = new MascotaAltaDto(this.email_cliente, this.nombreMascota, this.razaMascota, this.edadMascota);
     this.mascotaService.altaMascota(nuevaMascota)
    .subscribe({
       next: mascota => {
@@ -54,11 +53,11 @@ export class MascotaComponent {
       this.razaMascota = '';
       this.edadMascota = null;
     },
-    error: err => {
-      this.mensajeAlta = 'Error al crear la mascota.';
-    }
-  });
-}
+      error: err => {
+        this.mensajeAlta = 'Error al crear la mascota.';
+      }
+    });
+  }
 
   bajaMascota() {
     this.mascotaService.deleteMascota(this.bajaId).subscribe({

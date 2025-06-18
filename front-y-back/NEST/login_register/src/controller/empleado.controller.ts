@@ -18,27 +18,27 @@ export class EmpleadoController {
   constructor(private readonly empleadoService: EmpleadoService) {}
 
   @Post('altaEmpleado')
-  async altaCita(@Body() empleado:EmpleadoAltaDto, @Res() res:Response){
+  async altaEmpleado(@Body() empleado:EmpleadoAltaDto, @Res() res:Response){
     const creada = await this.empleadoService.highEmployees(empleado);
     if(creada){
       return res.status(201).json({
-        message: 'Cita creada',
+        message: 'Empleado creada',
       });
     }else{
       return res.status(499).json({
-          message: 'Ya existe una cita en la hora seleccionada'
+          message: 'Ya existe un empleado'
       });
     }
   }
 
   @Get('Empleados')
-  allEmpleados():Promise<EmpleadoDatosDto>{
-    return this.allEmpleados();
+  allEmpleados():Promise<EmpleadoDatosDto[]>{
+    return this.empleadoService.allEmployees();
   }
 
-  @Patch('modificarEmpleado')
-  modifyEmpleado(@Body() empleado:EmpleadoAltaDto){
-    return this.modifyEmpleado(empleado);
+  @Patch('modificarEmpleado/:dni')
+  modifyEmpleado(@Param('dni') dni:string, @Body() empleado:EmpleadoAltaDto){
+    return this.empleadoService.modifyEmployees(dni,empleado);
   }
 
   @Delete('eliminarEmpleado/:dni')

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmpleadoAltaDto } from 'src/dto/EmpeladoAltaDto';
+import { EmpleadoDatosDto } from 'src/dto/EmpleadoDatosDto';
 import { Empleado } from 'src/model/Empleado';
 import { Repository } from 'typeorm';
 
@@ -11,13 +12,19 @@ export class EmpleadoService {
     @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>
   ){}
 
+  // BUSCAR EMPLEADOS
+
+  allEmployees():Promise<EmpleadoDatosDto[]>{
+    return this.repositoryEmpleado.find();
+  }
+
   // ALTA EMPLEADO
 
   async highEmployees(empleadoNuevo: EmpleadoAltaDto):Promise<boolean>{
     // Verifica si el empleado existe, si no, lo crea
     let empleado :Empleado = await this.repositoryEmpleado.findOne({ where: { dni: empleadoNuevo.dni } });
     if (!empleado) {
-      empleado = this.repositoryEmpleado.create(empleado);
+      empleado = this.repositoryEmpleado.create(empleadoNuevo);
       await this.repositoryEmpleado.save(empleado);
       return true;
       }
@@ -28,18 +35,21 @@ export class EmpleadoService {
 
   //BAJA EMPLEADO
 
-  async deleteEmployees(dni:string):Promise<boolean>{
-    const delet :Empleado = await this.repositoryEmpleado.createQueryBuilder("Empleado")
-    .where("dni=:dni", { dni:dni})
-    .getOne();
-    
-    if(delet){
-      this.repositoryEmpleado.delete(delet);
+  async deleteEmployees(dni: string): Promise<boolean> {
+    // Busca solo al empleado por su DNI
+    const delet: Empleado = await this.repositoryEmpleado.findOne({
+      where: { dni: dni }
+    });
+
+    if (delet) {
+      // Elimina al empleado si existe
+      await this.repositoryEmpleado.delete(delet.dni); 
       return true;
-    }else{
+    } else {
       return false;
     }
   }
+  
   
   //MODIFICAR EMPLEADO
 

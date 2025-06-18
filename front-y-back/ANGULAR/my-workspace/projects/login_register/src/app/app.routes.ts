@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NuevaMascotaComponent } from './views/usuario/mascotas/nueva-mascota/nueva-mascota.component';
 import { MisMascotasComponent } from './views/usuario/mascotas/mis-mascotas/mis-mascotas.component';
 import { MascotaComponent } from './components/mascota/mascota.component';
+import { EmpleadoComponent } from './components/empleado/empleado.component';
 
 export const routes: Routes = [
 
@@ -30,6 +31,10 @@ export const routes: Routes = [
   {
     path: 'mis-mascotas',
     component: MascotaComponent
+  },
+  {
+    path: 'mis-empleados',
+    component: EmpleadoComponent
   },
   {
     path: '',
