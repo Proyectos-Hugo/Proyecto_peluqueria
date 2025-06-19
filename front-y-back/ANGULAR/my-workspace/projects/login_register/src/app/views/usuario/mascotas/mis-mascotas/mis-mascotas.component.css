@@ -1,63 +1,121 @@
 .mis-mascotas-container {
   max-width: 600px;
-  margin: 30px auto;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #0001;
-  padding: 24px 32px;
+  margin: 40px auto;
+  padding: 28px 36px;
+  background: #f4f8fb;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.08);
+}
+
+h2 {
+  text-align: center;
+  color: #1e40af;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.mensaje-alerta {
+  text-align: center;
+  color: #ef4444;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.mensaje-info {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-top: 40px;
 }
 
 .mascota-lista {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .mascota-item {
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #eee;
+  background: #e0e7ff;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  padding: 18px 16px;
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.06);
 }
 
 .acciones {
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-left: 16px;
+  gap: 10px;
 }
 
-.btn-editar, .btn-eliminar, .btn-guardar, .btn-cancelar {
-  padding: 6px 14px;
+.btn-editar,
+.btn-eliminar,
+.btn-guardar,
+.btn-cancelar {
+  padding: 7px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 0.95em;
+  transition: background 0.2s;
 }
 
-.btn-editar { background: #f7d774; color: #333; }
-.btn-eliminar { background: #e57373; color: #fff; }
-.btn-guardar { background: #81c784; color: #fff; }
-.btn-cancelar { background: #bdbdbd; color: #333; }
+.btn-editar {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background: #1e40af;
+}
+
+.btn-eliminar {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-eliminar:hover {
+  background: #b91c1c;
+}
+
+.btn-guardar {
+  background: #059669;
+  color: #fff;
+}
+
+.btn-guardar:hover {
+  background: #047857;
+}
+
+.btn-cancelar {
+  background: #64748b;
+  color: #fff;
+}
+
+.btn-cancelar:hover {
+  background: #334155;
+}
+
+.edicion-form {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
 .edicion-form input {
-  margin-right: 8px;
-  margin-bottom: 6px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 7px 10px;
+  border: 1px solid #b6c6e3;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
 }
 
-.mensaje-alerta {
-  color: #b0413e;
-  margin-bottom: 16px;
-  font-weight: 500;
-}
-
-.mensaje-info {
-  color: #888;
-  margin-top: 16px;
-  text-align: center;
+.edicion-form input:focus {
+  border-color: #2563eb;
+  outline: none;
+  background: #e0e7ff;
 }
