@@ -11,11 +11,6 @@ import { CitaAltaDto } from 'src/dto/CitaAltaDto';
 import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
 import { MascotaService } from './mascota.service';
 import { EmpleadoService } from './empleado.service';
-import { Mascota } from 'src/model/Mascota';
-import { Cliente } from 'src/model/Cliente';
-import { ClienteDatosDto } from 'src/dto/ClienteDatosDto';
-import { MascotaDatosDto } from 'src/dto/MascotaDatosDto';
-
 
 @Injectable()
 export class CitaService {
@@ -28,29 +23,37 @@ export class CitaService {
   ){}
 
   // Devolucion de todas las citas
-  async findAllCitas(): Promise<CitaDatosDto[]> {
-    const citas = await this.repositoryCita.find();
-    const citasDto: CitaDatosDto[] = [];
+async findAllCitas(): Promise<CitaDatosDto[]> {
+  const citas = await this.repositoryCita.find();
+  const citasDto: CitaDatosDto[] = [];
 
-    for (const cita of citas) {
-      const cliente = await this.clienteService.findClienteByEmail(cita.email_cliente);
-      const empleado = await this.empleadosService.findEmpleadoByDni(cita.dni_empleado);
-      const mascota = await this.mascotasService.findMascota(cita.id_mascota);
-      citasDto.push(
-        new CitaDatosDto(
-          cita,
-          cita.cliente?.nombre ?? '',
-          cita.cliente?.telefono ?? '',
-          cita.dni_empleado ?? '',
-          mascota?.nombre ?? '',
-          mascota?.raza ?? '',
-
-        )
-      );
-    }
-
-    return citasDto;
+  for (const cita of citas) {
+    const cliente = await this.clienteService.findClienteByEmail(cita.email_cliente);
+    const clienteNombre = typeof cliente === 'object' && cliente !== null
+      ? cliente.nombre
+      : '';
+    const empleadoObj = await this.empleadosService.findEmpleadoByDni(cita.dni_empleado);
+    const empleadoNombre = typeof empleadoObj === 'object' && empleadoObj !== null
+      ? empleadoObj.nombre
+      : '';
+    const telefonoCliente = typeof cliente === 'object' && cliente !== null
+      ? cliente.telefono
+      : '';
+    const mascota = await this.mascotasService.findMascota(cita.id_mascota);
+    citasDto.push(
+      new CitaDatosDto(
+        cita,
+        clienteNombre, // Now always a string
+        telefonoCliente,
+        empleadoNombre, // Now always a string
+        mascota?.nombre ?? '',
+        mascota?.raza ?? ''
+      )
+    );
   }
+
+  return citasDto;
+}
 
   // Devover las citas de un cliente
   async findQuotesByClient(email: string): Promise<CitaDatosDto[]> {
@@ -203,11 +206,11 @@ async highQuoteByEmployee(cita: CitaAltaEmpleadoDto): Promise<CitaDatosDto | boo
 
   // Eliminar Cita
 
-  async deleteQuote(cita:CitaAltaDto):Promise<boolean>{
+  async deleteQuote(id:number):Promise<boolean>{
     const delet :Cita = await this.repositoryCita.createQueryBuilder("citas")
-    .where("fecha=:fecha AND hora=:hora", { fecha: cita.fecha, hora: cita.hora })
+    .where("id_cita=:id", { id:id })
     .getOne();
-    
+
     if(delet){
       this.repositoryCita.delete(delet);
       return true;

@@ -22,8 +22,11 @@ export class CitaController {
 
 
     @Get('todas')
-    todasCitas():Promise<CitaDatosDto[]>{
-      return this.citaService.findAllCitas();
+    async todasCitas(@Res() res:Response){
+      const citas = await this.citaService.findAllCitas();
+      console.log(citas)
+
+      return res.status(200).json(citas);
     }
 
     @Get('buscar-cita-por-cliente/:email')
@@ -64,9 +67,9 @@ export class CitaController {
       return this.citaService.modifyQuote(cita);
     }
 
-    @Delete('eliminar-cita')
-    async EliminarCita(@Body() cita:CitaAltaDto, @Res() res:Response){
-      const eli= await this.citaService.deleteQuote(cita);
+    @Delete('eliminar-cita/:id')
+    async EliminarCita(@Param('id') id:number, @Res() res:Response){
+      const eli= await this.citaService.deleteQuote(id);
       if(eli){
         return res.status(200).json({message:"has eliminado la cita con exito",});}
       else{

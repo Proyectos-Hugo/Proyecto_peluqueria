@@ -81,5 +81,12 @@ export class EmpleadoService {
     }
     return null;
   }
+  async getEmployeesByDni(dni: string): Promise<EmpleadoDatosDto> {
+    const empleado = await this.repositoryEmpleado.findOne({ where: { dni } });
+    if (empleado) {
+      return new EmpleadoDatosDto(empleado.dni, empleado.email, empleado.password, empleado.nombre, empleado.apellido, empleado.especialidad, empleado.telefono);
+    }
+    return null;
+  }
 }
 

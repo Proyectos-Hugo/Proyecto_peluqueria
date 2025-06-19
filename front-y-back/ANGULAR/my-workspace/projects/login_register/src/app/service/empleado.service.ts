@@ -16,7 +16,7 @@ export class EmpleadoService {
   url:string= 'http://localhost:3000/empleados';
 
   allEmpleados():Observable<EmpleadoDatosDto[]>{
-    return this.http.get<EmpleadoDatosDto[]>(`${this.url}/Empleados`);
+    return this.http.get<EmpleadoDatosDto[]>(this.url);
   }
 
   altaEmpleado(nuevoEmpleado:EmpleadoAltaDto):Observable<EmpleadoDatosDto>{
@@ -32,6 +32,9 @@ export class EmpleadoService {
   }
   getEmpleadoByEmail(email: string): Observable<EmpleadoDatosDto> {
     return this.http.get<EmpleadoDatosDto>(`${this.url}/findEmpleado/${email}`);
+  }
+  getEmpleadoPorDni(dni: string): Observable<EmpleadoDatosDto> {
+    return this.http.get<EmpleadoDatosDto>(`${this.url}/findEmpleadoByDni/${dni}`);
   }
 
   setEmpleado(empleado: EmpleadoDatosDto): void {

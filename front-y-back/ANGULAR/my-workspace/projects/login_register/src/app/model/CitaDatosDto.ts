@@ -10,6 +10,10 @@ export class CitaDatosDto {
   raza_mascota: string;
   fecha: Date;
   hora: string;
+  nombre_empleado: string;
+  apellido_empleado: string;
+
+
 
   constructor(
     id_cita: number,
@@ -20,7 +24,9 @@ export class CitaDatosDto {
     nombre_mascota:string,
     raza_mascota: string,
     fecha: Date,
-    hora: string
+    hora: string,
+    nombre_empleado: string = '',
+    apellido_empleado: string = ''
   ) {
     this.id_cita = id_cita;
     this.email_cliente = email_cliente;
@@ -31,5 +37,7 @@ export class CitaDatosDto {
     this.raza_mascota = raza_mascota;
     this.fecha = fecha;
     this.hora = hora;
+    this.nombre_empleado = nombre_empleado;
+    this.apellido_empleado = apellido_empleado;
   }
 }

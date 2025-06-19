@@ -39,6 +39,10 @@ export class EmpleadoController {
   getEmpleadoByEmail(@Param('email') email:string):Promise<EmpleadoDatosDto>{
     return this.empleadoService.getEmployeesByEmail(email);
   }
+    @Get('findEmpleadoByDni/:dni')
+  getEmpleadoByDni(@Param('dni') dni:string):Promise<EmpleadoDatosDto>{
+    return this.empleadoService.getEmployeesByDni(dni);
+  }
 
 
   @Patch('modificarEmpleado/:dni')

@@ -6,9 +6,9 @@ export class EmpleadoDatosDto {
   nombre: string;
   apellido: string;
   especialidad: string;
-  telefono: number;
+  telefono: string;
 
-  constructor(dni: string, email: string, password: string, nombre: string, apellido: string, especialidad: string, telefono: number) {
+  constructor(dni: string, email: string, password: string, nombre: string, apellido: string, especialidad: string, telefono: string) {
     this.dni = dni;
     this.email = email;
     this.password = password;
