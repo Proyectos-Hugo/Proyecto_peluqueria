@@ -1,18 +1,18 @@
-import { MascotaService } from '../../service/mascota.service';
+import { MascotaService } from '../../../service/mascota.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MascotaDatosDto } from '../../model/MascotaDatosDto';
-import { MascotaAltaDto } from '../../model/MascotaAltaDto';
-import { UserService } from '../../service/user.service';
+import { MascotaDatosDto } from '../../../model/MascotaDatosDto';
+import { MascotaAltaDto } from '../../../model/MascotaAltaDto';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-mascota',
   imports: [FormsModule,CommonModule],
-  templateUrl: './mascota.component.html',
-  styleUrl: './mascota.component.css'
+  templateUrl: './mascotas.component.html',
+  styleUrl: './mascotas.component.css'
 })
-export class MascotaComponent {
+export class MascotasComponent {
 
   id_mascota:number;
   bajaId:number;
@@ -27,7 +27,13 @@ export class MascotaComponent {
   edad: number;
   mascotaEncontrada: MascotaDatosDto[];
   mensajeAlta: string;
-
+  mascota = {
+    id_mascota: null,
+    nombre: '',
+    raza: '',
+    edad: null,
+    email_cliente: ''
+  };
 
   constructor(private mascotaService:MascotaService, private userService: UserService){}
 
@@ -72,16 +78,13 @@ export class MascotaComponent {
   }
 
   modificarMascota() {
+    console.log(this.idModificar)
     this.mascotaService.modifyMascota(
       this.idModificar,
-      {
-        email_cliente: this.email_clienteMascota,
-        nombre: this.nombre,
-        raza: this.raza,
-        edad: this.edad
-      }
+      new MascotaAltaDto(this.mascota.email_cliente, this.mascota.nombre, this.mascota.raza, this.mascota.edad)
     ).subscribe({
       next: (resultado) => {
+        console.log(resultado);
         this.mensajeAlta = resultado ? 'Mascota modificada correctamente.' : 'No se pudo modificar la mascota.';
       },
       error: () => {

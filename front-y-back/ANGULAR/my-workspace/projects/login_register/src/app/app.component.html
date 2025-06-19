@@ -26,6 +26,8 @@
     <mat-menu #citasMenu="matMenu" yPosition="below">
       <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
       <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita</button>
+      <button (click)="goToGestionCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestion Citas</button>
+      <button (click)="goToNuevaCitaEmpleado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Empleado</button>
     </mat-menu>
   </div>
    <!-- Menú Mascotas -->
@@ -34,6 +36,7 @@
     <mat-menu #mascotasMenu="matMenu" yPosition="below">
       <button (click)="goToMisMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Mascotas</button>
       <button (click)="goToNuevaMascota()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Mascota</button>
+      <button (click)="goToMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestionar Mascota</button>
     </mat-menu>
   </div>
    <!-- Menú Tienda -->

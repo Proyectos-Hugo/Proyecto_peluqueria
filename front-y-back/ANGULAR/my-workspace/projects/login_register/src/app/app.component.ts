@@ -32,18 +32,27 @@ export class AppComponent {
   goToHome() {
       this.router.navigate(['/home']);
   }
+
+  //LOGIN Y REGISTRO
   goToLogin() {
       this.router.navigate(['/auth/login']);
   }
   goToRegister() {
       this.router.navigate(['/auth/register']);
   }
+  //MASCOTAS
   goToMisMascotas() {
       this.router.navigate(['/mis-mascotas']);
   }
   goToNuevaMascota() {
       this.router.navigate(['/nueva-mascota']);
   }
+  goToMascotas(){
+      this.router.navigate(['/gestion-mascotas']);
+  }
+
+
+  //EMPLEADOS
   goToMisEmpleados(){
       this.router.navigate(['/mis-empleados']);
   }
@@ -52,6 +61,23 @@ export class AppComponent {
   }
   goToProductos(){
       this.router.navigate(['/productos']);
+  }
+
+
+
+  //CITAS
+
+  goToMisCitas(){
+      this.router.navigate(['/mis-citas']);
+  }
+  goToGestionCitas(){
+      this.router.navigate(['/gestion-citas']);
+  }
+  goToNuevaCitaEmpleado(){
+      this.router.navigate(['/nueva-cita-empleado']);
+  }
+    goToNuevaCitaCliente(){
+      this.router.navigate(['/nueva-cita-cliente']);
   }
 
 

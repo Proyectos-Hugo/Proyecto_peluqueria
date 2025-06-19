@@ -32,9 +32,20 @@ export class MascotaController {
     }
   }
 
-  @Get('buscarMascota/:email')
+  @Get('buscarMascotaPorEmail/:email')
   async mascotaPorEmail(@Param('email') email: string, @Res()res :Response){
     const mascotas = await this.mascotaService.getMascotasPorEmail(email);
+    if(mascotas.length>0){
+      return res.status(200).json(mascotas);
+    }else{
+      return res.status(499).json({
+        message: "No se encontro la mascota"
+      });
+    }
+  }
+    @Get('buscarMascota/:id')
+  async mascotaPorId(@Param('id') id: number, @Res()res :Response){
+    const mascotas = await this.mascotaService.getMascotasPorId(id);
     if(mascotas.length>0){
       return res.status(200).json(mascotas);
     }else{
@@ -60,7 +71,16 @@ export class MascotaController {
   }
 
   @Put('modificarMascota/:id')
-  modifyMascota(@Param('id') id:number,@Body() mascota:MascotaAltaDto){
-    return this.mascotaService.modifyAnimals(id,mascota);
+  modifyMascota(@Param('id') id:number,@Body() mascota:MascotaAltaDto,@Res() res: Response){
+    const modify = this.mascotaService.modifyAnimals(id, mascota);
+    if(modify){
+      return res.status(201).json({
+        message: "Se modifico la mascota"
+      });
+    }else{
+      return res.status(404).json({
+        message: "No se pudo modificar la mascota"
+      });
+    }
   }
 }

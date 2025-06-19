@@ -13,10 +13,10 @@ export class MascotaService {
 
   constructor(private http: HttpClient) {}
   getMascotasPorEmail(email: string): Observable<MascotaDatosDto[]> {
-    return this.http.get<MascotaDatosDto[]>(`${this.apiUrl}/buscarMascota/${email}`);
+    return this.http.get<MascotaDatosDto[]>(`${this.apiUrl}/buscarMascotaPorEmail/${email}`);
   }
   findMascota(id: number): Observable<MascotaDatosDto> {
-    return this.http.get<MascotaDatosDto>(`${this.apiUrl}/${id}`);
+    return this.http.get<MascotaDatosDto>(`${this.apiUrl}/buscarMascota/${id}`);
   }
 
   altaMascota(mascota: MascotaAltaDto): Observable<any> {
