@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../../service/user.service';
 import { MascotaComponent } from "./mascota/mascota.component";
+import { ClienteService } from '../../../../service/cliente.service';
 
 @Component({
   selector: 'app-mis-mascotas',
@@ -19,14 +20,14 @@ export class MisMascotasComponent {
   editandoId: number | null = null;
   mascotaEditada: MascotaAltaDto = new MascotaAltaDto('', '', '', 0);
 
-  constructor(private mascotaService: MascotaService, private userService: UserService) {}
+  constructor(private mascotaService: MascotaService, private clienteService: ClienteService) {}
 
   ngOnInit() {
     this.obtenerMascotasPorEmail();
   }
 
   obtenerMascotasPorEmail() {
-    this.mascotaService.getMascotasPorEmail(this.userService.getCliente().email).subscribe({
+    this.mascotaService.getMascotasPorEmail(this.clienteService.getCliente().email).subscribe({
       next: (mascotas) => {
         this.mascotas = mascotas;
         this.mensaje = mascotas.length ? '' : 'No se encontraron mascotas para este email.';

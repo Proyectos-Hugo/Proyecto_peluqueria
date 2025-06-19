@@ -2,14 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmpleadoAltaDto } from 'src/dto/EmpeladoAltaDto';
 import { EmpleadoDatosDto } from 'src/dto/EmpleadoDatosDto';
+import { UserAltaDto } from 'src/dto/UserAltaDto';
 import { Empleado } from 'src/model/Empleado';
+import { Usuario } from 'src/model/Usuario';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class EmpleadoService {
   
   constructor(
-    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>
+    @InjectRepository(Empleado) private repositoryEmpleado: Repository<Empleado>,
+    @InjectRepository(Usuario) private repositoryUsuario: Repository<Usuario>
   ){}
 
   // BUSCAR EMPLEADOS
@@ -26,12 +29,14 @@ export class EmpleadoService {
     if (!empleado) {
       empleado = this.repositoryEmpleado.create(empleadoNuevo);
       await this.repositoryEmpleado.save(empleado);
+      await this.repositoryUsuario.save(new UserAltaDto(empleadoNuevo.email, empleadoNuevo.password, 'empleado'));
       return true;
       }
     else{
       return false;
     }
   }
+  
 
   //BAJA EMPLEADO
 
@@ -68,6 +73,13 @@ export class EmpleadoService {
       return new EmpleadoDatosDto(empleado.dni, empleado.email, empleado.password, empleado.nombre, empleado.apellido, empleado.especialidad, empleado.telefono);
     }
     return false;
+  }
+  async getEmployeesByEmail(email: string): Promise<EmpleadoDatosDto> {
+    const empleado = await this.repositoryEmpleado.findOne({ where: { email } });
+    if (empleado) {
+      return new EmpleadoDatosDto(empleado.dni, empleado.email, empleado.password, empleado.nombre, empleado.apellido, empleado.especialidad, empleado.telefono);
+    }
+    return null;
   }
 }
 

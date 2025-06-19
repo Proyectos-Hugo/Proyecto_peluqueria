@@ -5,6 +5,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
 import { UserService } from './service/user.service';
+import { EmpleadoService } from './service/empleado.service';
+import { ClienteService } from './service/cliente.service';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +21,16 @@ import { UserService } from './service/user.service';
   `]
 })
 export class AppComponent {
-  constructor(private router: Router, private userService: UserService){}
+  constructor(private router: Router, private clienteService: ClienteService, private empleadoService: EmpleadoService){}
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('cliente');
   }
   logout(): void {
     localStorage.removeItem('cliente');
-    this.userService.removeUsuario();
+    localStorage.removeItem('empleado');
+    this.clienteService.removeCliente();
+    this.empleadoService.removeEmpleado();
     this.router.navigate(['/home']);
   }
   goToHome() {

@@ -24,8 +24,8 @@
   <div *ngIf="isLoggedIn()">
     <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="citasMenu">Citas</button>
     <mat-menu #citasMenu="matMenu" yPosition="below">
-      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
-      <button style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita</button>
+      <button (click)="goToMisCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
+      <button (click)="goToNuevaCitaCliente()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Cliente</button>
       <button (click)="goToGestionCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestion Citas</button>
       <button (click)="goToNuevaCitaEmpleado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Empleado</button>
     </mat-menu>

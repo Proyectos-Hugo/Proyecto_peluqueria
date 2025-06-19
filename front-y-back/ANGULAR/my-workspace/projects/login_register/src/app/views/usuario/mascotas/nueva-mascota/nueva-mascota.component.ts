@@ -6,6 +6,7 @@ import { MascotaAltaDto } from "../../../../model/MascotaAltaDto";
 import { MascotaDatosDto } from "../../../../model/MascotaDatosDto";
 import { MascotaService } from "../../../../service/mascota.service";
 import { UserService } from '../../../../service/user.service';
+import { ClienteService } from "../../../../service/cliente.service";
 
 
 @Component({
@@ -23,9 +24,9 @@ export class NuevaMascotaComponent {
   mensajeAlta: string;
 
 
-  constructor(private mascotaService:MascotaService, private userService: UserService){}
+  constructor(private mascotaService:MascotaService, private clienteService: ClienteService){}
   ngOnInit() {
-    this.email_clienteMascota = this.userService.getCliente().email;
+    this.email_clienteMascota = this.clienteService.getCliente().email;
     console.log(this.email_clienteMascota);
   }
 

@@ -5,6 +5,7 @@ import { RegisterService } from '../../service/register.service';
 import { ClienteDatosDto } from '../../model/ClienteDatosDto';
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { ClienteService } from '../../service/cliente.service';
 @Component({
   selector: 'app-register',
   imports: [FormsModule,CommonModule, RouterModule],
@@ -19,7 +20,7 @@ export class RegisterComponent {
   password: string = '';
   telefono: string = '';
 
-  constructor(private registerService:RegisterService, private userService: UserService  ,private router: Router){}
+  constructor(private registerService:RegisterService, private clienteService: ClienteService  ,private router: Router){}
 
   registrarCliente() {
     this.registerService.registerCliente(
@@ -33,7 +34,7 @@ export class RegisterComponent {
         // Maneja el éxito (puedes mostrar un mensaje o redirigir)
         console.log('Cliente registrado:', cliente);
         localStorage.setItem('cliente', JSON.stringify(cliente))
-        this.userService.setCliente(cliente);
+        this.clienteService.setCliente(cliente);
       },
       error: (error) => {
         // Maneja el error

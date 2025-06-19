@@ -2,14 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClienteAltaDto } from 'src/dto/ClienteAltaDto';
 import { ClienteDatosDto } from 'src/dto/ClienteDatosDto';
+import { UserAltaDto } from 'src/dto/UserAltaDto';
 import { Cliente } from 'src/model/Cliente';
+import { Usuario } from 'src/model/Usuario';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ClienteService {
   
   constructor(
-    @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>
+    @InjectRepository(Cliente) private repositoryCliente: Repository<Cliente>,
+    @InjectRepository(Usuario) private repositoryUsuario: Repository<Usuario>
   ){}
   
   // ALTA CLIENTE
@@ -27,7 +30,10 @@ export class ClienteService {
         console.log('Cliente existente: ', clienteRepetido);
         if(!clienteRepetido.password && nuevo.password){
           // Si el cliente ya existe, verifica si tiene contraseña, y si no tiene, la añade
+          let creado = this.repositoryUsuario.create(new UserAltaDto(nuevo.email, nuevo.password, 'cliente'));
+          this.repositoryUsuario.save(creado);
           return this.modifyClient(nuevo.email, nuevo);
+          
         }
         else{
           return false;
@@ -67,8 +73,8 @@ export class ClienteService {
 
 
     //BUSCAR CLIENTE POR EMAIL Y PASSWORD
-    async findOne(email: string, password: string): Promise<ClienteDatosDto | boolean> {
-      const usuario = await this.repositoryCliente.findOneBy({ email, password });
+    async findOne(email: string): Promise<ClienteDatosDto | boolean> {
+      const usuario = await this.repositoryCliente.findOneBy({ email});
       if (usuario) {
         return new ClienteDatosDto(usuario.email, usuario.nombre, usuario.apellido, usuario.password, usuario.telefono);
       }

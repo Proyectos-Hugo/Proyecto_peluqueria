@@ -2,8 +2,9 @@ import { EmpleadoDatosDto } from './../../../../../../../NEST/login_register/src
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EmpleadosDatosDto } from '../model/EmpleadosDatosDto';
 import { EmpleadoAltaDto } from '../model/EmpeladoAltaDto';
+import { ClienteDatosDto } from '../model/ClienteDatosDto';
+import { UserDatosDto } from '../model/UserDatosDto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ import { EmpleadoAltaDto } from '../model/EmpeladoAltaDto';
 export class EmpleadoService {
 
   constructor(private http:HttpClient) { }
-
+  empleado: EmpleadoDatosDto | null = null;
   url:string= 'http://localhost:3000/empleados';
 
-  allEmpleados():Observable<EmpleadosDatosDto[]>{
-    return this.http.get<EmpleadosDatosDto[]>(`${this.url}/Empleados`);
+  allEmpleados():Observable<EmpleadoDatosDto[]>{
+    return this.http.get<EmpleadoDatosDto[]>(`${this.url}/Empleados`);
   }
 
   altaEmpleado(nuevoEmpleado:EmpleadoAltaDto):Observable<EmpleadoDatosDto>{
@@ -29,4 +30,26 @@ export class EmpleadoService {
   modifyEmpleado(dni:string,empleado: Partial<EmpleadoDatosDto>): Observable<EmpleadoDatosDto> {
     return this.http.patch<EmpleadoDatosDto>(`${this.url}/modificarEmpleado/${dni}`, empleado);
   }
+  getEmpleadoByEmail(email: string): Observable<EmpleadoDatosDto> {
+    return this.http.get<EmpleadoDatosDto>(`${this.url}/findEmpleado/${email}`);
+  }
+
+  setEmpleado(empleado: EmpleadoDatosDto): void {
+    this.empleado = empleado;
+  }
+
+  getEmpleado(): EmpleadoDatosDto | null {
+    if(!this.empleado){
+      return null;
+    } else if (localStorage.getItem('empleado') === null) {
+      return null;
+    } else{
+      this.empleado = JSON.parse(localStorage.getItem('empleado'));
+      return this.empleado;
+    }
+  }
+  removeEmpleado():void{
+    this.empleado = null;
+  }
+
 }

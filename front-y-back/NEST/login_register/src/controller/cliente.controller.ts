@@ -36,9 +36,9 @@ export class ClienteController {
     return this.clienteService.allClientes();
   }
 
-  @Get('cliente/:email/:password')
-  findByOne(@Param('email')email:string, @Param('password')password:string){
-    return this.clienteService.findOne(email,password);
+  @Get('cliente/:email')
+  findByOne(@Param('email')email:string){
+    return this.clienteService.findOne(email);
   }
 
   @Delete('borrarCliente/:email')

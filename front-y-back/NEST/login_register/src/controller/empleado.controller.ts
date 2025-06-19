@@ -35,6 +35,11 @@ export class EmpleadoController {
   allEmpleados():Promise<EmpleadoDatosDto[]>{
     return this.empleadoService.allEmployees();
   }
+  @Get('findEmpleado/:email')
+  getEmpleadoByEmail(@Param('email') email:string):Promise<EmpleadoDatosDto>{
+    return this.empleadoService.getEmployeesByEmail(email);
+  }
+
 
   @Patch('modificarEmpleado/:dni')
   modifyEmpleado(@Param('dni') dni:string, @Body() empleado:EmpleadoAltaDto){

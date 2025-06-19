@@ -12,6 +12,8 @@ import { NuevaCitaEmpleadoComponent } from './views/admin/citas/nueva-cita-emple
 import { MisEmpleadosComponent } from './views/admin/empleados/mis-empleados/mis-empleados.component';
 import { NuevoEmpleadoComponent } from './views/admin/empleados/nuevo-empleado/nuevo-empleado.component';
 import { MascotasComponent } from './views/admin/mascotas/mascotas.component';
+import { NuevaCitaClienteComponent } from './views/usuario/citas/nueva-cita-cliente/nueva-cita-cliente.component';
+import { MisCitasComponent } from './views/usuario/citas/mis-citas/mis-citas.component';
 
 export const routes: Routes = [
 
@@ -50,7 +52,7 @@ export const routes: Routes = [
     path: 'gestion-mascotas',
     component: MascotasComponent
   },
-  /*
+
   {
     path: 'nueva-cita-cliente',
     component: NuevaCitaClienteComponent
@@ -61,7 +63,6 @@ export const routes: Routes = [
     component: MisCitasComponent
   },
 
- */
   {
     path: 'gestion-citas',
     component: GestionCitasComponent
