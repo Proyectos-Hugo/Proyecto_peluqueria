@@ -24,10 +24,10 @@ export class MascotaService {
   }
 
   deleteMascota(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/eliminarMascota/${id}`);
   }
 
   modifyMascota(id: number, mascota: MascotaAltaDto): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, mascota);
+    return this.http.put<any>(`${this.apiUrl}/modificarMascota/${id}`, mascota);
   }
 }

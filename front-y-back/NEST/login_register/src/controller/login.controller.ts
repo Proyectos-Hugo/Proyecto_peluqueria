@@ -24,11 +24,9 @@ export class LoginController {
   async create(@Body() user: ClienteAltaDto, @Res() res: Response):Promise<Response> {
     const creado = await this.clienteService.highClient(user);
     if(creado){
-      return res.status(201).json({
-        message: 'Usuario creado'
-      })
+      return res.status(201).json(creado)
     }else{
-      return res.status(499).json(
+      return res.status(500).json(
       {
         message: 'El usuario ya existe',
       });

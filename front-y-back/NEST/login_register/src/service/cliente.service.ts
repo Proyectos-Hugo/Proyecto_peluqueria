@@ -19,14 +19,19 @@ export class ClienteService {
     // Verifica si el cliente existe, si no, lo crea
       let clienteRepetido :Cliente = await this.repositoryCliente.findOne({ where: { email: nuevo.email } });
       if (!clienteRepetido) { //Verifica si existe un cliente
-        let cliente = this.repositoryCliente.create(
-          nuevo
-        );
+        let cliente = this.repositoryCliente.create(nuevo);
         cliente = await this.repositoryCliente.save(cliente);
         return new ClienteDatosDto(cliente.email, cliente.nombre, cliente.apellido, cliente.telefono);
       }
       else{
-        return false
+        console.log('Cliente existente: ', clienteRepetido);
+        if(!clienteRepetido.password && nuevo.password){
+          // Si el cliente ya existe, verifica si tiene contraseña, y si no tiene, la añade
+          return this.modifyClient(nuevo.email, nuevo);
+        }
+        else{
+          return false;
+        }
       }
 
   }
@@ -48,16 +53,16 @@ export class ClienteService {
   
   //MODIFICAR CLIENTE
 
-    async modifyClient(email:string, clienteModificado :ClienteAltaDto):Promise<boolean>{
-      const result = await this.repositoryCliente.createQueryBuilder()
-      .update(Cliente)
-      .set({ ...clienteModificado })
-      .where("", { 
-        email: email
-      })
-      .execute();
+    async modifyClient(email:string, clienteModificado :ClienteAltaDto):Promise<ClienteDatosDto | boolean> {
+      //otra alternativa
+      const result = await this.repositoryCliente.update({ email: email }, { ...clienteModificado });
+      //devolver el cliente actualizado
+      if(result.affected > 0) {
+        const usuario = await this.repositoryCliente.findOneBy({ email });  
+        console.log('Cliente modificado: ', usuario);
+        return new ClienteDatosDto(usuario.email, usuario.nombre, usuario.apellido, usuario.telefono, usuario.password);
+      }
 
-      return result.affected && result.affected > 0;
     }
 
 

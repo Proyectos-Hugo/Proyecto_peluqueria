@@ -4,14 +4,13 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   Res,
 } from '@nestjs/common';
 import { MascotaService } from 'src/service/mascota.service';
 import { Response } from 'express';
 import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
-import { MascotaDatosDto } from 'src/dto/MascotaDatosDto';
 
 
 @Controller('mascotas')
@@ -60,7 +59,7 @@ export class MascotaController {
     }
   }
 
-  @Patch('modificarMascota/:id')
+  @Put('modificarMascota/:id')
   modifyMascota(@Param('id') id:number,@Body() mascota:MascotaAltaDto){
     return this.mascotaService.modifyAnimals(id,mascota);
   }
