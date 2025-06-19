@@ -1,32 +1,33 @@
-import { MascotaDatosDto } from '../model/mascotaDatosDto';
-import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MascotaDatosDto } from '../model/MascotaDatosDto';
 import { MascotaAltaDto } from '../model/MascotaAltaDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MascotaService {
+  private apiUrl = 'http://localhost:3000/mascotas';
 
-  constructor(private http:HttpClient) { }
-
-  url:string = 'http://localhost:3000/mascotas';
-
-  findMascota(id:number):Observable<MascotaDatosDto>{
-    return this.http.get<MascotaDatosDto>(`${this.url}/buscarMascota/${id}`);
+  constructor(private http: HttpClient) {}
+  getMascotasPorEmail(email: string): Observable<MascotaDatosDto[]> {
+    return this.http.get<MascotaDatosDto[]>(`${this.apiUrl}/buscarMascota/${email}`);
+  }
+  findMascota(id: number): Observable<MascotaDatosDto> {
+    return this.http.get<MascotaDatosDto>(`${this.apiUrl}/${id}`);
   }
 
-  altaMascota(mascota: MascotaAltaDto):Observable<MascotaDatosDto>{
-    return this.http.post<MascotaDatosDto>(`${this.url}/altaMascota/`,mascota);
+  altaMascota(mascota: MascotaAltaDto): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/altaMascota`, mascota);
   }
 
-
-  deleteMascota(id:number):Observable<MascotaDatosDto> {
-    return this.http.delete<MascotaDatosDto>(`${this.url}/eliminarMascota/${id}`);
+  deleteMascota(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
-  modifyMascota(id: number, mascota: Partial<MascotaDatosDto>): Observable<MascotaDatosDto> {
-    return this.http.patch<MascotaDatosDto>(`${this.url}/modificarMascota/${id}`, mascota);
+  modifyMascota(id: number, mascota: MascotaAltaDto): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, mascota);
   }
 }

@@ -24,7 +24,6 @@ export class LoginController {
   async create(@Body() user: ClienteAltaDto, @Res() res: Response):Promise<Response> {
     const creado = await this.clienteService.highClient(user);
     if(creado){
-
       return res.status(201).json({
         message: 'Usuario creado'
       })
@@ -40,9 +39,9 @@ export class LoginController {
   async findOne(@Param('email') email: string, @Param('password') password: string, @Res() res: Response):Promise<Response> {
 
     var cliente: ClienteDatosDto|boolean = await this.clienteService.findOne(email, password);
-
+    console.log(cliente);
     //comprobar que el cliente es Cliente
-    if (cliente instanceof Cliente) {
+    if (cliente instanceof ClienteDatosDto) {
     // Asegúrate que ClienteDatosDto tiene constructor o crea un objeto simple
       const clientedto = new ClienteDatosDto(
         cliente.email,

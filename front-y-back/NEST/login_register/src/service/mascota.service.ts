@@ -21,8 +21,17 @@ export class MascotaService {
   }
   
   //BUSCAR MASCOTAS POR EMAIL DE CLIENTE
-  async findMascotasByEmail(email: string): Promise<Mascota[]> {
-    return this.repositoryMascota.find({ where: { email_cliente:email } });
+  async getMascotasPorEmail(email: string): Promise<MascotaDatosDto[]> {
+    const mascotas = this.repositoryMascota.find({ where: { email_cliente:email } });
+    const mascotasDto: MascotaDatosDto[] = (await mascotas).map(mascota => new MascotaDatosDto(
+      mascota.id_mascota,
+      mascota.email_cliente,
+      mascota.nombre,
+      mascota.raza,
+      mascota.edad,
+    ));
+    console.log(mascotasDto);
+    return mascotasDto;
   }
   //BUSCAR MASCOTA POR EMAIL DE CLIENTE Y NOMBRE
   async findMascotaByEmailAndName(email: string, nombre: string): Promise<MascotaDatosDto | boolean> {

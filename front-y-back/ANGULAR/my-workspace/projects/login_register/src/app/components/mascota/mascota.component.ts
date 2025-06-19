@@ -2,8 +2,9 @@ import { MascotaService } from '../../service/mascota.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MascotaDatosDto } from '../../model/mascotaDatosDto';
+import { MascotaDatosDto } from '../../model/MascotaDatosDto';
 import { MascotaAltaDto } from '../../model/MascotaAltaDto';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-mascota',
@@ -28,7 +29,7 @@ export class MascotaComponent {
   mensajeAlta: string;
 
 
-  constructor(private mascotaService:MascotaService){}
+  constructor(private mascotaService:MascotaService, private userService: UserService){}
 
   buscarMascotaPorId() {
   this.mascotaService.findMascota(this.id_mascota).subscribe(mascota => {

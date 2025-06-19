@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +19,15 @@ import { Router } from '@angular/router';
   `]
 })
 export class AppComponent {
-  constructor(private router: Router){
-
-  }
+  constructor(private router: Router, private userService: UserService){}
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('usuario');
+    return !!localStorage.getItem('cliente');
   }
   logout(): void {
-    localStorage.removeItem('usuario');
+    localStorage.removeItem('cliente');
+    this.userService.removeUsuario();
+    this.router.navigate(['/home']);
   }
   goToHome() {
       this.router.navigate(['/home']);
@@ -48,6 +49,9 @@ export class AppComponent {
   }
   goToNuevoEmplado(){
       this.router.navigate(['/nuevo-empleado']);
+  }
+  goToProductos(){
+      this.router.navigate(['/productos']);
   }
 
 

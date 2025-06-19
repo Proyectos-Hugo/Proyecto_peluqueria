@@ -114,7 +114,6 @@ async highQuoteByEmployee(cita: CitaAltaEmpleadoDto): Promise<CitaDatosDto | boo
       ? cita.fecha.toISOString().slice(0, 10)
       : cita.fecha;
 
-    // ❌ Verifica si ya existe una cita para la misma fecha y hora
     const citaRepetida = await this.repositoryCita.createQueryBuilder("citas")
       .where("citas.fecha = :fecha AND citas.hora = :hora", {
         fecha: fechaStr,
@@ -127,7 +126,7 @@ async highQuoteByEmployee(cita: CitaAltaEmpleadoDto): Promise<CitaDatosDto | boo
       return false;
     }
 
-    // ✅ Verifica si el cliente existe; si no, lo crea
+    // Verifica si el cliente existe; si no, lo crea
     let cliente = await this.clienteService.findClienteByEmail(cita.email_cliente);
     console.log(cliente)
     if (!cliente) {
@@ -141,13 +140,13 @@ async highQuoteByEmployee(cita: CitaAltaEmpleadoDto): Promise<CitaDatosDto | boo
       console.log('Cliente creado:', cliente);
     }
 
-    // ✅ Verifica si la mascota existe
+    // Verifica si la mascota existe
     let mascota = await this.mascotasService.findMascotaByEmailAndName(
       cita.email_cliente,
       cita.nombre_mascota
     );
 
-    // 🐾 Si la mascota no existe, la crea
+    // Si la mascota no existe, la crea
     if (!mascota) {
       const mascotaNuevaDto = new MascotaAltaDto(
         cita.email_cliente,
@@ -160,7 +159,7 @@ async highQuoteByEmployee(cita: CitaAltaEmpleadoDto): Promise<CitaDatosDto | boo
     }
 
 
-    // 📅 Si la mascota fue creada o ya existía, se crea la cita
+    // Si la mascota fue creada o ya existía, se crea la cita
     if (mascota && typeof mascota === 'object' && 'id_mascota' in mascota ) {
       console.log('Creando cita...')
       const nuevaCitaDto = new CitaAltaDto(

@@ -26,7 +26,7 @@
 
   <!-- Alta de Producto -->
   <div class="section">
-    <h2>➕ Alta de Producto</h2>
+    <h2> Alta de Producto</h2>
     <form (ngSubmit)="altaProducto()">
       <div class="form-group">
         <label for="nombreProducto">Nombre:</label>
@@ -40,10 +40,6 @@
         <label for="precioProducto">Precio:</label>
         <input type="number" [(ngModel)]="nuevoProducto.precio" name="precioProducto" required />
       </div>
-      <div class="form-group">
-        <label for="imagenProducto">URL de la Imagen:</label>
-        <input type="text" [(ngModel)]="nuevoProducto.imagen" name="imagenProducto" required />
-      </div>
       <button type="submit">Dar de Alta</button>
       <div *ngIf="mensajeAlta">
         {{ mensajeAlta }}
@@ -55,11 +51,12 @@
 
   <!-- Baja de Producto -->
   <div class="section">
-    <h2>🗑️ Dar de Baja Producto</h2>
+    <h2>Dar de Baja Producto</h2>
     <form (ngSubmit)="bajaProducto()">
       <div class="form-group">
         <label for="bajaId">Introduce el ID del producto a eliminar:</label>
-        <input type="number" [(ngModel)]="idEliminar" name="bajaId" required />
+
+        <input type="number"  [(ngModel)]="idEliminar" name="bajaId" required />
       </div>
       <button type="submit">Eliminar</button>
     </form>
