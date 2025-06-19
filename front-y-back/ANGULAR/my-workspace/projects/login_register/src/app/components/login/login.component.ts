@@ -21,15 +21,18 @@ export class LoginComponent {
   constructor(private log :LoginService, private userService: UserService, private router: Router){}
 
   login(){
-    this.log.findUsu(this.email,this.password).subscribe({
-      next: (cliente) => {
-        if (cliente) {
-          localStorage.setItem('cliente', JSON.stringify(cliente));
-          this.userService.setCliente(cliente);
+    this.userService.findUser(this.email,this.password).subscribe({
+      next: (usuario) => {
+        if (usuario) {
+          console.log('Usuario encontrado:', usuario);
+
+          localStorage.setItem('cliente', JSON.stringify(usuario));
+          this.userService.setUser(usuario);
           this.router.navigate(['/home']);
         }
         else{
-          console.error('Usuario no encontrado');        }
+          console.error('Usuario no encontrado');
+        }
       },
       error: (error) => {
         console.error('Error al iniciar sesión:', error);

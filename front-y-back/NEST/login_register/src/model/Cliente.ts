@@ -1,37 +1,50 @@
-import { Entity, PrimaryColumn, Column, OneToMany, ManyToMany } from 'typeorm';
-import { Mascota } from './Mascota';
-import { Cita } from './Cita';
+import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Usuario } from './Usuario';
 import { Pedido } from './Pedido';
+import { Cita } from './Cita';
+import { Mascota } from './Mascota';
 
 @Entity('clientes')
 export class Cliente {
-  @PrimaryColumn({ unique: true })
+  @PrimaryColumn()
   email: string;
 
   @Column()
   nombre: string;
 
-  @Column()
+  @Column({ nullable: true })
   apellido: string;
 
-  @Column()
-  telefono: string;
-
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
-  @OneToMany(() => Mascota, mascota => mascota.cliente)
-  mascotas: Mascota[];
+  @Column({ nullable: true })
+  telefono: string;
+
+  @OneToOne(() => Usuario, usuario => usuario.cliente)
+  @JoinColumn({ name: 'email', referencedColumnName: 'email' })
+  usuario: Usuario;
 
   @OneToMany(() => Pedido, pedido => pedido.cliente)
   pedidos: Pedido[];
 
-  constructor(email: string, nombre: string, apellido: string, telefono: string, password?: string) {
-    this.email = email;
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.telefono = telefono;
-    this.password = password;
-    
+  @OneToMany(() => Cita, cita => cita.cliente)
+  citas: Cita[];
+
+  @OneToMany(() => Mascota, mascota => mascota.cliente)
+  mascotas: Mascota[];
+
+  constructor(
+    email?: string,
+    nombre?: string,
+    apellido?: string,
+    password?: string,
+    telefono?: string
+  ) {
+    this.email = email ?? '';
+    this.nombre = nombre ?? '';
+    this.apellido = apellido ?? '';
+    this.password = password ?? '';
+    this.telefono = telefono ?? '';
   }
 }

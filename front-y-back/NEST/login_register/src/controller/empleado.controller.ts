@@ -31,7 +31,7 @@ export class EmpleadoController {
     }
   }
 
-  @Get('Empleados')
+  @Get('')
   allEmpleados():Promise<EmpleadoDatosDto[]>{
     return this.empleadoService.allEmployees();
   }

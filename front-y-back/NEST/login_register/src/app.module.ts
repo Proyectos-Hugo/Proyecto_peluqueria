@@ -1,3 +1,5 @@
+import { UserController } from './controller/user.controller';
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Cita } from './model/Cita';
@@ -17,6 +19,8 @@ import { MascotaService } from './service/mascota.service';
 import { LoginController } from './controller/login.controller';
 import { MascotaController } from './controller/mascota.controller';
 import { EmpleadoController } from './controller/empleado.controller';
+import { Usuario } from './model/Usuario';
+import { UserService } from './service/user.service';
 
 
 
@@ -28,10 +32,10 @@ import { EmpleadoController } from './controller/empleado.controller';
   username: 'nestuser',
   password: 'nestpass',
   database: 'db_peluqueria',
-  entities: [Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
+  entities: [Usuario,Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto],
   synchronize: false,
-  }),TypeOrmModule.forFeature([Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],
-  controllers: [LoginController,CitaController,TiendaController,MascotaController,EmpleadoController],
-  providers: [TiendaService,CitaService,EmpleadoService,ClienteService,MascotaService],
+  }),TypeOrmModule.forFeature([Usuario,Cita,Cliente,Empleado,Mascota,Pedido,PedidoProducto,Producto])],
+  controllers: [UserController,LoginController,CitaController,TiendaController,MascotaController,EmpleadoController],
+  providers: [UserService,TiendaService,CitaService,EmpleadoService,ClienteService,MascotaService],
 })
 export class AppModule {}
