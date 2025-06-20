@@ -55,10 +55,10 @@ export class ClienteController {
       });
     }
   }
-
+  //EDITAR
   @Patch('modificarCliente/:email')
   modifyCliente(@Param('email')email:string,cliente:ClienteAltaDto){
     return this.clienteService.modifyClient(email,cliente);
-  }
+  };
 
 }
