@@ -183,3 +183,57 @@ INSERT INTO USERS (email, password, role) VALUES
 ('javier@peluqueria.com', 'passJavier789', 'empleado'),
 ('sara@peluqueria.com', 'passSara321', 'empleado'),
 ('david@peluqueria.com', 'passDavid654', 'empleado');
+
+-- MASCOTAS (al menos 3 por cliente)
+INSERT INTO MASCOTAS (email_cliente, nombre, raza, edad) VALUES
+('ana@gmail.com', 'Toby', 'Labrador', 3),
+('ana@gmail.com', 'Kira', 'Golden Retriever', 2),
+('ana@gmail.com', 'Simba', 'Bulldog Francés', 1),
+('luis@gmail.com', 'Luna', 'Caniche', 2),
+('luis@gmail.com', 'Thor', 'Dálmata', 4),
+('luis@gmail.com', 'Milo', 'Yorkshire', 5),
+('marta@gmail.com', 'Max', 'Bulldog', 5),
+('marta@gmail.com', 'Coco', 'Chihuahua', 2),
+('marta@gmail.com', 'Nina', 'Boxer', 3),
+('carlos@gmail.com', 'Nala', 'Beagle', 4),
+('carlos@gmail.com', 'Rocky', 'Pastor Alemán', 1),
+('carlos@gmail.com', 'Sasha', 'Shih Tzu', 6),
+('elena@gmail.com', 'Rocky', 'Pastor Alemán', 1),
+('elena@gmail.com', 'Lola', 'Pug', 2),
+('elena@gmail.com', 'Duke', 'Schnauzer', 4);
+
+-- CITAS (mínimo 4 por usuario/cliente)
+-- Para Ana (id_mascota: 1, 2, 3)
+INSERT INTO CITAS (email_cliente, dni_empleado, id_mascota, fecha, hora) VALUES
+('ana@gmail.com', '12345678A', 1, '2025-06-10', '10:00'),
+('ana@gmail.com', '12345678A', 2, '2025-06-15', '11:00'),
+('ana@gmail.com', '23456789B', 3, '2025-06-20', '12:00'),
+('ana@gmail.com', '34567890C', 1, '2025-06-25', '13:00');
+
+-- Para Luis (id_mascota: 4, 5, 6)
+INSERT INTO CITAS (email_cliente, dni_empleado, id_mascota, fecha, hora) VALUES
+('luis@gmail.com', '23456789B', 4, '2025-06-11', '11:00'),
+('luis@gmail.com', '34567890C', 5, '2025-06-16', '12:00'),
+('luis@gmail.com', '45678901D', 6, '2025-06-21', '13:00'),
+('luis@gmail.com', '56789012E', 4, '2025-06-26', '14:00');
+
+-- Para Marta (id_mascota: 7, 8, 9)
+INSERT INTO CITAS (email_cliente, dni_empleado, id_mascota, fecha, hora) VALUES
+('marta@gmail.com', '34567890C', 7, '2025-06-12', '12:00'),
+('marta@gmail.com', '45678901D', 8, '2025-06-17', '13:00'),
+('marta@gmail.com', '56789012E', 9, '2025-06-22', '14:00'),
+('marta@gmail.com', '12345678A', 7, '2025-06-27', '10:00');
+
+-- Para Carlos (id_mascota: 10, 11, 12)
+INSERT INTO CITAS (email_cliente, dni_empleado, id_mascota, fecha, hora) VALUES
+('carlos@gmail.com', '45678901D', 10, '2025-06-13', '13:00'),
+('carlos@gmail.com', '56789012E', 11, '2025-06-18', '14:00'),
+('carlos@gmail.com', '12345678A', 12, '2025-06-23', '10:00'),
+('carlos@gmail.com', '23456789B', 10, '2025-06-28', '11:00');
+
+-- Para Elena (id_mascota: 13, 14, 15)
+INSERT INTO CITAS (email_cliente, dni_empleado, id_mascota, fecha, hora) VALUES
+('elena@gmail.com', '56789012E', 13, '2025-06-14', '14:00'),
+('elena@gmail.com', '12345678A', 14, '2025-06-19', '10:00'),
+('elena@gmail.com', '23456789B', 15, '2025-06-24', '11:00'),
+('elena@gmail.com', '34567890C', 13, '2025-06-29', '12:00');
