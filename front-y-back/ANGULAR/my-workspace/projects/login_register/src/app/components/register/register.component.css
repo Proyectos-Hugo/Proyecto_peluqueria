@@ -1,0 +1,86 @@
+/* Estilo general para centrar y estilizar el formulario */
+form, div.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Títulos */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Estilo para etiquetas y entradas */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Botón principal */
+.btn-submit {
+  width: 100%;
+  background-color: #007BFF;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+/* Botón secundario */
+button:not(.btn-submit) {
+  margin-top: 10px;
+  background-color: transparent;
+  color: #007BFF;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  margin: 15px 0 5px;
+}
+.center-button {
+  text-align: center;
+}
+
+.center-button button {
+  display: inline-block;
+  font-size: 15px;
+}

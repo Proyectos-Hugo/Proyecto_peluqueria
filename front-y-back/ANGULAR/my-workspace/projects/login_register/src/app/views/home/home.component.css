@@ -1,0 +1,43 @@
+.home-container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.section {
+  margin-bottom: 40px;
+  background: linear-gradient(to bottom, #ff4e7a, #ffb6c1, #fff);
+}
+
+.button-group {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #ff6f61;
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #e35549;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}

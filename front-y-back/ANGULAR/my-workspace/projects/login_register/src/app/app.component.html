@@ -1,0 +1,57 @@
+<nav style="height:5vh;">
+  <!-- Menú Perfil -->
+  <div>
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="perfilMenu">Perfil</button>
+      <mat-menu #perfilMenu="matMenu" yPosition="below">
+        <button *ngIf="!isLoggedIn()" (click)="goToLogin()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Inicia Sesión</button>
+        <button *ngIf="!isLoggedIn()" (click)="goToRegister()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Regístrate</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Pedidos</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo Pedido</button>
+        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:red;" class="mat-menu-item" mat-menu-item>Cierra sesión</button>
+      </mat-menu>
+  </div>
+
+  <!-- Menú Empleado -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="empleadoMenu">Empleado</button>
+    <mat-menu #empleadoMenu="matMenu" yPosition="below">
+      <button (click)="goToMisEmpleados()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis empleados</button>
+      <button (click)="goToNuevoEmplado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo empleado</button>
+    </mat-menu>
+  </div>
+
+  <!-- Menú Citas -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="citasMenu">Citas</button>
+    <mat-menu #citasMenu="matMenu" yPosition="below">
+      <button (click)="goToMisCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
+      <button (click)="goToNuevaCitaCliente()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Cliente</button>
+      <button (click)="goToGestionCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestion Citas</button>
+      <button (click)="goToNuevaCitaEmpleado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Empleado</button>
+    </mat-menu>
+  </div>
+   <!-- Menú Mascotas -->
+  <div *ngIf="isLoggedIn()">
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="mascotasMenu">Mascotas</button>
+    <mat-menu #mascotasMenu="matMenu" yPosition="below">
+      <button (click)="goToMisMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Mascotas</button>
+      <button (click)="goToNuevaMascota()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Mascota</button>
+      <button (click)="goToMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestionar Mascota</button>
+    </mat-menu>
+  </div>
+   <!-- Menú Tienda -->
+  <div>
+    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="productosMenu">Tienda</button>
+    <mat-menu #productosMenu="matMenu" yPosition="below">
+      <button (click)="goToProductos()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Productos</button>
+    </mat-menu>
+  </div>
+  <div>
+    <button (click)="goToHome()" style="color:rgb(14, 110, 235);" mat-button>Home</button>
+
+  </div>
+
+</nav>
+<div style="height:80vh;">
+  <router-outlet></router-outlet>
+</div>

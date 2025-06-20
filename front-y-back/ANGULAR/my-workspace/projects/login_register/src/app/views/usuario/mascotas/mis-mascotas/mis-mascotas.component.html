@@ -1,0 +1,23 @@
+<div class="mis-mascotas-container">
+  <h2>Mis Mascotas</h2>
+  <div *ngIf="mensaje" class="mensaje-alerta">{{ mensaje }}</div>
+  <ul class="mascota-lista" *ngIf="mascotas.length > 0; else sinMascotas">
+    <li *ngFor="let mascota of mascotas" class="mascota-item">
+      <app-mascota [mascota]="mascota"></app-mascota>
+      <div class="acciones">
+        <button class="btn-editar" (click)="editarMascota(mascota)">Editar</button>
+        <button class="btn-eliminar" (click)="eliminarMascota(mascota.id_mascota)">Eliminar</button>
+      </div>
+      <div *ngIf="editandoId === mascota.id_mascota" class="edicion-form">
+        <input [(ngModel)]="mascotaEditada.nombre" placeholder="Nombre" />
+        <input [(ngModel)]="mascotaEditada.raza" placeholder="Raza" />
+        <input [(ngModel)]="mascotaEditada.edad" type="number" placeholder="Edad" />
+        <button class="btn-guardar" (click)="guardarEdicion()">Guardar</button>
+        <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </li>
+  </ul>
+  <ng-template #sinMascotas>
+    <div class="mensaje-info">No tienes mascotas registradas.</div>
+  </ng-template>
+</div>

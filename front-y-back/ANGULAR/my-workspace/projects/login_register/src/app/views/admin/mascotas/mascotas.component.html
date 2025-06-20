@@ -1,0 +1,138 @@
+<div class="mascota-container">
+
+  <!-- Sección 1: Buscar Mascota por ID -->
+  <div class="section">
+    <h2>Buscar Mascota por ID</h2>
+    <form (ngSubmit)="buscarMascotaPorId()">
+      <div class="form-group">
+        <label for="buscarId">Introduce el ID de la mascota:</label>
+        <input type="number" [(ngModel)]="id_mascota" name="buscarId" required>
+      </div>
+      <button type="submit">Buscar</button>
+    </form>
+    <div *ngIf="mascotaEncontrada">
+      <h3>Información de la Mascota</h3>
+      <ul *ngFor="let mascota of mascotaEncontrada">
+        <li><strong>ID:</strong> {{ mascota.id_mascota }}</li>
+        <li><strong>Nombre:</strong> {{ mascota.nombre }}</li>
+        <li><strong>Raza:</strong> {{ mascota.raza }}</li>
+        <li><strong>Edad:</strong> {{ mascota.edad }}</li>
+        <li><strong>Email Cliente:</strong> {{ mascota.email_cliente }}</li>
+        <hr>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Sección 2: Alta de Mascota -->
+  <div class="section">
+    <h2>Alta de Mascota</h2>
+    <form (ngSubmit)="altaMascota()">
+      <div class="form-group">
+        <label for="email_Cliente">Email del Cliente:</label>
+        <input type="email" [(ngModel)]="email_cliente" name="emailCliente" required>
+      </div>
+      <div class="form-group">
+        <label for="nombreMascota">Nombre:</label>
+        <input type="text" [(ngModel)]="nombreMascota" name="nombreMascota" required>
+      </div>
+      <div class="form-group">
+        <label for="razaMascota">Raza:</label>
+        <input type="text" [(ngModel)]="razaMascota" name="razaMascota" required>
+      </div>
+      <div class="form-group">
+        <label for="edadMascota">Edad:</label>
+        <input type="number" [(ngModel)]="edadMascota" name="edadMascota" min="0" required>
+      </div>
+      <button type="submit">Dar de Alta</button>
+      <div *ngIf="mensajeAlta">
+        {{mensajeAlta}}
+      </div>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Sección 3: Dar de Baja Mascota -->
+  <div class="section">
+    <h2>Dar de Baja Mascota</h2>
+    <form (ngSubmit)="bajaMascota()">
+      <div class="form-group">
+        <label for="bajaId">Introduce el ID de la mascota:</label>
+        <input type="number" [(ngModel)]="bajaId" name="bajaId" required>
+      </div>
+      <button type="submit">Dar de Baja</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Sección 4: Modificar Mascota -->
+
+<div class="mascota-form-container">
+  <h2>Editar Mascota</h2>
+  <form (ngSubmit)="modificarMascota()" #mascotaForm="ngForm" class="mascota-form">
+    <div class="form-group">
+      <label for="id_mascota">ID Mascota:</label>
+      <input
+        id="id_mascota"
+        name="id_mascota"
+        type="number"
+        [(ngModel)]="idModificar"
+        required
+        class="form-control"
+        placeholder="Introduce el ID de la mascota"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email_cliente">Email del cliente:</label>
+      <input
+        id="email_cliente"
+        name="email_cliente"
+        type="email"
+        [(ngModel)]="mascota.email_cliente"
+        class="form-control"
+        placeholder="Email del cliente"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input
+        id="nombre"
+        name="nombre"
+        type="text"
+        [(ngModel)]="mascota.nombre"
+        required
+        class="form-control"
+        placeholder="Nombre de la mascota"
+      />
+    </div>
+    <div class="form-group">
+      <label for="raza">Raza:</label>
+      <input
+        id="raza"
+        name="raza"
+        type="text"
+        [(ngModel)]="mascota.raza"
+        class="form-control"
+        placeholder="Raza de la mascota"
+      />
+    </div>
+    <div class="form-group">
+      <label for="edad">Edad:</label>
+      <input
+        id="edad"
+        name="edad"
+        type="number"
+        [(ngModel)]="mascota.edad"
+        class="form-control"
+        placeholder="Edad de la mascota"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  </form>
+</div>
+
+</div>

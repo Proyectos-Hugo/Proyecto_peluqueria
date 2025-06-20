@@ -1,0 +1,17 @@
+--Libreria para acceder a la base de datos desde TypeScript--
+
+npm install @nestjs/typeorm@11 typeorm@0.3 mysql2
+
+--Se puede utilizar swagger para documentar servicios REST de nestjs--
+
+npm install --save @nestjs/swagger swagger-ui-express
+
+--Validacion en los DTOs--
+
+npm install class-validation
+
+--Autenticacion--
+
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt
+npm install -D @types/passport-jwt
+

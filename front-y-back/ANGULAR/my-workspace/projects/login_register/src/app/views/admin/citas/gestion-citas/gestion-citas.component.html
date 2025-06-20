@@ -1,0 +1,31 @@
+<div *ngIf="citas.length > 0; else sinCitas">
+  <h2>Gestión de citas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Mascota</th>
+        <th>Cliente</th>
+        <th>Empleado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td>{{ cita.fecha | date:'dd/MM/yyyy' }}</td>
+        <td>{{ cita.hora }}</td>
+        <td>{{ cita.nombre_mascota }}</td>
+        <td>{{ cita.nombre_cliente }}</td>
+        <td>{{ cita.nombre_empleado }} {{ cita.apellido_empleado }}</td>
+        <td>
+          <button (click)="eliminarCita(cita.id_cita)" class="btn-eliminar">Eliminar</button>
+          <!-- Puedes agregar más acciones aquí, como editar o cambiar estado -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #sinCitas>
+  <p>No hay citas registradas.</p>
+</ng-template>

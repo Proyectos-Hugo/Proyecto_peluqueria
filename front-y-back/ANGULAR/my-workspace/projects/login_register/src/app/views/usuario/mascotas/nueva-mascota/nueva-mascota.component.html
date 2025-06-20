@@ -1,0 +1,44 @@
+<div class="form-container">
+  <h2>Registrar nueva mascota</h2>
+  <form (ngSubmit)="altaMascota()" #mascotaForm="ngForm">
+    <div>
+      <label for="nombreMascota">Nombre:</label>
+      <input
+        id="nombreMascota"
+        name="nombreMascota"
+        type="text"
+        [(ngModel)]="nombreMascota"
+        required
+        placeholder="Nombre de la mascota"
+      />
+    </div>
+    <div>
+      <label for="razaMascota">Raza:</label>
+      <input
+        id="razaMascota"
+        name="razaMascota"
+        type="text"
+        [(ngModel)]="razaMascota"
+        required
+        placeholder="Raza"
+      />
+    </div>
+    <div>
+      <label for="edadMascota">Edad:</label>
+      <input
+        id="edadMascota"
+        name="edadMascota"
+        type="number"
+        [(ngModel)]="edadMascota"
+        required
+        min="0"
+        placeholder="Edad"
+      />
+    </div>
+    <button type="submit" [disabled]="mascotaForm.invalid">Registrar Mascota</button>
+  </form>
+
+  <div *ngIf="mensajeAlta" class="mensaje">
+    {{ mensajeAlta }}
+  </div>
+</div>

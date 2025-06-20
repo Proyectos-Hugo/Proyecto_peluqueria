@@ -1,0 +1,67 @@
+form {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 28px 36px;
+  background: #f4f8fb;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.08);
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+  color: #1e40af;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #b6c6e3;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  border-color: #2563eb;
+  outline: none;
+  background: #e0e7ff;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+}
+
+button[type="submit"]:hover:enabled {
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.15);
+}
+
+button[disabled] {
+  background: #b6c6e3;
+  cursor: not-allowed;
+}

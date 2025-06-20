@@ -1,0 +1,32 @@
+<div *ngIf="empleados.length > 0; else sinEmpleados">
+  <h2>Listado de empleados</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>DNI</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Especialidad</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados">
+        <td>{{ empleado.dni }}</td>
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.apellido }}</td>
+        <td>{{ empleado.email }}</td>
+        <td>{{ empleado.especialidad }}</td>
+        <td>{{ empleado.telefono }}</td>
+        <td>
+          <button (click)="eliminarEmpleado(empleado.dni)" class="btn-eliminar">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #sinEmpleados>
+  <p>No hay empleados registrados.</p>
+</ng-template>

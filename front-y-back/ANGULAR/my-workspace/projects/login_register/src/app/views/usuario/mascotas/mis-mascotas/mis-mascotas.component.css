@@ -1,0 +1,121 @@
+.mis-mascotas-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 28px 36px;
+  background: #f4f8fb;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.08);
+}
+
+h2 {
+  text-align: center;
+  color: #1e40af;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.mensaje-alerta {
+  text-align: center;
+  color: #ef4444;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.mensaje-info {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-top: 40px;
+}
+
+.mascota-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.mascota-item {
+  background: #e0e7ff;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.06);
+}
+
+.acciones {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-editar,
+.btn-eliminar,
+.btn-guardar,
+.btn-cancelar {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-editar {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-editar:hover {
+  background: #1e40af;
+}
+
+.btn-eliminar {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-eliminar:hover {
+  background: #b91c1c;
+}
+
+.btn-guardar {
+  background: #059669;
+  color: #fff;
+}
+
+.btn-guardar:hover {
+  background: #047857;
+}
+
+.btn-cancelar {
+  background: #64748b;
+  color: #fff;
+}
+
+.btn-cancelar:hover {
+  background: #334155;
+}
+
+.edicion-form {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.edicion-form input {
+  padding: 7px 10px;
+  border: 1px solid #b6c6e3;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+.edicion-form input:focus {
+  border-color: #2563eb;
+  outline: none;
+  background: #e0e7ff;
+}
