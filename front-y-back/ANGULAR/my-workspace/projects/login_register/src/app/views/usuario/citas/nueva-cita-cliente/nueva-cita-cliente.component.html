@@ -1,0 +1,27 @@
+<form #citaForm="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Fecha:</label>
+    <input type="date" name="fecha" [(ngModel)]="fecha" required>
+  </div>
+  <div>
+    <label>Hora:</label>
+    <input type="time" name="hora" [(ngModel)]="hora" required>
+  </div>
+  <div>
+    <label>Mascota:</label>
+    <select name="id_mascota" [(ngModel)]="id_mascota" required>
+      <option value="">Seleccione una mascota</option>
+      <option *ngFor="let mascota of mascotas" [value]="mascota.id_mascota">
+        {{ mascota.nombre }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <label>Empleado:</label>
+    <select name="empleado" [(ngModel)]="dni_empleado" required>
+      <option value="">Seleccione un empleado</option>
+      <option *ngFor="let empleado of empleados" [value]="empleado.dni">{{ empleado.nombre }} {{ empleado.apellido }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!citaForm.valid">Crear Cita</button>
+</form>

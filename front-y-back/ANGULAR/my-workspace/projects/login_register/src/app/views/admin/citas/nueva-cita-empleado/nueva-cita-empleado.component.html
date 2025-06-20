@@ -1,0 +1,41 @@
+<form #citaForm="ngForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Email Cliente:</label>
+    <input type="email" name="email_cliente" [(ngModel)]="email_cliente" required>
+  </div>
+  <div>
+    <label>Nombre Cliente:</label>
+    <input type="text" name="nombre_cliente" [(ngModel)]="nombre_cliente" required>
+  </div>
+  <div>
+    <label>Teléfono Cliente:</label>
+    <input type="text" name="telefono_cliente" [(ngModel)]="telefono_cliente" required>
+  </div>
+  <div>
+    <label>Nombre Mascota:</label>
+    <input type="text" name="nombre_mascota" [(ngModel)]="nombre_mascota" required>
+  </div>
+  <div>
+    <label>Raza:</label>
+    <input type="text" name="raza" [(ngModel)]="raza" required>
+  </div>
+  <div>
+    <label>Edad:</label>
+    <input type="number" name="edad" [(ngModel)]="edad" required>
+  </div>
+  <div>
+    <label>Fecha:</label>
+    <input type="date" name="fecha" [(ngModel)]="fecha" required>
+  </div>
+  <div>
+    <label>Hora:</label>
+    <input type="time" name="hora" [(ngModel)]="hora" required>
+  </div>
+  <div>
+    <select name="empleado" [(ngModel)]="dni_empleado" required>
+      <option value="">Seleccione un empleado</option>
+      <option *ngFor="let empleado of empleados" [value]="empleado.dni">{{ empleado.nombre }} {{ empleado.apellido }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!citaForm.valid">Crear Cita</button>
+</form>
