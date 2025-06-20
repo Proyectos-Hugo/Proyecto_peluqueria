@@ -1,6 +1,6 @@
 .main-navbar {
   display: flex;
-  flex-direction: row-reverse;      /* Elementos desde la derecha */
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
   gap: 18px;
@@ -8,11 +8,11 @@
   box-shadow: 0 2px 12px 0 rgba(255,78,122,0.07);
   border-radius: 0 0 18px 18px;
   padding: 12px 24px;
-  max-width: 1200px;                /* Limita el ancho máximo */
+  max-width: 1200px;
   width: 100%;
-  margin: 18px auto 32px auto;      /* Centra el navbar horizontalmente */
-  box-sizing: border-box;           /* Incluye el padding en el ancho */
-  overflow-x: auto;                 /* Evita scroll vertical, permite horizontal si es necesario */
+  margin: 18px auto 32px auto;
+  box-sizing: border-box;
+  overflow-x: auto;
   position: relative;
   z-index: 2;
 }
@@ -44,12 +44,18 @@
   color: #e53935 !important;
 }
 
+/* Tablet: apila los botones y alinea a la derecha */
 @media (max-width: 900px) {
   .main-navbar {
-    max-width: 100vw;
-    padding: 8px 2vw;
+    flex-wrap: wrap;
     gap: 10px;
+    padding: 10px 2vw;
+    max-width: 100%;
+    width: 100%;
+    margin: 10px 0 18px 0;
     border-radius: 0 0 14px 14px;
+    box-sizing: border-box;
+    overflow-x: auto;
   }
   .nav-btn {
     font-size: 0.98rem;
@@ -57,20 +63,19 @@
   }
 }
 
+/* Móvil: más compacto y botones a la derecha */
 @media (max-width: 600px) {
   .main-navbar {
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
-    align-items: flex-end;
     gap: 6px;
     padding: 6px 2vw;
-    max-width: 100vw;
-    width: 100vw;
-    margin: 10px 0 18px 0;
     border-radius: 0 0 10px 10px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
   }
   .nav-btn {
-    width: 100%;
-    text-align: right;
+    font-size: 0.95rem;
+    padding: 6px 6px;
   }
 }
