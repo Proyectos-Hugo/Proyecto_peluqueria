@@ -19,6 +19,11 @@ export class UserService {
     return this.http.post<UserDatosDto>(`${this.url}/create`, user);
   }
   findUser(email: string, password: string): Observable<UserDatosDto | null> {
-    return this.http.get<UserDatosDto>(`${this.url}/findUser/${email},${password}`);
+    const user = this.http.get<UserDatosDto>(`${this.url}/findUser/${email},${password}`);
+    this.user = user;
+    return user;
+  }
+  obtenerRole(): string  {
+    return this.user.role
   }
 }

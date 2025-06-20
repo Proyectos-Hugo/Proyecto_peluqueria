@@ -24,10 +24,15 @@
   <div *ngIf="isLoggedIn()">
     <button mat-button [matMenuTriggerFor]="citasMenu" class="nav-btn">Citas</button>
     <mat-menu #citasMenu="matMenu" yPosition="below">
-      <button (click)="goToMisCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis Citas</button>
-      <button (click)="goToNuevaCitaCliente()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Cliente</button>
-      <button (click)="goToGestionCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Gestion Citas</button>
-      <button (click)="goToNuevaCitaEmpleado()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Empleado</button>
+      <div *ngIf="isAdmin()">
+        <button (click)="goToGestionCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Gestion Citas</button>
+        <button (click)="goToMisCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis Citas</button>
+        <button (click)="goToNuevaCitaCliente()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Cliente</button>
+      </div>
+      <div *ngIf="!isAdmin()">
+        <button (click)="goToGestionCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Gestion Citas</button>
+        <button (click)="goToNuevaCitaEmpleado()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Empleado</button>
+      </div>
     </mat-menu>
   </div>
   <!-- Menú Mascotas -->

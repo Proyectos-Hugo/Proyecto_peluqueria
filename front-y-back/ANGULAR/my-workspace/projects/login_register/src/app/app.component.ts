@@ -15,7 +15,7 @@ import { ClienteService } from './service/cliente.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private router: Router, private clienteService: ClienteService, private empleadoService: EmpleadoService){}
+  constructor(private router: Router, private clienteService: ClienteService, private empleadoService: EmpleadoService, private userService: UserService){}
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('cliente');
@@ -29,6 +29,9 @@ export class AppComponent {
   }
   goToHome() {
       this.router.navigate(['/home']);
+  }
+  isAdmin(): boolean {
+    return this.userService.obtenerRole() == 'empleado';
   }
 
   //LOGIN Y REGISTRO

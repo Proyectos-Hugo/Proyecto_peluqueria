@@ -43,7 +43,10 @@
 .logout {
   color: #e53935 !important;
 }
-
+.brand{
+  text-align: center;
+  font-size: 1.2rem;
+}
 /* Tablet: apila los botones y alinea a la derecha */
 @media (max-width: 900px) {
   .main-navbar {
