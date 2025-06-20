@@ -12,13 +12,7 @@ import { ClienteService } from './service/cliente.service';
   selector: 'app-root',
   imports: [RouterModule, CommonModule, MatMenuModule, MatButtonModule],
   templateUrl: './app.component.html',
-  styles:[`
-    nav {
-      padding: 1rem;
-      display: flex;
-      flex-direction: row-reverse;
-    }
-  `]
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   constructor(private router: Router, private clienteService: ClienteService, private empleadoService: EmpleadoService){}

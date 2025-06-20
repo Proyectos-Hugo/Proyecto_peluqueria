@@ -1,0 +1,76 @@
+.main-navbar {
+  display: flex;
+  flex-direction: row-reverse;      /* Elementos desde la derecha */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 2px 12px 0 rgba(255,78,122,0.07);
+  border-radius: 0 0 18px 18px;
+  padding: 12px 24px;
+  max-width: 1200px;                /* Limita el ancho máximo */
+  width: 100%;
+  margin: 18px auto 32px auto;      /* Centra el navbar horizontalmente */
+  box-sizing: border-box;           /* Incluye el padding en el ancho */
+  overflow-x: auto;                 /* Evita scroll vertical, permite horizontal si es necesario */
+  position: relative;
+  z-index: 2;
+}
+
+.nav-btn {
+  color: #ff4e7a !important;
+  font-weight: 600;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  transition: background 0.18s, color 0.18s;
+  font-size: 1.08rem;
+  white-space: nowrap;
+}
+
+.nav-btn:hover, .nav-menu-item:hover {
+  background: #ffe4ec !important;
+  color: #d81b60 !important;
+}
+
+.nav-menu-item {
+  color: #ff4e7a !important;
+  font-weight: 500;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.logout {
+  color: #e53935 !important;
+}
+
+@media (max-width: 900px) {
+  .main-navbar {
+    max-width: 100vw;
+    padding: 8px 2vw;
+    gap: 10px;
+    border-radius: 0 0 14px 14px;
+  }
+  .nav-btn {
+    font-size: 0.98rem;
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-navbar {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 6px 2vw;
+    max-width: 100vw;
+    width: 100vw;
+    margin: 10px 0 18px 0;
+    border-radius: 0 0 10px 10px;
+  }
+  .nav-btn {
+    width: 100%;
+    text-align: right;
+  }
+}

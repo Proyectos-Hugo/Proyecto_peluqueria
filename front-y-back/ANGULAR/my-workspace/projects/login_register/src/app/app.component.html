@@ -1,56 +1,54 @@
-<nav style="height:5vh;">
+<nav class="main-navbar">
   <!-- Menú Perfil -->
   <div>
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="perfilMenu">Perfil</button>
-      <mat-menu #perfilMenu="matMenu" yPosition="below">
-        <button *ngIf="!isLoggedIn()" (click)="goToLogin()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Inicia Sesión</button>
-        <button *ngIf="!isLoggedIn()" (click)="goToRegister()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Regístrate</button>
-        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Pedidos</button>
-        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo Pedido</button>
-        <button *ngIf="isLoggedIn()" (click)="logout()" style="color:red;" class="mat-menu-item" mat-menu-item>Cierra sesión</button>
-      </mat-menu>
+    <button mat-button [matMenuTriggerFor]="perfilMenu" class="nav-btn">Perfil</button>
+    <mat-menu #perfilMenu="matMenu" yPosition="below">
+      <button *ngIf="!isLoggedIn()" (click)="goToLogin()" class="mat-menu-item nav-menu-item" mat-menu-item>Inicia Sesión</button>
+      <button *ngIf="!isLoggedIn()" (click)="goToRegister()" class="mat-menu-item nav-menu-item" mat-menu-item>Regístrate</button>
+      <button *ngIf="isLoggedIn()" (click)="logout()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis Pedidos</button>
+      <button *ngIf="isLoggedIn()" (click)="logout()" class="mat-menu-item nav-menu-item" mat-menu-item>Nuevo Pedido</button>
+      <button *ngIf="isLoggedIn()" (click)="logout()" class="mat-menu-item nav-menu-item logout" mat-menu-item>Cierra sesión</button>
+    </mat-menu>
   </div>
 
   <!-- Menú Empleado -->
   <div *ngIf="isLoggedIn()">
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="empleadoMenu">Empleado</button>
+    <button mat-button [matMenuTriggerFor]="empleadoMenu" class="nav-btn">Empleado</button>
     <mat-menu #empleadoMenu="matMenu" yPosition="below">
-      <button (click)="goToMisEmpleados()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis empleados</button>
-      <button (click)="goToNuevoEmplado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nuevo empleado</button>
+      <button (click)="goToMisEmpleados()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis empleados</button>
+      <button (click)="goToNuevoEmplado()" class="mat-menu-item nav-menu-item" mat-menu-item>Nuevo empleado</button>
     </mat-menu>
   </div>
 
   <!-- Menú Citas -->
   <div *ngIf="isLoggedIn()">
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="citasMenu">Citas</button>
+    <button mat-button [matMenuTriggerFor]="citasMenu" class="nav-btn">Citas</button>
     <mat-menu #citasMenu="matMenu" yPosition="below">
-      <button (click)="goToMisCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Citas</button>
-      <button (click)="goToNuevaCitaCliente()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Cliente</button>
-      <button (click)="goToGestionCitas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestion Citas</button>
-      <button (click)="goToNuevaCitaEmpleado()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Cita Empleado</button>
+      <button (click)="goToMisCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis Citas</button>
+      <button (click)="goToNuevaCitaCliente()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Cliente</button>
+      <button (click)="goToGestionCitas()" class="mat-menu-item nav-menu-item" mat-menu-item>Gestion Citas</button>
+      <button (click)="goToNuevaCitaEmpleado()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Cita Empleado</button>
     </mat-menu>
   </div>
-   <!-- Menú Mascotas -->
+  <!-- Menú Mascotas -->
   <div *ngIf="isLoggedIn()">
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="mascotasMenu">Mascotas</button>
+    <button mat-button [matMenuTriggerFor]="mascotasMenu" class="nav-btn">Mascotas</button>
     <mat-menu #mascotasMenu="matMenu" yPosition="below">
-      <button (click)="goToMisMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Mis Mascotas</button>
-      <button (click)="goToNuevaMascota()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Nueva Mascota</button>
-      <button (click)="goToMascotas()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Gestionar Mascota</button>
+      <button (click)="goToMisMascotas()" class="mat-menu-item nav-menu-item" mat-menu-item>Mis Mascotas</button>
+      <button (click)="goToNuevaMascota()" class="mat-menu-item nav-menu-item" mat-menu-item>Nueva Mascota</button>
+      <button (click)="goToMascotas()" class="mat-menu-item nav-menu-item" mat-menu-item>Gestionar Mascota</button>
     </mat-menu>
   </div>
-   <!-- Menú Tienda -->
+  <!-- Menú Tienda -->
   <div>
-    <button style="color:rgb(14, 110, 235);" mat-button [matMenuTriggerFor]="productosMenu">Tienda</button>
+    <button mat-button [matMenuTriggerFor]="productosMenu" class="nav-btn">Tienda</button>
     <mat-menu #productosMenu="matMenu" yPosition="below">
-      <button (click)="goToProductos()" style="color:rgb(14, 110, 235);" class="mat-menu-item" mat-menu-item>Productos</button>
+      <button (click)="goToProductos()" class="mat-menu-item nav-menu-item" mat-menu-item>Productos</button>
     </mat-menu>
   </div>
   <div>
-    <button (click)="goToHome()" style="color:rgb(14, 110, 235);" mat-button>Home</button>
-
+    <button (click)="goToHome()" mat-button class="nav-btn">Home</button>
   </div>
-
 </nav>
 <div style="height:80vh;">
   <router-outlet></router-outlet>
