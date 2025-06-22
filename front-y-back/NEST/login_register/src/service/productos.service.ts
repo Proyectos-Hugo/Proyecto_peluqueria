@@ -13,16 +13,11 @@ export class ProductosService {
   ){}
   
   // ALTA PRODUCTO  
-
   async highProduct(producto:ProductoAltaDto):Promise<boolean>{
-
-    // Verifica si el empleado existe, si no, lo crea
     let articulo :Producto = await this.repositoryProducto.findOne({ where: { nombre: producto.nombre, descripcion: producto.descripcion} });
-
     if (!articulo) {
       articulo = this.repositoryProducto.create({});
       await this.repositoryProducto.save(articulo);
-
     }
     const existe = await this.repositoryProducto.createQueryBuilder("producto")
     .where("id_producto=:id_producto", { id_producto:producto.id_producto })
@@ -38,7 +33,6 @@ export class ProductosService {
   }
 
   //BAJA PRODUCTO
-
   async deleteProduct(id:number):Promise<boolean>{
     const delet :Producto = await this.repositoryProducto.createQueryBuilder("producto")
     .where("id_producto=:id_producto", { id_producto:id})
@@ -53,7 +47,6 @@ export class ProductosService {
   }
   
   //MODIFICAR PRODUCTO
-
   async modifyProduct(id:number, producto: ProductoAltaDto):Promise<boolean>{
     const result = await this.repositoryProducto.createQueryBuilder()
     .update(Producto)
@@ -66,7 +59,6 @@ export class ProductosService {
   }
 
   //MOSTRAR TODOS LOS PRODUCTOS
-
   async findAllProduct(): Promise<ProductoDatosDto[]> {
     const productos = await this.repositoryProducto.find();
     const productosDto: ProductoDatosDto[] = [];

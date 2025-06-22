@@ -1,18 +1,17 @@
-import { MascotaService } from '../../../service/mascota.service';
+import { MascotaService } from '../../service/mascota.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MascotaDatosDto } from '../../../model/MascotaDatosDto';
-import { MascotaAltaDto } from '../../../model/MascotaAltaDto';
-import { UserService } from '../../../service/user.service';
+import { MascotaAltaDto } from '../../model/MascotaAltaDto';
+import { MascotaDatosDto } from '../../model/MascotaDatosDto';
 
 @Component({
   selector: 'app-mascota',
   imports: [FormsModule,CommonModule],
-  templateUrl: './mascotas.component.html',
-  styleUrl: './mascotas.component.css'
+  templateUrl: './mascota.component.ts',
+  styleUrl: '../../views/usuario/mascotas/mis-mascotas/mis-mascotas.component.css',
 })
-export class MascotasComponent {
+export class MascotaComponent {
 
   id_mascota:number;
   bajaId:number;
@@ -27,16 +26,10 @@ export class MascotasComponent {
   edad: number;
   mascotaEncontrada: MascotaDatosDto[];
   mensajeAlta: string;
-  mascota = {
-    id_mascota: null,
-    nombre: '',
-    raza: '',
-    edad: null,
-    email_cliente: ''
-  };
 
-  constructor(private mascotaService:MascotaService, private userService: UserService){}
+  constructor(private mascotaService:MascotaService){}
 
+  //MUESTRA LA MASCOTA POR ID
   buscarMascotaPorId() {
     this.mascotaService.findMascota(this.id_mascota).subscribe(mascota => {
       if (Array.isArray(mascota)) {
@@ -49,6 +42,7 @@ export class MascotasComponent {
     });
   }
 
+  //SE DA DE ALTA A LA MASCOTA
   altaMascota() {
     let nuevaMascota = new MascotaAltaDto(this.email_cliente, this.nombreMascota, this.razaMascota, this.edadMascota);
     this.mascotaService.altaMascota(nuevaMascota)
@@ -58,7 +52,7 @@ export class MascotasComponent {
       this.email_clienteMascota = '';
       this.nombreMascota = '';
       this.razaMascota = '';
-      this.edadMascota = null;
+      this.edadMascota;
     },
       error: err => {
         this.mensajeAlta = 'Error al crear la mascota.';
@@ -66,6 +60,7 @@ export class MascotasComponent {
     });
   }
 
+  //SE DA DE BAJA A LA MASCOTA
   bajaMascota() {
     this.mascotaService.deleteMascota(this.bajaId).subscribe({
       next: (resultado) => {
@@ -77,14 +72,18 @@ export class MascotasComponent {
     });
   }
 
+  //SE MODIFICA A LA MASCOTA
   modificarMascota() {
-    console.log(this.idModificar)
     this.mascotaService.modifyMascota(
       this.idModificar,
-      new MascotaAltaDto(this.mascota.email_cliente, this.mascota.nombre, this.mascota.raza, this.mascota.edad)
+      {
+        email_cliente: this.email_clienteMascota,
+        nombre: this.nombre,
+        raza: this.raza,
+        edad: this.edad
+      }
     ).subscribe({
       next: (resultado) => {
-        console.log(resultado);
         this.mensajeAlta = resultado ? 'Mascota modificada correctamente.' : 'No se pudo modificar la mascota.';
       },
       error: () => {

@@ -10,7 +10,18 @@ export class CitaAltaEmpleadoDto{
     fecha:Date;
     hora:string;
 
-    constructor(email:string, nombre_cliente: string, apellido_cliente: string, telefono_cliente: string, dni_empleado:string, nombre_mascota:string, raza: string, edad: number, fecha:Date, hora:string){
+    constructor(
+        email?:string, 
+        nombre_cliente?:string,
+        apellido_cliente?:string,
+        telefono_cliente?:string,
+        dni_empleado?:string,
+        nombre_mascota?:string,
+        raza?:string,
+        edad?:number,
+        fecha?:Date,
+        hora?:string
+    ){
         this.email_cliente=email;
         this.nombre_cliente = nombre_cliente;
         this.apellido_cliente = apellido_cliente;

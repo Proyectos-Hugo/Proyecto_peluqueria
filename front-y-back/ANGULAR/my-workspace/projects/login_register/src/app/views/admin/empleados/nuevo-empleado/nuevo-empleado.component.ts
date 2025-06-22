@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./nuevo-empleado.component.css'],
   imports:[CommonModule, FormsModule],
 })
+
 export class NuevoEmpleadoComponent {
   dni: string = '';
   email: string = '';
@@ -18,7 +19,6 @@ export class NuevoEmpleadoComponent {
   apellido: string = '';
   especialidad: string = '';
   telefono: string = '';
-
   mensaje: string = '';
 
   constructor(private empleadoService: EmpleadoService) {}

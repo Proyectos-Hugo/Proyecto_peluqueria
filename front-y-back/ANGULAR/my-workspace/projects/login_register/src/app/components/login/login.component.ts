@@ -29,7 +29,7 @@ export class LoginComponent {
           console.log(usuario.role)
           console.log('Usuario encontrado:', usuario);
           if(usuario.role === 'empleado'){
-            this.empleadoService.getEmpleadoByEmail(usuario.email).subscribe({
+            this.empleadoService.getEmpleadoPorDni(usuario.email).subscribe({
               next: (empleado) => {
                 console.log('Empleado encontrado:', empleado);
                 this.empleadoService.setEmpleado(empleado);

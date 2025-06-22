@@ -10,6 +10,7 @@ import { EmpleadoDatosDto } from '../../../../model/EmpleadoDatosDto';
   templateUrl: './mis-empleados.component.html',
   styleUrl: './mis-empleados.component.css'
 })
+
 export class MisEmpleadosComponent {
   empleados: EmpleadoDatosDto[] = [];
   constructor(private empleadosService: EmpleadoService) {}
@@ -30,6 +31,4 @@ export class MisEmpleadosComponent {
       }
     });
   }
-
-
 }

@@ -15,10 +15,11 @@ export class MascotaService {
   ){}
 
   // BUSCAR MASCOTA
-
   async findMascota(id: number): Promise<Mascota> {
     return this.repositoryMascota.findOne({ where: { id_mascota:id } });
   }
+
+  //MUESTRA TODAS LAS MASCOTAS POR ID
   async getMascotasPorId(id: number): Promise<MascotaDatosDto[]> {
     const mascotas = this.repositoryMascota.find({ where: { id_mascota:id } });
     const mascotasDto: MascotaDatosDto[] = (await mascotas).map(mascota => new MascotaDatosDto(
@@ -45,6 +46,7 @@ export class MascotaService {
     console.log(mascotasDto);
     return mascotasDto;
   }
+
   //BUSCAR MASCOTA POR EMAIL DE CLIENTE Y NOMBRE
   async findMascotaByEmailAndName(email: string, nombre: string): Promise<MascotaDatosDto | boolean> {
     const mascota = await this.repositoryMascota.findOne({ where: { email_cliente:email, nombre:nombre } });
@@ -59,28 +61,21 @@ export class MascotaService {
     }else{
       return false;
     }
-    
   }
 
   //ALTA MASCOTA
-
   async highAnimals(mascota: MascotaAltaDto):Promise<Mascota | boolean>{
-
-    // Verifica si la mascota existe, si no, lo crea
-      let mascotaRepetida:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: mascota.email_cliente, nombre: mascota.nombre, raza: mascota.raza}});
-      if (!mascotaRepetida) {
-        this.repositoryMascota.create(mascota);
-        let mascotacreada = await this.repositoryMascota.save(mascota)
-        return mascotacreada;
-      }
-      else{
-        return false;
-      }
-
+    let mascotaRepetida:Mascota = await this.repositoryMascota.findOne({ where: { email_cliente: mascota.email_cliente, nombre: mascota.nombre, raza: mascota.raza}});
+    if(!mascotaRepetida){
+      this.repositoryMascota.create(mascota);
+      let mascotacreada = await this.repositoryMascota.save(mascota)
+      return mascotacreada;
+    }else{
+      return false;
+    }
   } 
 
   //BAJA MASCOTA
-
   async deleteAnimal(id: number): Promise<boolean> {
     const mascota = await this.repositoryMascota
       .createQueryBuilder('mascota')
@@ -96,9 +91,7 @@ export class MascotaService {
     }
   }
 
-
   //MODIFICAR MASCOTA
-
   async modifyAnimals(id:number, mascota: MascotaAltaDto):Promise<boolean>{
     const result = await this.repositoryMascota.createQueryBuilder()
       .update(Mascota)
@@ -107,5 +100,4 @@ export class MascotaService {
       .execute()
     return result.affected && result.affected > 0;
   }
-
 }

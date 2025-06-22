@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './gestion-citas.component.html',
   styleUrls: ['./gestion-citas.component.css']
 })
+
 export class GestionCitasComponent {
   citas: CitaDatosDto[] = [];
   empleados: any[] = []; // Puedes definir un tipo más específico si lo deseas
@@ -36,7 +37,6 @@ export class GestionCitasComponent {
   eliminarCita(id: number) {
     this.citasService.eliminarCita(id).subscribe({
       next: () => {
-
         console.log('Cita eliminada correctamente');
         // Actualizar la lista de citas después de eliminar
         this.citas = this.citas.filter(cita => cita.id_cita !== id);
@@ -46,5 +46,4 @@ export class GestionCitasComponent {
       }
     });
   }
-
 }

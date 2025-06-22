@@ -1,5 +1,3 @@
-
-
 export class CitaDatosDto {
   id_cita: number;
   email_cliente: string;
@@ -12,8 +10,6 @@ export class CitaDatosDto {
   hora: string;
   nombre_empleado: string;
   apellido_empleado: string;
-
-
 
   constructor(
     id_cita: number,

@@ -1,4 +1,3 @@
-
 export class EmpleadoDatosDto {
   dni: string;
   email: string;

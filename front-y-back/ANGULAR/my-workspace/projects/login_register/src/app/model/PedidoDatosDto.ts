@@ -1,6 +1,5 @@
 import { PedidoProductoDatosDto } from "./PedidoProductoDatosDto";
 
-
 export class PedidoDatosDto {
   id_pedido: number;
   clienteEmail: string;

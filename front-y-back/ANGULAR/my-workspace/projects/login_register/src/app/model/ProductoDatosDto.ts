@@ -1,6 +1,4 @@
-
 export class ProductoDatosDto {
-
   id_producto: number;
   nombre: string;
   descripcion: string;

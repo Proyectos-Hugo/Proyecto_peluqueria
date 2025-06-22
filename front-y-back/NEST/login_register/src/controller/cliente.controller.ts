@@ -31,7 +31,7 @@ export class ClienteController {
     }
   }
 
-  @Get('clientes')
+  @Get('allClientes')
   allCLientes(){
     return this.clienteService.allClientes();
   }
@@ -60,5 +60,4 @@ export class ClienteController {
   modifyCliente(@Param('email')email:string,cliente:ClienteAltaDto){
     return this.clienteService.modifyClient(email,cliente);
   }
-
 }

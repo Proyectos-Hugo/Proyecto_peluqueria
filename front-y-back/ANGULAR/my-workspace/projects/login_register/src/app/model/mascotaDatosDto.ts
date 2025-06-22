@@ -1,4 +1,3 @@
-
 export class MascotaDatosDto {
   id_mascota?: number;
   nombre: string;

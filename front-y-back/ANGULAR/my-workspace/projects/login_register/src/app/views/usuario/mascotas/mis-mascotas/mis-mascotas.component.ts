@@ -4,7 +4,6 @@ import { MascotaDatosDto } from '../../../../model/MascotaDatosDto';
 import { MascotaAltaDto } from '../../../../model/MascotaAltaDto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../../../service/user.service';
 import { MascotaComponent } from "./mascota/mascota.component";
 import { ClienteService } from '../../../../service/cliente.service';
 

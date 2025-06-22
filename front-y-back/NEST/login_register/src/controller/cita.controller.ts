@@ -33,7 +33,7 @@ export class CitaController {
     BuscarCitaPorCliente(@Param('email') email:string){
       return this.citaService.findQuotesByClient(email)
     }
-    //CITA RESERVADA POR UN CLIENTE EN LA WEB
+    
     @Post('alta-cita-cliente')
     async altaCitaCliente(@Body() cita:CitaAltaClienteDto, @Res() res:Response){
       const creada = await this.citaService.highQuoteByClient(cita);
@@ -42,9 +42,8 @@ export class CitaController {
       }else{
         return res.status(499).json(creada);
       }
-      
     }
-    //CITA RESERVADA POR UN EMPLEADO A UN CLIENTE NUEVO
+    
     @Post('alta-cita-empleado')
     async altaCitaEmpleado(@Body() cita:CitaAltaEmpleadoDto, @Res() res:Response){
       const creada = await this.citaService.highQuoteByEmployee(cita);
@@ -77,11 +76,3 @@ export class CitaController {
       };
     }
   }
-        
-
-
-
-
-
-
-

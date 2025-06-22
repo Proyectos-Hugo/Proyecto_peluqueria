@@ -3,9 +3,7 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MascotaAltaDto } from "../../../../model/MascotaAltaDto";
-import { MascotaDatosDto } from "../../../../model/MascotaDatosDto";
 import { MascotaService } from "../../../../service/mascota.service";
-import { UserService } from '../../../../service/user.service';
 import { ClienteService } from "../../../../service/cliente.service";
 
 

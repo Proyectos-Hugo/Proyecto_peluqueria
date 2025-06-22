@@ -8,6 +8,7 @@ import { CitaDatosDto } from '../model/CitaDatosDto';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CitaService {
 
   url:string = 'http://localhost:3000/citas';
@@ -20,11 +21,9 @@ export class CitaService {
   crearCitaEmpleado(cita: CitaAltaEmpleadoDto): Observable<any> {
     return this.http.post<any>(`${this.url}/alta-cita-empleado`, cita);
   }
-
   obtenerCitas(): Observable<CitaDatosDto[]> {
     return this.http.get<CitaDatosDto[]>(`${this.url}/todas`);
   }
-
   eliminarCita(id: number): Observable<any> {
     return this.http.delete<any>(`${this.url}/eliminar-cita/${id}`);
   }
@@ -32,4 +31,3 @@ export class CitaService {
     return this.http.get<CitaDatosDto[]>(`${this.url}/buscar-cita-por-cliente/${email}`);
   }
 }
-

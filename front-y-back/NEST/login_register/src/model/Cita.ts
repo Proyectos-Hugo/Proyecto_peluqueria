@@ -21,6 +21,7 @@ export class Cita {
 
   @Column()
   hora: string;
+
   @ManyToOne(() => Mascota, mascota => mascota.citas, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'id_mascota' })
   mascota: Mascota;
@@ -32,7 +33,6 @@ export class Cita {
   @ManyToOne(() => Empleado, empleado => empleado.citas, {onDelete: 'CASCADE'})
   @JoinColumn({ name: 'dni_empleado', referencedColumnName: 'dni' })
   empleado: Empleado;
-
 
   constructor(cliente?: Cliente, empleado?: Empleado, mascota?: Mascota, fecha?: Date, hora?: string) {
     if(cliente){

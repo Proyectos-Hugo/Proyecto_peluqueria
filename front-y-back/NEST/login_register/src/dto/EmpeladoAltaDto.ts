@@ -22,7 +22,7 @@ export class EmpleadoAltaDto {
   @Length(9,9)
   telefono: string;
 
-  constructor(dni?: string, email?: string, password?: string, nombre?: string, apellido?: string, especialidad?: string, telefono?: string) {
+  constructor(dni?:string, email?:string, password?:string, nombre?:string, apellido?:string, especialidad?:string, telefono?:string) {
     this.dni = dni;
     this.email = email;
     this.password = password;

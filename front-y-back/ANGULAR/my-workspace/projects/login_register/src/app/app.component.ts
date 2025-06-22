@@ -24,7 +24,6 @@ export class AppComponent {
     localStorage.removeItem('cliente');
     localStorage.removeItem('empleado');
     this.clienteService.removeCliente();
-    this.empleadoService.removeEmpleado();
     this.router.navigate(['/home']);
   }
   goToHome() {

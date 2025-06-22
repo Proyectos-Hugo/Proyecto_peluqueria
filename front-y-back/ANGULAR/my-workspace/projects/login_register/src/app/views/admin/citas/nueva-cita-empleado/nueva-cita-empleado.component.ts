@@ -13,6 +13,7 @@ import { CitaAltaEmpleadoDto } from '../../../../model/CitaAltaEmpleadoDto';
   styleUrls: ['./nueva-cita-empleado.component.css'],
   imports: [CommonModule, FormsModule]
 })
+
 export class NuevaCitaEmpleadoComponent {
 
   constructor(private empleadoService: EmpleadoService, private citaService: CitaService){}

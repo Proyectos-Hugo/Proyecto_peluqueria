@@ -1,7 +1,4 @@
-
-
 export class PedidoAltaDto {
-
   fecha: Date;
   email_cliente: string;
 

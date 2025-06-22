@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 import { Cliente } from './Cliente';
 import { Empleado } from './Empleado';
 
-@Entity('users')
+@Entity('clientes')
 export class Usuario {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,7 +14,7 @@ export class Usuario {
   password: string;
 
   @Column()
-  role: string; // 'cliente', 'empleado' o 'admin'
+  role: string; 
 
   @OneToOne(() => Cliente, cliente => cliente.usuario)
   cliente: Cliente;

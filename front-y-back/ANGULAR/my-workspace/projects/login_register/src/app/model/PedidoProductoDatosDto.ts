@@ -1,7 +1,4 @@
 import { ProductoDatosDto } from "./ProductoDatosDto";
-
-
-
 export class PedidoProductoDatosDto {
   id_pedido: number;
   producto: ProductoDatosDto;

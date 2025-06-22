@@ -1,5 +1,3 @@
-
-
 export class ClienteAltaDto {
   email: string;
   nombre: string;
@@ -7,7 +5,7 @@ export class ClienteAltaDto {
   password: string;
   telefono: string;
 
-  constructor(email: string, telefono: string, nombre: string, apellido?: string, password?: string) {
+  constructor(email?: string, telefono?: string, nombre?: string, apellido?: string, password?: string) {
     this.email = email;
     this.nombre = nombre;
     this.apellido = apellido;

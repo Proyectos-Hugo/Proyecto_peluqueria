@@ -4,12 +4,10 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
 } from '@nestjs/common';
 import { UserAltaDto } from 'src/dto/UserAltaDto';
 import { UserService } from 'src/service/user.service';
-
 
 @Controller('users')
 export class UserController {

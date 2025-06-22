@@ -15,6 +15,7 @@ import { MascotaAltaDto } from 'src/dto/MascotaAltaDto';
 
 @Controller('mascotas')
 export class MascotaController {
+  
   constructor(private readonly mascotaService: MascotaService) {}
 
   @Post('altaMascota')
@@ -43,7 +44,8 @@ export class MascotaController {
       });
     }
   }
-    @Get('buscarMascota/:id')
+  
+  @Get('buscarMascota/:id')
   async mascotaPorId(@Param('id') id: number, @Res()res :Response){
     const mascotas = await this.mascotaService.getMascotasPorId(id);
     if(mascotas.length>0){

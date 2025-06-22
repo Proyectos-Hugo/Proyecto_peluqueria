@@ -1,4 +1,3 @@
-
 export class ProductoAltaDto {
   id_producto?: number;
   nombre: string;

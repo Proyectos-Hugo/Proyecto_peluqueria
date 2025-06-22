@@ -31,19 +31,20 @@ export class EmpleadoController {
     }
   }
 
-  @Get('')
+  @Get('allEmpleados')
   allEmpleados():Promise<EmpleadoDatosDto[]>{
     return this.empleadoService.allEmployees();
   }
+  
   @Get('findEmpleado/:email')
   getEmpleadoByEmail(@Param('email') email:string):Promise<EmpleadoDatosDto>{
     return this.empleadoService.getEmployeesByEmail(email);
   }
-    @Get('findEmpleadoByDni/:dni')
-  getEmpleadoByDni(@Param('dni') dni:string):Promise<EmpleadoDatosDto>{
-    return this.empleadoService.getEmployeesByDni(dni);
-  }
 
+  @Get('findEmpleadoByDni/:dni')
+  getEmpleadoByDni(@Param('dni') dni:string){
+    return this.empleadoService.findEmpleadoByDni(dni);
+  }
 
   @Patch('modificarEmpleado/:dni')
   modifyEmpleado(@Param('dni') dni:string, @Body() empleado:EmpleadoAltaDto){
@@ -63,5 +64,4 @@ export class EmpleadoController {
       });
     }
   }
-
 }

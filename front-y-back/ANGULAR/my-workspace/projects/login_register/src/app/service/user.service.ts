@@ -8,9 +8,9 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
   url: string = 'http://localhost:3000/users';
-
   user: any = null;
 
   constructor(private http: HttpClient) {}

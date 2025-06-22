@@ -5,7 +5,6 @@ import { UserDatosDto } from 'src/dto/UserDatosDto';
 import { Usuario } from 'src/model/Usuario';
 import { Repository } from 'typeorm';
 
-
 @Injectable()
 export class UserService {
   constructor(@InjectRepository(Usuario) private readonly userRepository: Repository<Usuario>) {}
@@ -17,13 +16,14 @@ export class UserService {
   }
 
   async findOne(email: string, password: string): Promise<UserDatosDto | null> {
-    const user = await this.userRepository.findOne({ where: { email, password } });
+    const user = await this.userRepository.createQueryBuilder('clientes')
+      .where('clinetes.email = :email', { email })
+      .andWhere('clientes.password = :password', { password })
+      .getOne();
     if (user) {
       return new UserDatosDto(user.id, user.email, user.role);
     }
-    return null;
   }
-
 
   async remove(id: number): Promise<void> {
     await this.userRepository.delete(id);
