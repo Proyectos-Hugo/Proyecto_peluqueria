@@ -1,0 +1,107 @@
+.productos-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.section {
+  margin-bottom: 32px;
+  padding: 18px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.section h2 {
+  margin-top: 0;
+  color: #1d3557;
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+.form-group {
+  margin-bottom: 14px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 500;
+}
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #a8dadc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f1faee;
+  transition: border 0.2s;
+}
+input:focus {
+  border-color: #457b9d;
+  outline: none;
+}
+button {
+  background: #457b9d;
+  color: #fff;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 6px;
+  margin-right: 8px;
+}
+button:hover {
+  background: #1d3557;
+}
+hr {
+  border: none;
+  border-top: 1px solid #a8dadc;
+  margin: 28px 0;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li {
+  margin-bottom: 10px;
+  background: #e9ecef;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Agrega este CSS a tu archivo de estilos global o al componente para mejorar la sección de eliminar producto */
+
+.section h2 {
+  color: #b80000;
+}
+
+.section form button[type="submit"] {
+  background: #b80000;
+  color: #fff;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 6px;
+}
+
+.section form button[type="submit"]:hover {
+  background: #7c0000;
+}
+
+.section form input[type="number"]#eliminarId {
+  border: 1px solid #ffb3b3;
+  background: #fff0f0;
+}
+
+.section form input[type="number"]#eliminarId:focus {
+  border-color: #b80000;
+}

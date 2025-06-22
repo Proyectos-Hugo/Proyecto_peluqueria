@@ -1,0 +1,78 @@
+<div class="productos-container">
+   <div>
+      {{mensajeAlta}}
+    </div>
+  <!-- Crear Producto -->
+  <div class="section">
+    <h2>Crear Producto</h2>
+    <form (ngSubmit)="crearProducto()">
+      <div class="form-group">
+        <label for="nombreProducto">Nombre:</label>
+        <input type="text" id="nombreProducto" [(ngModel)]="nuevonombre" name="nombreProducto" required>
+      </div>
+      <div class="form-group">
+        <label for="precioProducto">Precio:</label>
+        <input type="number" id="precioProducto" [(ngModel)]="nuevoprecio" name="precioProducto" required>
+      </div>
+      <div class="form-group">
+        <label for="descripcionProducto">Descripción:</label>
+        <input type="text" id="descripcionProducto" [(ngModel)]="nuevodescripcion" name="descripcionProducto">
+      </div>
+      <button type="submit">Crear</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Mostrar Productos -->
+  <div class="section">
+    <h2>Lista de Productos</h2>
+    <button (click)="mostrarProductos()">Mostrar Productos</button>
+    <ul *ngIf="productos && productos.length > 0">
+      <li *ngFor="let producto of productos">
+        <strong>{{producto.nombre}}</strong> - {{producto.precio}}€ | {{producto.descripcion}}
+        <button (click)="seleccionarProducto(producto)">Modificar</button>
+        <button (click)="eliminarProducto(producto.id_producto)">Eliminar</button>
+      </li>
+    </ul>
+    <div *ngIf="productos && productos.length === 0">
+      <em>No hay productos registrados.</em>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Modificar Producto -->
+  <div class="section" *ngIf="productoSeleccionado">
+    <h2>Modificar Producto</h2>
+    <form (ngSubmit)="modificarProducto()">
+      <div class="form-group">
+        <label for="modNombre">Nombre:</label>
+        <input type="text" id="modNombre" [(ngModel)]="nombre" name="modNombre" required>
+      </div>
+      <div class="form-group">
+        <label for="modPrecio">Precio:</label>
+        <input type="number" id="modPrecio" [(ngModel)]="precio" name="modPrecio" required>
+      </div>
+      <div class="form-group">
+        <label for="modDescripcion">Descripción:</label>
+        <input type="text" id="modDescripcion" [(ngModel)]="descripcion" name="modDescripcion">
+      </div>
+      <button type="submit">Guardar Cambios</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <!-- Eliminar Producto -->
+  <div class="section">
+    <h2>Eliminar Producto</h2>
+    <form (ngSubmit)="eliminarProducto(idEliminar)">
+      <div class="form-group">
+        <label for="eliminarId">ID del producto a eliminar:</label>
+        <input type="number" id="eliminarId" [(ngModel)]="idEliminar" name="eliminarId" required>
+      </div>
+      <button type="submit">Eliminar</button>
+    </form>
+  </div>
+</div>

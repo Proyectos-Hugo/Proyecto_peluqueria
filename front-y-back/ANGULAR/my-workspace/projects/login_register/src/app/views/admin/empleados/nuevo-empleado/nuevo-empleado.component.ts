@@ -31,7 +31,7 @@ export class NuevoEmpleadoComponent {
       this.nombre,
       this.apellido,
       this.especialidad,
-      this.telefono
+      Number(this.telefono)
     );
 
     this.empleadoService.altaEmpleado(nuevoEmpleado).subscribe({

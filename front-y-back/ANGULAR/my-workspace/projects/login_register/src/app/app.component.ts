@@ -27,7 +27,7 @@ export class AppComponent {
     this.router.navigate(['/home']);
   }
   goToHome() {
-      this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
   }
   isAdmin(): boolean {
     return this.userService.obtenerRole() == 'empleado';
@@ -35,32 +35,29 @@ export class AppComponent {
 
   //LOGIN Y REGISTRO
   goToLogin() {
-      this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/login']);
   }
   goToRegister() {
-      this.router.navigate(['/auth/register']);
+    this.router.navigate(['/auth/register']);
   }
   //MASCOTAS
   goToMisMascotas() {
-      this.router.navigate(['/mis-mascotas']);
+    this.router.navigate(['/mis-mascotas']);
   }
   goToNuevaMascota() {
-      this.router.navigate(['/nueva-mascota']);
+    this.router.navigate(['/nueva-mascota']);
   }
   goToMascotas(){
-      this.router.navigate(['/gestion-mascotas']);
+    this.router.navigate(['/gestion-mascotas']);
   }
 
 
   //EMPLEADOS
   goToMisEmpleados(){
-      this.router.navigate(['/mis-empleados']);
+    this.router.navigate(['/mis-empleados']);
   }
   goToNuevoEmplado(){
-      this.router.navigate(['/nuevo-empleado']);
-  }
-  goToProductos(){
-      this.router.navigate(['/productos']);
+    this.router.navigate(['/nuevo-empleado']);
   }
 
 
@@ -68,17 +65,22 @@ export class AppComponent {
   //CITAS
 
   goToMisCitas(){
-      this.router.navigate(['/mis-citas']);
+    this.router.navigate(['/mis-citas']);
   }
   goToGestionCitas(){
-      this.router.navigate(['/gestion-citas']);
+    this.router.navigate(['/gestion-citas']);
   }
   goToNuevaCitaEmpleado(){
-      this.router.navigate(['/nueva-cita-empleado']);
+    this.router.navigate(['/nueva-cita-empleado']);
   }
-    goToNuevaCitaCliente(){
-      this.router.navigate(['/nueva-cita-cliente']);
+  goToNuevaCitaCliente(){
+    this.router.navigate(['/nueva-cita-cliente']);
   }
 
+
+  //PRODUCTOS
+  goToProductos(){
+    this.router.navigate(['/productos']);
+  }
 
 }
